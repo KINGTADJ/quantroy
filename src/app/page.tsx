@@ -2,170 +2,183 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { 
-  ArrowRight, 
-  Check, 
-  Shield, 
-  TrendingUp, 
-  Users, 
-  Wallet, 
-  Bot, 
-  Gift, 
-  Star, 
-  ChevronRight,
-  Sparkles,
-  Lock,
-  BarChart3,
-  Zap,
-  Globe
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
-import { NumberTicker } from '@/components/ui/number-ticker';
-import { BentoGrid, BentoCard } from '@/components/ui/bento-grid';
-import { Marquee } from '@/components/ui/marquee';
+import { useState, useEffect } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-};
+// Animated counter component like AngelList
+function AnimatedCounter({ target, prefix = '', suffix = '' }: { target: number; prefix?: string; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    const duration = 2000;
+    const steps = 60;
+    const increment = target / steps;
+    let current = 0;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        setCount(target);
+        clearInterval(timer);
+      } else {
+        setCount(Math.floor(current));
+      }
+    }, duration / steps);
+    
+    return () => clearInterval(timer);
+  }, [target]);
+  
+  return (
+    <span className="tabular-nums">
+      {prefix}{count.toLocaleString()}{suffix}
+    </span>
+  );
+}
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-};
-
-// Data
-const features = [
+// Product data
+const products = [
   {
-    icon: TrendingUp,
-    title: 'AI-Powered Strategies',
-    description: 'Advanced algorithms analyze market trends 24/7 to maximize your returns.',
+    title: 'Investment Strategies',
+    description: 'AI-powered quantitative strategies tailored to your risk appetite and investment goals.',
+    image: '/images/hero-family.png',
+    href: '/strategies',
   },
   {
-    icon: Shield,
-    title: 'Bank-Grade Security',
-    description: 'Multi-signature wallets and cold storage protect your assets.',
+    title: 'Portfolio Management',
+    description: 'Diversified crypto portfolios managed by advanced algorithms for optimal returns.',
+    image: '/images/lifestyle-finance.png',
+    href: '/strategies',
   },
   {
-    icon: BarChart3,
-    title: 'Real-Time Analytics',
-    description: 'Track performance with live dashboards and detailed reports.',
+    title: 'Secure Custody',
+    description: 'Bank-grade security with multi-signature wallets and cold storage protection.',
+    image: '/images/team-ceo.png',
+    href: '/strategies',
   },
   {
-    icon: Zap,
-    title: 'Instant Withdrawals',
-    description: 'Access your funds anytime with fast, secure withdrawals.',
-  },
-  {
-    icon: Users,
-    title: 'Expert Support',
-    description: 'Dedicated team available 24/7 to assist with your portfolio.',
-  },
-  {
-    icon: Gift,
-    title: '6% Referral Bonus',
-    description: 'Earn commission by inviting friends to the platform.',
+    title: 'AI Guidance',
+    description: 'Get personalized investment recommendations powered by cutting-edge AI technology.',
+    image: '/images/team-cio.png',
+    href: '/strategies',
   },
 ];
 
-const stats = [
-  { value: 50, suffix: 'M+', label: 'Assets Managed', prefix: '$' },
-  { value: 10000, suffix: '+', label: 'Active Investors' },
-  { value: 99.9, suffix: '%', label: 'Uptime' },
-  { value: 24, suffix: '/7', label: 'Support' },
-];
-
+// Testimonials
 const testimonials = [
   {
+    quote: '...the platform made it incredibly easy to start investing. Within weeks, I was seeing consistent returns that exceeded my expectations.',
     name: 'James Okoro',
     role: 'Entrepreneur',
-    avatar: '/images/testimonial-1.png',
-    content: 'Quantroy transformed my investment approach. The AI recommendations are spot-on, and I\'ve seen consistent 15% monthly returns.',
   },
   {
+    quote: '...I was skeptical at first, but Quantroy proved me wrong. The transparency and security gave me confidence to invest more.',
     name: 'Chioma Eze',
     role: 'Business Owner',
-    avatar: '/images/testimonial-2.png',
-    content: 'I was skeptical at first, but the transparency and security gave me confidence. My portfolio grew 40% in just 6 months.',
   },
   {
+    quote: '...as someone in finance, I appreciate the professionalism. This is exactly how crypto investing should be done.',
     name: 'Emmanuel Asante',
     role: 'Financial Analyst',
-    avatar: '/images/testimonial-3.png',
-    content: 'As someone in finance, I appreciate the professionalism. This is how crypto investing should be done.',
-  },
-  {
-    name: 'Amaka Obi',
-    role: 'Doctor',
-    avatar: '/images/team-cio.png',
-    content: 'Finally, an investment platform that actually delivers on its promises. The automated strategies work while I focus on my career.',
-  },
-  {
-    name: 'David Mensah',
-    role: 'Software Engineer',
-    avatar: '/images/team-ceo.png',
-    content: 'The tech behind Quantroy is impressive. Clean UI, fast execution, and the AI predictions are remarkably accurate.',
-  },
-  {
-    name: 'Grace Adeyemi',
-    role: 'Teacher',
-    avatar: '/images/team-compliance.png',
-    content: 'Started with just $500 and built it up to $5,000 in 8 months. The platform makes investing accessible to everyone.',
   },
 ];
 
-const plans = [
-  { name: 'Starter', roi: '8-12%', min: '$500', duration: '30 days', popular: false },
-  { name: 'Growth', roi: '15-20%', min: '$5,000', duration: '60 days', popular: true },
-  { name: 'Premium', roi: '25-35%', min: '$25,000', duration: '90 days', popular: false },
+// Resources/Articles
+const articles = [
+  {
+    title: 'The Ultimate Guide to Crypto Investing in 2026',
+    category: 'Guide',
+    date: 'Feb 8, 2026',
+    readTime: '5 min read',
+    image: '/images/testimonial-1.png',
+    href: '/blog',
+  },
+  {
+    title: 'How AI is Revolutionizing Investment Strategies',
+    category: 'Insights',
+    date: 'Feb 5, 2026',
+    readTime: '4 min read',
+    image: '/images/testimonial-2.png',
+    href: '/blog',
+  },
+  {
+    title: 'Security Best Practices for Crypto Portfolios',
+    category: 'Security',
+    date: 'Feb 1, 2026',
+    readTime: '6 min read',
+    image: '/images/testimonial-3.png',
+    href: '/blog',
+  },
+  {
+    title: 'Building Wealth Through Smart Diversification',
+    category: 'Strategy',
+    date: 'Jan 28, 2026',
+    readTime: '8 min read',
+    image: '/images/team-compliance.png',
+    href: '/blog',
+  },
 ];
 
-const logos = ['Bloomberg', 'Reuters', 'Forbes', 'TechCrunch', 'Yahoo Finance'];
+// Partners
+const partners = ['Bloomberg', 'Reuters', 'Forbes', 'CoinDesk', 'TechCrunch'];
 
 export default function HomePage() {
-  const firstRow = testimonials.slice(0, 3);
-  const secondRow = testimonials.slice(3);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  const nextTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevTestimonial = () => {
+    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
   return (
-    <main className="min-h-screen overflow-x-hidden">
-      {/* ==================== NAVIGATION ==================== */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-[#1a2f25]/95 backdrop-blur-md border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-6">
+    <main className="min-h-screen bg-white">
+      {/* ==================== HEADER ==================== */}
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div className="max-w-[1400px] mx-auto px-6">
           <nav className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#c4f542] to-[#a8e026] flex items-center justify-center shadow-lg shadow-[#c4f542]/20">
-                <span className="text-[#1a2f25] font-bold text-base">Q</span>
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-[#1a2f25] flex items-center justify-center">
+                <span className="text-[#c4f542] font-bold text-sm">Q</span>
               </div>
-              <span className="text-white font-semibold text-lg tracking-tight">Quantroy</span>
+              <span className="text-[#1a2f25] font-semibold text-lg">Quantroy</span>
             </Link>
 
-            <div className="hidden lg:flex items-center gap-1">
-              {['About', 'Strategies', 'Pricing', 'Contact'].map((item) => (
-                <Link 
-                  key={item} 
-                  href={`/${item.toLowerCase()}`}
-                  className="px-4 py-2 text-white/70 text-sm font-medium hover:text-white hover:bg-white/5 rounded-lg transition-all"
+            {/* Nav Links */}
+            <div className="hidden md:flex items-center gap-1">
+              {[
+                { label: 'Products', href: '/strategies', hasDropdown: true },
+                { label: 'Solutions', href: '/about', hasDropdown: true },
+                { label: 'Pricing', href: '/pricing', hasDropdown: false },
+                { label: 'Resources', href: '/blog', hasDropdown: true },
+              ].map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="flex items-center gap-1 px-4 py-2 text-[15px] text-gray-600 hover:text-[#1a2f25] transition-colors"
                 >
-                  {item}
+                  {item.label}
+                  {item.hasDropdown && (
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  )}
                 </Link>
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="hidden sm:block text-white/70 hover:text-white text-sm font-medium px-4 py-2">
-                Sign In
+            {/* CTA */}
+            <div className="flex items-center gap-4">
+              <Link href="/login" className="text-[15px] text-gray-600 hover:text-[#1a2f25]">
+                Sign in
               </Link>
-              <Link href="/register">
-                <Button className="bg-[#c4f542] hover:bg-[#d4ff5c] text-[#1a2f25] font-semibold rounded-full px-5 h-9 text-sm shadow-lg shadow-[#c4f542]/20">
-                  Get Started
-                  <ArrowRight className="ml-1.5 h-4 w-4" />
-                </Button>
+              <Link
+                href="/register"
+                className="bg-[#1a2f25] text-white px-5 py-2.5 rounded-lg text-[15px] font-medium hover:bg-[#2a4a3a] transition-colors"
+              >
+                Get Started
               </Link>
             </div>
           </nav>
@@ -173,509 +186,356 @@ export default function HomePage() {
       </header>
 
       {/* ==================== HERO ==================== */}
-      <section className="relative bg-[#1a2f25] pt-32 pb-20 overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#2a4a3a] via-[#1a2f25] to-[#1a2f25]" />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
-        
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left content */}
-            <motion.div 
-              initial="hidden"
-              animate="visible"
-              variants={staggerContainer}
-              className="max-w-xl"
+      <section className="pt-16 pb-24">
+        <div className="max-w-[1400px] mx-auto px-6">
+          {/* Announcement Banner */}
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-[#1a2f25] text-sm mb-12 hover:opacity-70 transition-opacity"
+          >
+            <span className="text-[#c4f542]">New</span>
+            <span>Explore our 2026 Investment Guide</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+
+          {/* Hero Content */}
+          <div className="max-w-4xl">
+            <h1 className="text-[clamp(48px,8vw,88px)] font-medium text-[#1a2f25] leading-[1.05] tracking-[-0.03em] mb-6">
+              Built to grow
+              <br />
+              <span className="text-[#c4f542]">your wealth</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-10 max-w-xl">
+              Quantroy provides investors with AI-powered tools to build and manage their crypto portfolios.
+            </p>
+            <Link
+              href="/register"
+              className="inline-flex items-center gap-2 bg-[#1a2f25] text-white px-6 py-3.5 rounded-lg text-[15px] font-medium hover:bg-[#2a4a3a] transition-colors"
             >
-              <motion.div variants={fadeInUp}>
-                <Badge className="bg-[#c4f542]/10 text-[#c4f542] border-[#c4f542]/20 hover:bg-[#c4f542]/20 mb-6">
-                  <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                  #1 Crypto Investment Platform 2026
-                </Badge>
-              </motion.div>
+              Get Started
+            </Link>
+          </div>
+        </div>
+      </section>
 
-              <motion.h1 
-                variants={fadeInUp}
-                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-6"
+      {/* ==================== PRODUCT CARDS ==================== */}
+      <section className="pb-24">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product, idx) => (
+              <Link
+                key={idx}
+                href={product.href}
+                className="group block"
               >
-                Grow Your Wealth with{' '}
-                <span className="bg-gradient-to-r from-[#c4f542] via-[#f9d423] to-[#c4f542] bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                  AI-Powered
-                </span>{' '}
-                Investing
-              </motion.h1>
-
-              <motion.p 
-                variants={fadeInUp}
-                className="text-lg text-white/60 leading-relaxed mb-8 max-w-lg"
-              >
-                Join 10,000+ investors earning consistent returns through our intelligent 
-                crypto strategies. Start with as little as $500.
-              </motion.p>
-
-              <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 mb-10">
-                <Link href="/register">
-                  <Button size="lg" className="bg-[#c4f542] hover:bg-[#d4ff5c] text-[#1a2f25] font-semibold rounded-full px-8 h-12 text-base shadow-xl shadow-[#c4f542]/25 w-full sm:w-auto">
-                    Start Investing
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/strategies">
-                  <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/5 rounded-full px-8 h-12 text-base w-full sm:w-auto">
-                    View Strategies
-                  </Button>
-                </Link>
-              </motion.div>
-
-              <motion.div variants={fadeInUp} className="flex items-center gap-6">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <Avatar key={i} className="w-10 h-10 border-2 border-[#1a2f25]">
-                      <AvatarImage src={`/images/testimonial-${Math.min(i, 3)}.png`} />
-                      <AvatarFallback className="bg-[#c4f542] text-[#1a2f25] text-xs font-bold">U{i}</AvatarFallback>
-                    </Avatar>
-                  ))}
-                </div>
-                <div>
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#f9d423] text-[#f9d423]" />
-                    ))}
-                    <span className="text-white font-semibold ml-1.5">4.9</span>
-                  </div>
-                  <p className="text-white/50 text-sm">From 2,000+ reviews</p>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right - Dashboard preview */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="relative"
-            >
-              <div className="relative bg-gradient-to-br from-[#0f1f18] to-[#1a2f25] rounded-2xl border border-white/10 p-6 shadow-2xl">
-                {/* Dashboard header */}
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <p className="text-white/50 text-sm">Total Portfolio Value</p>
-                    <p className="text-3xl font-bold text-white">
-                      $<NumberTicker value={124582} className="text-3xl font-bold text-white" />
-                      <span className="text-[#c4f542]">.40</span>
-                    </p>
-                  </div>
-                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
-                    <TrendingUp className="h-3 w-3 mr-1" />
-                    +24.5%
-                  </Badge>
-                </div>
-
-                {/* Chart placeholder */}
-                <div className="h-48 bg-gradient-to-t from-[#c4f542]/10 to-transparent rounded-xl mb-6 flex items-end justify-between px-4 pb-4">
-                  {[40, 55, 45, 70, 60, 85, 75, 95, 80, 90, 85, 100].map((h, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${h}%` }}
-                      transition={{ duration: 0.5, delay: i * 0.05 }}
-                      className="w-[6%] bg-gradient-to-t from-[#c4f542] to-[#c4f542]/60 rounded-t-sm"
+                <div className="mb-4">
+                  <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3">
+                    {product.title}
+                  </h3>
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                  ))}
+                  </div>
                 </div>
+                <p className="text-[15px] text-gray-600 leading-relaxed">
+                  {product.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                {/* Stats row */}
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-white/5 rounded-xl p-4">
-                    <p className="text-white/40 text-xs mb-1">Today's Profit</p>
-                    <p className="text-green-400 font-bold text-lg">+$1,842</p>
-                  </div>
-                  <div className="bg-white/5 rounded-xl p-4">
-                    <p className="text-white/40 text-xs mb-1">Active Trades</p>
-                    <p className="text-white font-bold text-lg">12</p>
-                  </div>
-                  <div className="bg-white/5 rounded-xl p-4">
-                    <p className="text-white/40 text-xs mb-1">Win Rate</p>
-                    <p className="text-[#c4f542] font-bold text-lg">94.2%</p>
-                  </div>
+      {/* ==================== PARTNERS ==================== */}
+      <section className="py-16 border-y border-gray-100">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <h2 className="text-center text-2xl md:text-3xl text-[#1a2f25] mb-10">
+            Better together. Quantroy partners with industry leaders.
+          </h2>
+          <div className="flex items-center justify-center gap-12 flex-wrap opacity-60">
+            {partners.map((partner) => (
+              <span key={partner} className="text-[#1a2f25] font-semibold text-lg">
+                {partner}
+              </span>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-[#1a2f25] text-sm hover:opacity-70 transition-opacity"
+            >
+              Learn about our partnerships
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== STATS SECTION (DARK) ==================== */}
+      <section className="bg-[#1a2f25] py-24">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left Content */}
+            <div>
+              <p className="text-[#c4f542] text-sm font-medium uppercase tracking-wider mb-4">
+                By the numbers
+              </p>
+              <h2 className="text-4xl md:text-5xl text-white font-medium leading-tight mb-6">
+                Fueling financial
+                <br />freedom
+              </h2>
+              <p className="text-gray-400 text-lg leading-relaxed mb-10 max-w-md">
+                With thousands of successful investors on our platform, Quantroy is at the heart of modern crypto investing. This trust gives us the insight to build solutions that truly work.
+              </p>
+              
+              {/* Report Card */}
+              <Link
+                href="/blog"
+                className="block max-w-sm bg-[#0f1f18] rounded-xl overflow-hidden border border-white/10 hover:border-[#c4f542]/30 transition-colors"
+              >
+                <div className="aspect-[16/9] bg-gradient-to-br from-[#c4f542]/20 to-transparent" />
+                <div className="p-4">
+                  <p className="text-white text-sm font-medium mb-1">
+                    The State of Crypto Investing 2026
+                  </p>
+                  <span className="text-[#c4f542] text-xs font-medium">Report</span>
                 </div>
+              </Link>
+            </div>
+
+            {/* Right Stats */}
+            <div>
+              {/* Big Number */}
+              <div className="mb-12">
+                <p className="text-[clamp(64px,12vw,120px)] text-white font-medium leading-none tracking-tight">
+                  $<AnimatedCounter target={50} />M+
+                </p>
+                <p className="text-gray-500 text-sm mt-2">Assets on platform</p>
               </div>
 
-              {/* Floating cards */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -left-8 top-1/4 bg-white rounded-xl p-4 shadow-xl"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                    <TrendingUp className="h-5 w-5 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="text-gray-900 font-semibold text-sm">BTC Trade</p>
-                    <p className="text-green-600 text-xs font-medium">+$2,340 profit</p>
-                  </div>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 gap-8">
+                <div>
+                  <p className="text-4xl md:text-5xl text-white font-medium">
+                    <AnimatedCounter target={10} />k+
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1">Active investors</p>
                 </div>
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-4 bottom-1/4 bg-[#1a2f25] border border-[#c4f542]/30 rounded-xl p-4 shadow-xl"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#c4f542]/20 flex items-center justify-center">
-                    <Shield className="h-5 w-5 text-[#c4f542]" />
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold text-sm">Secured</p>
-                    <p className="text-white/50 text-xs">Bank-grade encryption</p>
-                  </div>
+                <div>
+                  <p className="text-4xl md:text-5xl text-white font-medium">
+                    <AnimatedCounter target={500} />+
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1">Investment strategies</p>
                 </div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== LOGOS ==================== */}
-      <section className="bg-[#f5f0e6] py-8 border-y border-[#1a2f25]/10">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-center gap-12 flex-wrap opacity-60">
-            <span className="text-[#1a2f25]/50 text-sm font-medium">As seen on:</span>
-            {logos.map((logo) => (
-              <span key={logo} className="text-[#1a2f25] font-semibold text-lg">{logo}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== FEATURES BENTO ==================== */}
-      <section className="bg-[#f5f0e6] py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center mb-16"
-          >
-            <motion.div variants={fadeInUp}>
-              <Badge className="bg-[#1a2f25] text-[#c4f542] mb-4">
-                Why Choose Us
-              </Badge>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1a2f25] mb-4">
-              Built for Serious Investors
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-[#1a2f25]/60 max-w-2xl mx-auto">
-              Everything you need to grow your wealth safely and consistently.
-            </motion.p>
-          </motion.div>
-
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {features.map((feature, idx) => (
-              <motion.div key={idx} variants={fadeInUp}>
-                <Card className="bg-white border-[#1a2f25]/10 hover:shadow-xl hover:shadow-[#1a2f25]/5 hover:-translate-y-1 transition-all duration-300 h-full">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-xl bg-[#1a2f25] flex items-center justify-center mb-4">
-                      <feature.icon className="h-6 w-6 text-[#c4f542]" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-[#1a2f25] mb-2">{feature.title}</h3>
-                    <p className="text-[#1a2f25]/60 leading-relaxed">{feature.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ==================== STATS ==================== */}
-      <section className="bg-[#1a2f25] py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl sm:text-5xl font-bold text-[#c4f542] mb-2">
-                  {stat.prefix}
-                  <NumberTicker value={stat.value} className="text-4xl sm:text-5xl font-bold text-[#c4f542]" />
-                  {stat.suffix}
+                <div>
+                  <p className="text-4xl md:text-5xl text-white font-medium">
+                    <AnimatedCounter target={99} suffix="%" />
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1">Platform uptime</p>
                 </div>
-                <p className="text-white/60">{stat.label}</p>
-              </motion.div>
-            ))}
+                <div>
+                  <p className="text-4xl md:text-5xl text-white font-medium">
+                    $<AnimatedCounter target={125} />M
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1">Profits distributed</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== PRICING ==================== */}
-      <section className="bg-[#f5f0e6] py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center mb-16"
-          >
-            <motion.div variants={fadeInUp}>
-              <Badge className="bg-[#c04d2d] text-white mb-4">
-                Investment Plans
-              </Badge>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1a2f25] mb-4">
-              Choose Your Growth Path
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-[#1a2f25]/60 max-w-2xl mx-auto">
-              Flexible plans designed for every investor, from beginners to professionals.
-            </motion.p>
-          </motion.div>
+      {/* ==================== TESTIMONIALS ==================== */}
+      <section className="py-24 bg-[#fafafa]">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <p className="text-[#c4f542] text-sm font-medium uppercase tracking-wider mb-8">
+            Testimonials
+          </p>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {plans.map((plan, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.15 }}
-              >
-                <Card className={`relative overflow-hidden h-full ${
-                  plan.popular 
-                    ? 'bg-[#1a2f25] border-[#c4f542] border-2 shadow-xl shadow-[#c4f542]/10' 
-                    : 'bg-white border-[#1a2f25]/10'
-                }`}>
-                  {plan.popular && (
-                    <div className="absolute top-0 right-0 bg-[#c4f542] text-[#1a2f25] text-xs font-bold px-3 py-1 rounded-bl-lg">
-                      MOST POPULAR
-                    </div>
-                  )}
-                  <CardContent className="p-8">
-                    <h3 className={`text-xl font-bold mb-2 ${plan.popular ? 'text-white' : 'text-[#1a2f25]'}`}>
-                      {plan.name}
-                    </h3>
-                    <div className={`text-4xl font-bold mb-1 ${plan.popular ? 'text-[#c4f542]' : 'text-[#1a2f25]'}`}>
-                      {plan.roi}
-                    </div>
-                    <p className={`text-sm mb-6 ${plan.popular ? 'text-white/60' : 'text-[#1a2f25]/60'}`}>
-                      Monthly Returns
-                    </p>
-                    
-                    <div className="space-y-3 mb-8">
-                      {[
-                        `Minimum: ${plan.min}`,
-                        `Duration: ${plan.duration}`,
-                        'Daily profits',
-                        'Instant withdrawal',
-                        '24/7 support',
-                      ].map((feature, i) => (
-                        <div key={i} className="flex items-center gap-2">
-                          <Check className={`h-5 w-5 ${plan.popular ? 'text-[#c4f542]' : 'text-green-500'}`} />
-                          <span className={`text-sm ${plan.popular ? 'text-white/80' : 'text-[#1a2f25]/80'}`}>
-                            {feature}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+          <div className="max-w-3xl">
+            <blockquote className="text-3xl md:text-4xl lg:text-5xl text-[#1a2f25] font-medium leading-tight mb-8">
+              "{testimonials[currentTestimonial].quote}"
+            </blockquote>
+            <p className="text-gray-600">
+              <span className="font-medium text-[#1a2f25]">{testimonials[currentTestimonial].name}</span>
+              , {testimonials[currentTestimonial].role}
+            </p>
+          </div>
 
-                    <Link href="/register" className="block">
-                      <Button className={`w-full rounded-full h-12 font-semibold ${
-                        plan.popular
-                          ? 'bg-[#c4f542] hover:bg-[#d4ff5c] text-[#1a2f25]'
-                          : 'bg-[#1a2f25] hover:bg-[#2a4a3a] text-white'
-                      }`}>
-                        Get Started
-                        <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+          {/* Navigation */}
+          <div className="flex items-center gap-4 mt-12">
+            <button
+              onClick={prevTestimonial}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-[#1a2f25] transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5 text-[#1a2f25]" />
+            </button>
+            <button
+              onClick={nextTestimonial}
+              className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-[#1a2f25] transition-colors"
+            >
+              <ChevronRight className="w-5 h-5 text-[#1a2f25]" />
+            </button>
+            {/* Dots */}
+            <div className="flex gap-2 ml-4">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentTestimonial(idx)}
+                  className={`w-2 h-2 rounded-full transition-colors ${
+                    idx === currentTestimonial ? 'bg-[#1a2f25]' : 'bg-gray-300'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ==================== TESTIMONIALS MARQUEE ==================== */}
-      <section className="bg-[#1a2f25] py-24 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 mb-12">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-            className="text-center"
-          >
-            <motion.div variants={fadeInUp}>
-              <Badge className="bg-[#c4f542]/10 text-[#c4f542] border-[#c4f542]/20 mb-4">
-                Testimonials
-              </Badge>
-            </motion.div>
-            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Loved by Thousands
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-lg text-white/60 max-w-2xl mx-auto">
-              Real stories from real investors who've transformed their financial future.
-            </motion.p>
-          </motion.div>
-        </div>
+      {/* ==================== RESOURCES ==================== */}
+      <section className="py-24">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <p className="text-[#c4f542] text-sm font-medium uppercase tracking-wider mb-2">
+                Resources
+              </p>
+              <h2 className="text-3xl md:text-4xl text-[#1a2f25] font-medium">
+                Latest articles
+              </h2>
+            </div>
+          </div>
 
-        <div className="relative">
-          <Marquee pauseOnHover className="[--duration:40s]">
-            {firstRow.map((testimonial, idx) => (
-              <Card key={idx} className="bg-white/5 border-white/10 backdrop-blur w-[350px] mx-4">
-                <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#f9d423] text-[#f9d423]" />
-                    ))}
-                  </div>
-                  <p className="text-white/80 mb-6 leading-relaxed">"{testimonial.content}"</p>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={testimonial.avatar} />
-                      <AvatarFallback className="bg-[#c4f542] text-[#1a2f25]">
-                        {testimonial.name[0]}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-white font-semibold text-sm">{testimonial.name}</p>
-                      <p className="text-white/50 text-xs">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </Marquee>
-
-          <Marquee reverse pauseOnHover className="[--duration:40s] mt-4">
-            {secondRow.map((testimonial, idx) => (
-              <Card key={idx} className="bg-white/5 border-white/10 backdrop-blur w-[350px] mx-4">
-                <CardContent className="p-6">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-[#f9d423] text-[#f9d423]" />
-                    ))}
-                  </div>
-                  <p className="text-white/80 mb-6 leading-relaxed">"{testimonial.content}"</p>
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={testimonial.avatar} />
-                      <AvatarFallback className="bg-[#c4f542] text-[#1a2f25]">
-                        {testimonial.name[0]}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-white font-semibold text-sm">{testimonial.name}</p>
-                      <p className="text-white/50 text-xs">{testimonial.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </Marquee>
-        </div>
-      </section>
-
-      {/* ==================== CTA ==================== */}
-      <section className="bg-gradient-to-br from-[#c04d2d] to-[#a03d1d] py-24">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={staggerContainer}
-          >
-            <motion.h2 variants={fadeInUp} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
-              Ready to Start Your Investment Journey?
-            </motion.h2>
-            <motion.p variants={fadeInUp} className="text-xl text-white/80 mb-10 max-w-2xl mx-auto">
-              Join thousands of investors who trust Quantroy. Start with as little as $500 and watch your wealth grow.
-            </motion.p>
-            <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/register">
-                <Button size="lg" className="bg-white hover:bg-white/90 text-[#c04d2d] font-bold rounded-full px-10 h-14 text-lg shadow-xl w-full sm:w-auto">
-                  Start Investing Today
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {articles.map((article, idx) => (
+              <Link key={idx} href={article.href} className="group block">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 mb-4">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    width={400}
+                    height={300}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <span className="text-[#c4f542] text-xs font-medium">{article.category}</span>
+                <h3 className="text-[#1a2f25] font-medium mt-2 mb-2 group-hover:text-[#c4f542] transition-colors">
+                  {article.title}
+                </h3>
+                <p className="text-gray-500 text-sm">
+                  {article.date} — {article.readTime}
+                </p>
               </Link>
-              <Link href="/contact">
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-10 h-14 text-lg w-full sm:w-auto">
-                  Contact Sales
-                </Button>
-              </Link>
-            </motion.div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ==================== FOOTER ==================== */}
-      <footer className="bg-[#1a2f25] pt-20 pb-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <footer className="bg-white border-t border-gray-100 pt-16 pb-8">
+        <div className="max-w-[1400px] mx-auto px-6">
+          {/* Top Section */}
+          <div className="grid lg:grid-cols-5 gap-12 mb-16">
+            {/* Logo & CTA */}
             <div className="lg:col-span-1">
-              <Link href="/" className="flex items-center gap-2.5 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#c4f542] to-[#a8e026] flex items-center justify-center">
-                  <span className="text-[#1a2f25] font-bold text-lg">Q</span>
+              <Link href="/" className="flex items-center gap-2 mb-6">
+                <div className="w-8 h-8 rounded-lg bg-[#1a2f25] flex items-center justify-center">
+                  <span className="text-[#c4f542] font-bold text-sm">Q</span>
                 </div>
-                <span className="text-white font-semibold text-xl">Quantroy</span>
+                <span className="text-[#1a2f25] font-semibold text-lg">Quantroy</span>
               </Link>
-              <p className="text-white/50 leading-relaxed mb-6">
-                AI-powered crypto investment platform helping you build wealth safely and consistently.
-              </p>
-              <div className="flex gap-4">
-                {['X', 'LinkedIn', 'Instagram'].map((social) => (
-                  <div key={social} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:bg-[#c4f542] hover:text-[#1a2f25] transition-all cursor-pointer">
-                    <span className="text-xs font-bold">{social[0]}</span>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-3">
+                <Link
+                  href="/register"
+                  className="bg-[#1a2f25] text-white px-4 py-2.5 rounded-lg text-sm font-medium text-center hover:bg-[#2a4a3a] transition-colors"
+                >
+                  Get Started
+                </Link>
+                <Link
+                  href="/login"
+                  className="border border-gray-300 text-[#1a2f25] px-4 py-2.5 rounded-lg text-sm font-medium text-center hover:border-[#1a2f25] transition-colors"
+                >
+                  Sign in
+                </Link>
               </div>
             </div>
 
-            {[
-              { title: 'Product', links: ['Features', 'Pricing', 'Security', 'Roadmap'] },
-              { title: 'Company', links: ['About', 'Blog', 'Careers', 'Press'] },
-              { title: 'Legal', links: ['Privacy', 'Terms', 'Compliance', 'Cookies'] },
-            ].map((col) => (
-              <div key={col.title}>
-                <h4 className="text-white font-semibold mb-4">{col.title}</h4>
-                <ul className="space-y-3">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <Link href="#" className="text-white/50 hover:text-[#c4f542] transition-colors text-sm">
-                        {link}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {/* Products */}
+            <div>
+              <h4 className="text-[#1a2f25] font-medium mb-4">Products</h4>
+              <ul className="space-y-3">
+                {['Investment Strategies', 'Portfolio Management', 'Secure Custody', 'AI Guidance', 'Referral Program'].map((item) => (
+                  <li key={item}>
+                    <Link href="/strategies" className="text-gray-600 text-sm hover:text-[#1a2f25] transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Pricing */}
+            <div>
+              <h4 className="text-[#1a2f25] font-medium mb-4">Pricing + Returns</h4>
+              <ul className="space-y-3">
+                {['Pricing Plans', 'ROI Calculator', 'Performance Data'].map((item) => (
+                  <li key={item}>
+                    <Link href="/pricing" className="text-gray-600 text-sm hover:text-[#1a2f25] transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Resources */}
+            <div>
+              <h4 className="text-[#1a2f25] font-medium mb-4">Resources</h4>
+              <ul className="space-y-3">
+                {['Blog', 'Help Center', 'Education', 'Data Center'].map((item) => (
+                  <li key={item}>
+                    <Link href="/blog" className="text-gray-600 text-sm hover:text-[#1a2f25] transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="text-[#1a2f25] font-medium mb-4">Company</h4>
+              <ul className="space-y-3">
+                {['About Us', 'Careers', 'Contact', 'Press'].map((item) => (
+                  <li key={item}>
+                    <Link href="/about" className="text-gray-600 text-sm hover:text-[#1a2f25] transition-colors">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          <Separator className="bg-white/10 mb-8" />
-
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">© 2026 Quantroy. All rights reserved.</p>
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-gray-100">
             <div className="flex items-center gap-6">
-              <Link href="/terms" className="text-white/40 hover:text-white/60 text-sm">Terms</Link>
-              <Link href="/privacy" className="text-white/40 hover:text-white/60 text-sm">Privacy</Link>
-              <Link href="/cookies" className="text-white/40 hover:text-white/60 text-sm">Cookies</Link>
+              <Link href="/terms" className="text-gray-500 text-sm hover:text-[#1a2f25]">Terms</Link>
+              <Link href="/privacy" className="text-gray-500 text-sm hover:text-[#1a2f25]">Privacy</Link>
+              <Link href="/disclosures" className="text-gray-500 text-sm hover:text-[#1a2f25]">Disclosures</Link>
+              <span className="text-gray-400 text-sm">© 2026 Quantroy Inc.</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <Link href="#" className="text-gray-400 hover:text-[#1a2f25]">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </Link>
+              <Link href="#" className="text-gray-400 hover:text-[#1a2f25]">
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </Link>
             </div>
           </div>
         </div>
