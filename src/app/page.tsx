@@ -99,54 +99,61 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden">
       <Header />
       
-      {/* Hero Section - Dark Green */}
-      <section className="bg-dark-green pt-28 pb-20 px-6 relative">
-        <div className="container mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* Hero Section - Dark Green - Coronation Style */}
+      <section className="bg-[#1a2f25] min-h-[90vh] flex items-center relative overflow-hidden">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-4 items-center">
             {/* Left Content */}
-            <div className="animate-fadeInUp">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-[family-name:var(--font-playfair)]">
+            <div className="max-w-xl py-12 lg:py-20">
+              <h1 className="text-[42px] md:text-[52px] lg:text-[62px] font-bold text-white leading-[1.1] mb-8 font-[family-name:var(--font-playfair)]">
                 Secure your{' '}
-                <span className="text-[#c4f542]">future</span>
+                <span className="text-[#c4f542] relative">
+                  future
+                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
+                    <path d="M2 8C50 2 150 2 198 8" stroke="#c4f542" strokeWidth="4" strokeLinecap="round"/>
+                  </svg>
+                </span>
                 <br />
                 with smart investments
               </h1>
-              <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
-                Join thousands of investors who trust Quantroy with their crypto investments. 
-                AI-powered strategies with transparent tracking and consistent monthly returns.
+              <p className="text-lg text-white/70 mb-10 leading-relaxed max-w-md">
+                We proudly present professional crypto investment strategies that 
+                represent the future of wealth creation, carefully crafted for 
+                investors who value transparency and consistent returns.
               </p>
-              <div className="flex flex-wrap gap-4 mb-12">
-                <Link href="/register" className="btn-primary">
-                  Learn More <ArrowRight size={18} />
+              <div className="mb-16">
+                <Link 
+                  href="/register" 
+                  className="inline-flex items-center gap-2 border-2 border-[#c4f542] text-[#c4f542] px-8 py-4 rounded-full font-semibold hover:bg-[#c4f542] hover:text-[#1a2f25] transition-all"
+                >
+                  <ArrowRight size={18} /> Learn More
                 </Link>
               </div>
               
               {/* Trust Logos */}
-              <div className="pt-8 border-t border-white/10">
-                <p className="text-gray-400 text-sm mb-4">As Seen On:</p>
-                <div className="flex flex-wrap items-center gap-8 opacity-60">
-                  {['Forbes', 'Bloomberg', 'CoinDesk', 'Yahoo!'].map((name) => (
-                    <span key={name} className="text-white font-semibold text-lg">{name}</span>
+              <div>
+                <p className="text-white/40 text-sm mb-4">As Seen On:</p>
+                <div className="flex flex-wrap items-center gap-6">
+                  {['Zillow', 'HousingWire', 'Forbes', 'Yahoo!'].map((name) => (
+                    <span key={name} className="text-white/50 font-bold text-base tracking-wide">{name}</span>
                   ))}
                 </div>
               </div>
             </div>
             
-            {/* Right Image */}
-            <div className="relative animate-slideInRight hidden lg:block">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <div className="aspect-[4/5] relative">
-                  <Image
-                    src="/images/hero-family.png"
-                    alt="Happy African family investing for their future"
-                    fill
-                    className="object-cover"
-                    priority
-                  />
-                </div>
-                {/* Yellow Ribbon */}
-                <div className="absolute bottom-8 -left-4 -right-4 bg-[#f9d423] py-3 px-6 transform -rotate-2">
-                  <p className="text-[#1a2f25] font-bold text-center text-sm tracking-wider uppercase">
+            {/* Right Image - Offset positioning like Coronation */}
+            <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[45%] lg:h-[85%]">
+              <div className="relative h-full min-h-[400px] lg:min-h-[600px] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/images/hero-family.png"
+                  alt="Happy African family investing for their future"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                />
+                {/* Yellow Ribbon - Angled across image */}
+                <div className="absolute bottom-12 -left-8 -right-8 bg-[#f9d423] py-4 px-8 transform -rotate-3 shadow-lg">
+                  <p className="text-[#1a2f25] font-black text-center text-sm tracking-[0.2em] uppercase">
                     ⭐ Best Investment Platform 2026 ⭐
                   </p>
                 </div>
