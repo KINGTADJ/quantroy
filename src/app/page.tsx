@@ -126,17 +126,21 @@ export default function Home() {
         <div className="hero-orb hero-orb-2" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Text with 3D Asset */}
-            <div className="text-center lg:text-left relative">
-              {/* 3D Credit Card - Integrated into hero text area */}
-              <div className="hidden lg:block absolute -left-20 top-1/2 -translate-y-1/2 w-48 h-48 opacity-90 -z-10">
+          {/* 3-Column Hero: Asset | Text | Image+Asset */}
+          <div className="grid lg:grid-cols-[200px_1fr_1fr] gap-8 items-center">
+            {/* Left 3D Asset - Credit Card */}
+            <div className="hidden lg:flex items-center justify-center">
+              <div className="relative w-56 h-56">
                 <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
               </div>
+            </div>
+            
+            {/* Center - Text */}
+            <div className="text-center lg:text-left">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
                 🚀 Professional Crypto Investment Platform
               </div>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
                 Invest in Professional<br />
                 <span className="text-emerald-400">Crypto Strategies</span>
               </h1>
@@ -153,13 +157,15 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Right - Image with 3D Asset */}
-            <div className="relative hidden lg:block">
-              {/* 3D Crypto Coins - Integrated near family image */}
-              <div className="absolute -right-16 bottom-20 w-44 h-44 opacity-90 z-10">
-                <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            {/* Right - Image + Coins */}
+            <div className="hidden lg:block">
+              {/* 3D Coins above family image */}
+              <div className="flex justify-end mb-4">
+                <div className="relative w-40 h-40">
+                  <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
               </div>
-              <div className="relative aspect-square max-w-lg mx-auto">
+              <div className="relative aspect-square max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-3xl" />
                 <Image
                   src="/images/hero-family.png"
@@ -277,23 +283,28 @@ export default function Home() {
       {/* Investment Packages */}
       <section className="py-20 px-4 mesh-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Section header with integrated 3D assets */}
-          <div className="text-center mb-12 relative">
-            {/* 3D Gold Bars - Left of title */}
-            <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 opacity-85">
+          {/* Section header with 3D assets as inline elements */}
+          <div className="flex items-center justify-center gap-8 mb-12">
+            {/* Left 3D Asset - Gold Bars */}
+            <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
               <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
-            {/* 3D Money Bundle - Right of title */}
-            <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 w-36 h-36 opacity-85">
+            
+            {/* Center - Title */}
+            <div className="text-center">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+                <Award size={14} className="mr-2" /> Investment Plans
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Investment Packages</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Choose from our professionally managed investment strategies designed for different risk appetites and capital levels.
+              </p>
+            </div>
+            
+            {/* Right 3D Asset - Money Bundle */}
+            <div className="hidden xl:block relative w-44 h-44 flex-shrink-0">
               <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Award size={14} className="mr-2" /> Investment Plans
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Investment Packages</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Choose from our professionally managed investment strategies designed for different risk appetites and capital levels.
-            </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {packages.map((pkg, i) => (
@@ -420,19 +431,23 @@ export default function Home() {
       {/* Security Section */}
       <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Section header with integrated 3D asset */}
-          <div className="text-center mb-12 relative">
-            {/* 3D Secure Vault - Right of title */}
-            <div className="hidden xl:block absolute right-8 top-1/2 -translate-y-1/2 w-44 h-44 opacity-85">
+          {/* Section header with 3D vault inline */}
+          <div className="flex items-center justify-center gap-8 mb-12">
+            {/* Center - Title */}
+            <div className="text-center">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+                <Lock size={14} className="mr-2" /> Enterprise Security
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Bank-Grade Security & Compliance</h2>
+              <p className="text-gray-400 max-w-2xl mx-auto">
+                Your security and trust are our top priorities with comprehensive protection measures.
+              </p>
+            </div>
+            
+            {/* Right 3D Asset - Secure Vault */}
+            <div className="hidden xl:block relative w-52 h-52 flex-shrink-0">
               <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Lock size={14} className="mr-2" /> Enterprise Security
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Bank-Grade Security & Compliance</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Your security and trust are our top priorities with comprehensive protection measures.
-            </p>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {[
@@ -469,27 +484,34 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 cta-bg relative overflow-hidden">
-        <div className="max-w-4xl mx-auto text-center relative">
-          {/* 3D Phone App - Left of CTA content */}
-          <div className="hidden xl:block absolute -left-32 top-1/2 -translate-y-1/2 w-44 h-44 opacity-85">
-            <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
-          </div>
-          <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-            Your Journey Starts Here
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Start Your Investment Journey?
-          </h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of investors who trust Quantroy with their crypto investments. Start with as little as $500.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-              Start Investing Today <ChevronRight size={20} />
-            </Link>
-            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
-              View All Strategies
-            </Link>
+        <div className="max-w-6xl mx-auto">
+          {/* CTA with Phone App inline */}
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset - Phone App */}
+            <div className="hidden xl:block relative w-56 h-56 flex-shrink-0">
+              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            {/* Center - CTA Content */}
+            <div className="text-center">
+              <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+                Your Journey Starts Here
+              </div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Ready to Start Your Investment Journey?
+              </h2>
+              <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                Join thousands of investors who trust Quantroy with their crypto investments. Start with as little as $500.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+                  Start Investing Today <ChevronRight size={20} />
+                </Link>
+                <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
+                  View All Strategies
+                </Link>
+              </div>
+            </div>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
