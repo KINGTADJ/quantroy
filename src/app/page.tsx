@@ -1,501 +1,357 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { 
+  TrendingUp, Shield, Wallet, Bot, Users, Gift,
+  ChevronRight, Star, CheckCircle, Lock, Clock,
+  BarChart3, Zap, Award, Globe
+} from 'lucide-react';
 
-// Slot machine style animated number
-function SlotNumber({ value, suffix = '' }: { value: string; suffix?: string }) {
+const stats = [
+  { value: '$500-$50M', label: 'Investment Range' },
+  { value: 'Monthly', label: 'Payout Frequency' },
+  { value: '4 Assets', label: 'Supported Cryptos' },
+  { value: 'AI-Powered', label: 'Gemini Integration' },
+];
+
+const features = [
+  { icon: TrendingUp, title: 'Professional Management', desc: 'Expert quantitative analysts with proven track records', badge: '10+ Years' },
+  { icon: Wallet, title: 'Monthly Payouts', desc: 'Regular returns directly to your crypto wallet', badge: 'Monthly' },
+  { icon: Shield, title: 'Bank-Grade Security', desc: 'Multi-signature wallets and cold storage protection', badge: '100% Secure' },
+  { icon: Bot, title: 'AI-Powered Guidance', desc: 'Gemini AI provides 24/7 personalized recommendations', badge: '24/7 AI' },
+  { icon: BarChart3, title: 'Transparent Tracking', desc: 'Real-time portfolio performance with blockchain verification', badge: 'Real-time' },
+  { icon: Gift, title: 'Affiliate Rewards', desc: 'Earn up to 6% commission with our referral system', badge: 'Up to 6%' },
+];
+
+const packages = [
+  {
+    name: 'Starter',
+    subtitle: 'First-time crypto investors',
+    minInvestment: '$500',
+    monthlyTarget: '~$830',
+    sixMonthTarget: '$5,000',
+    features: ['Monthly payouts', 'AI guidance', '24/7 support'],
+    popular: false,
+  },
+  {
+    name: 'Pro',
+    subtitle: 'Serious investors',
+    minInvestment: '$5,000',
+    monthlyTarget: '~$8,300',
+    sixMonthTarget: '$50,000',
+    features: ['Priority support', 'Advanced analytics', 'Dedicated advisor'],
+    popular: true,
+  },
+  {
+    name: 'Elite',
+    subtitle: 'High-net-worth individuals',
+    minInvestment: '$50,000',
+    monthlyTarget: '~$83,000',
+    sixMonthTarget: '$500,000',
+    features: ['VIP support', 'Custom strategies', 'Direct access'],
+    popular: false,
+  },
+  {
+    name: 'VIP',
+    subtitle: 'Institutional investors',
+    minInvestment: '$500,000+',
+    monthlyTarget: '~$830,000',
+    sixMonthTarget: '$5,000,000+',
+    features: ['White-glove service', 'Bespoke solutions', 'Risk management'],
+    popular: false,
+  },
+];
+
+const steps = [
+  {
+    number: '1',
+    title: 'Account Creation',
+    desc: 'Quick and secure account setup with enterprise-grade protection',
+    items: ['Email verification required', '2FA setup (email + authenticator)', 'Strong password requirements'],
+  },
+  {
+    number: '2',
+    title: 'Identity Verification',
+    desc: 'Fast KYC process with automated compliance review',
+    items: ['Government-issued ID upload', 'Proof of address document', 'Compliance review (24-48 hours)'],
+  },
+  {
+    number: '3',
+    title: 'Fund & Invest',
+    desc: 'Choose your strategy and start earning monthly returns',
+    items: ['Select investment strategy', 'Choose funding cryptocurrency', 'Start earning monthly payouts'],
+  },
+];
+
+export default function Home() {
   return (
-    <span className="inline-flex items-baseline">
-      <span className="tabular-nums">{value}</span>
-      <span>{suffix}</span>
-    </span>
-  );
-}
-
-// Data
-const products = [
-  {
-    category: 'Investment Strategies',
-    title: 'Investment Strategies',
-    description: 'AI-powered quantitative strategies tailored to your risk appetite and investment goals — all from a single platform.',
-    image: '/images/hero-family.png',
-    href: '/strategies',
-  },
-  {
-    category: 'Portfolio Management',
-    title: 'Portfolio Management',
-    description: 'Diversified crypto portfolios managed by advanced algorithms for optimal returns.',
-    image: '/images/lifestyle-finance.png',
-    href: '/strategies',
-  },
-  {
-    category: 'Secure Custody',
-    title: 'Secure Custody',
-    description: 'Bank-grade security with multi-signature wallets and cold storage protection.',
-    image: '/images/team-ceo.png',
-    href: '/strategies',
-  },
-  {
-    category: 'AI Guidance',
-    title: 'AI Guidance',
-    description: 'Get personalized investment recommendations powered by cutting-edge AI technology.',
-    image: '/images/team-cio.png',
-    href: '/strategies',
-  },
-];
-
-const testimonials = [
-  {
-    quote: '...it was crucial to get moving quickly and Quantroy enabled a seamless launch.',
-    name: 'James Okoro',
-    role: 'GP, Okoro Ventures',
-  },
-  {
-    quote: '...the platform made it incredibly easy to start investing. Within weeks, I was seeing consistent returns.',
-    name: 'Chioma Eze',
-    role: 'CEO, Eze Holdings',
-  },
-  {
-    quote: '...as someone in finance, I appreciate the professionalism. This is exactly how crypto investing should be.',
-    name: 'Emmanuel Asante',
-    role: 'Partner, Asante Capital',
-  },
-];
-
-const articles = [
-  {
-    title: 'Investor Relations Done Right: Lessons Pre-to-Post Close',
-    category: 'Case Studies',
-    date: 'Feb 8, 2026',
-    readTime: '7 min read',
-    image: '/images/testimonial-1.png',
-  },
-  {
-    title: 'The 2026 Guide to Crypto Investing',
-    category: 'Best Practices',
-    date: 'Feb 5, 2026',
-    readTime: '3 min read',
-    image: '/images/testimonial-2.png',
-  },
-  {
-    title: 'Are "Consensus" Investment Rounds Better?',
-    category: 'Data',
-    date: 'Feb 1, 2026',
-    readTime: '9 min read',
-    image: '/images/testimonial-3.png',
-  },
-  {
-    title: 'Building Wealth Through Smart Diversification',
-    category: 'Working at Quantroy',
-    date: 'Jan 28, 2026',
-    readTime: '17 min read',
-    image: '/images/team-compliance.png',
-  },
-];
-
-export default function HomePage() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-
-  return (
-    <div className="min-h-screen bg-white">
-      {/* ==================== HEADER ==================== */}
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-[60px]">
-            <Link href="/" className="text-[#1a2f25] font-semibold text-xl tracking-tight">
-              Quantroy
+    <main className="min-h-screen">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/20 to-transparent pointer-events-none" />
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+            🚀 Professional Crypto Investment Platform
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+            Invest in Professional<br />
+            <span className="text-emerald-400">Crypto Strategies</span>
+          </h1>
+          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
+            AI-powered crypto strategies with transparent tracking and monthly returns.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+              Get Started <ChevronRight size={20} />
             </Link>
-
-            <div className="hidden lg:flex items-center gap-1">
-              {['Products', 'Solutions'].map((item) => (
-                <button
-                  key={item}
-                  className="flex items-center gap-1.5 px-4 py-2 text-[15px] text-[#1a2f25] hover:text-[#1a2f25]/70 transition-colors"
-                >
-                  {item}
-                  <ChevronDown className="w-4 h-4 opacity-50" />
-                </button>
-              ))}
-              <Link href="/pricing" className="px-4 py-2 text-[15px] text-[#1a2f25] hover:text-[#1a2f25]/70">
-                Pricing
-              </Link>
-              <button className="flex items-center gap-1.5 px-4 py-2 text-[15px] text-[#1a2f25] hover:text-[#1a2f25]/70">
-                Resources
-                <ChevronDown className="w-4 h-4 opacity-50" />
-              </button>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Link href="/login" className="text-[15px] text-[#1a2f25] hover:text-[#1a2f25]/70">
-                Sign in
-              </Link>
-              <Link
-                href="/register"
-                className="bg-[#1a2f25] text-white px-4 py-2 rounded-md text-[15px] font-medium hover:bg-[#1a2f25]/90 transition-colors"
-              >
-                Contact sales
-              </Link>
-            </div>
-          </nav>
+            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
+              View Strategies
+            </Link>
+          </div>
+          
+          {/* Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {stats.map((stat, i) => (
+              <div key={i} className="card p-4">
+                <div className="text-emerald-400 font-bold text-lg">{stat.value}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </header>
+      </section>
 
-      <main>
-        {/* ==================== HERO ==================== */}
-        <section className="pt-12 pb-16 lg:pt-16 lg:pb-24">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            {/* Announcement */}
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 text-[#1a2f25] text-sm mb-8 group"
-            >
-              <span className="text-[#22c55e]">Explore the 2026 Guide to Crypto Investing</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+      {/* Trust Logos */}
+      <section className="py-12 border-y border-emerald-900/30">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h3 className="text-gray-400 text-sm mb-8">Trusted by Leading Organizations</h3>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            {['Coinbase', 'Binance', 'Kraken', 'Gemini', 'KuCoin', 'OKX'].map((name) => (
+              <div key={name} className="text-gray-400 font-semibold">{name}</div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-            {/* Headline */}
-            <h1 className="text-[clamp(3rem,8vw,5.5rem)] font-normal text-[#1a2f25] leading-[1.05] tracking-[-0.02em] max-w-4xl">
-              Built to scale<br />
-              <span className="text-[#22c55e]">all your wealth</span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="mt-6 text-lg lg:text-xl text-[#1a2f25]/60 max-w-xl">
-              Quantroy provides investors and innovators with the tools to grow.
+      {/* Features Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Star size={14} className="mr-2" /> Market Leader
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Quantroy?</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Experience the future of investing with our cutting-edge technology and professional management.
             </p>
-
-            {/* CTA */}
-            <Link
-              href="/register"
-              className="inline-flex mt-8 bg-[#1a2f25] text-white px-5 py-3 rounded-md text-[15px] font-medium hover:bg-[#1a2f25]/90 transition-colors"
-            >
-              Contact sales
-            </Link>
           </div>
-        </section>
-
-        {/* ==================== PRODUCT CARDS ==================== */}
-        <section className="pb-16 lg:pb-24">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.map((product, idx) => (
-                <Link key={idx} href={product.href} className="group block">
-                  {/* Category Label */}
-                  <p className="text-xs font-medium text-[#1a2f25]/50 uppercase tracking-wider mb-3">
-                    {product.category}
-                  </p>
-                  
-                  {/* Image */}
-                  <div className="aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 mb-4">
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-                  
-                  {/* Description */}
-                  <p className="text-[15px] text-[#1a2f25]/70 leading-relaxed">
-                    {product.description}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ==================== PARTNERS ==================== */}
-        <section className="py-12 border-t border-gray-100">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            <h2 className="text-center text-xl lg:text-2xl text-[#1a2f25] mb-8">
-              Better together. Quantroy partners with industry leaders.
-            </h2>
-            
-            {/* Partner logos */}
-            <div className="flex items-center justify-center gap-8 lg:gap-12 flex-wrap opacity-40">
-              {['APOPHIS', 'BOXER', 'NovaTech', 'CORNERSTONE', 'BULL CRYPTO'].map((partner) => (
-                <span key={partner} className="text-[#1a2f25] font-semibold text-sm lg:text-base">
-                  {partner}
-                </span>
-              ))}
-            </div>
-
-            {/* Link */}
-            <div className="text-center mt-8">
-              <Link
-                href="/partnerships"
-                className="inline-flex items-center gap-2 text-[#1a2f25] text-sm hover:text-[#22c55e] transition-colors group"
-              >
-                <span>Our premier partnership program assembles top professionals to deliver comprehensive</span>
-                <span className="text-[#22c55e] inline-flex items-center gap-1">
-                  expertise & support
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ==================== STATS (DARK SECTION) ==================== */}
-        <section className="bg-[#0f1d18] py-16 lg:py-24">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-              {/* Left Side */}
-              <div>
-                <p className="text-[#22c55e] text-xs font-medium uppercase tracking-wider mb-4">
-                  By the numbers
-                </p>
-                <h2 className="text-3xl lg:text-4xl text-white font-normal leading-tight mb-6">
-                  Fueling<br />innovation
-                </h2>
-                <p className="text-[#ffffff]/50 text-base leading-relaxed mb-8 max-w-md">
-                  With more than half of all top-tier deals run through the platform, Quantroy is at the heart of crypto investing. This exposure gives Quantroy the insight to identify gaps in the market and build the solutions that bridge them.
-                </p>
-
-                {/* Report Card */}
-                <Link href="/blog" className="block max-w-[280px]">
-                  <div className="aspect-[16/10] rounded-lg overflow-hidden bg-[#1a2f25] mb-3">
-                    <div className="w-full h-full bg-gradient-to-br from-[#22c55e]/20 to-transparent flex items-center justify-center">
-                      <span className="text-white/20 text-4xl font-bold">Q</span>
-                    </div>
-                  </div>
-                  <p className="text-white text-sm mb-1">The State of Crypto Investing 2026</p>
-                  <span className="text-[#22c55e] text-xs font-medium">Data</span>
-                </Link>
-              </div>
-
-              {/* Right Side - Stats */}
-              <div>
-                {/* Big number */}
-                <div className="mb-8">
-                  <p className="text-[clamp(4rem,12vw,8rem)] text-white font-normal leading-none tracking-tight">
-                    $<SlotNumber value="50" suffix="M+" />
-                  </p>
-                  <p className="text-white/40 text-sm mt-2">Assets on platform</p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((feature, i) => (
+              <div key={i} className="card p-6 hover:border-emerald-700/50 transition group">
+                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                  <feature.icon size={24} className="text-white" />
                 </div>
+                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                <p className="text-gray-400 mb-4">{feature.desc}</p>
+                <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm">
+                  {feature.badge}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                {/* Grid of stats */}
-                <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-                  <div>
-                    <p className="text-3xl lg:text-4xl text-white font-normal">
-                      <SlotNumber value="10" suffix="k+" />
-                    </p>
-                    <p className="text-white/40 text-sm mt-1">Funds and investors</p>
+      {/* Investment Packages */}
+      <section className="py-20 px-4 bg-[#061510]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Award size={14} className="mr-2" /> Investment Plans
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Investment Packages</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Choose from our professionally managed investment strategies designed for different risk appetites and capital levels.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {packages.map((pkg, i) => (
+              <div key={i} className={`card p-6 relative ${pkg.popular ? 'border-emerald-500 glow' : ''}`}>
+                {pkg.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold">
+                    Most Popular
                   </div>
-                  <div>
-                    <p className="text-3xl lg:text-4xl text-white font-normal">
-                      <SlotNumber value="500" suffix="+" />
-                    </p>
-                    <p className="text-white/40 text-sm mt-1">Active strategies</p>
+                )}
+                <div className="mb-4">
+                  <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
+                  <p className="text-gray-400 text-sm">{pkg.subtitle}</p>
+                </div>
+                <div className="mb-6">
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-gray-400">Minimum Investment</span>
+                    <span className="text-white font-semibold">{pkg.minInvestment}</span>
                   </div>
-                  <div>
-                    <p className="text-3xl lg:text-4xl text-white font-normal">
-                      <SlotNumber value="99" suffix="%" />
-                    </p>
-                    <p className="text-white/40 text-sm mt-1">Platform uptime</p>
+                  <div className="flex justify-between text-sm mb-2">
+                    <span className="text-gray-400">Monthly Target*</span>
+                    <span className="text-emerald-400 font-semibold">{pkg.monthlyTarget}</span>
                   </div>
-                  <div>
-                    <p className="text-3xl lg:text-4xl text-white font-normal">
-                      $<SlotNumber value="125" suffix="M" />
-                    </p>
-                    <p className="text-white/40 text-sm mt-1">Raised by active investors</p>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-gray-400">6-Month Target*</span>
+                    <span className="text-emerald-400 font-semibold">{pkg.sixMonthTarget}</span>
                   </div>
                 </div>
+                <ul className="space-y-2 mb-6">
+                  {pkg.features.map((f, j) => (
+                    <li key={j} className="flex items-center text-sm text-gray-300">
+                      <CheckCircle size={16} className="text-emerald-400 mr-2" /> {f}
+                    </li>
+                  ))}
+                </ul>
+                <Link href="/register" className={`block text-center py-3 rounded-lg font-semibold transition ${
+                  pkg.popular 
+                    ? 'gradient-primary text-white hover:opacity-90' 
+                    : 'border border-emerald-700 text-emerald-400 hover:bg-emerald-900/30'
+                }`}>
+                  Get Started <ChevronRight size={16} className="inline" />
+                </Link>
               </div>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ==================== TESTIMONIALS ==================== */}
-        <section className="py-16 lg:py-24 bg-[#fafafa]">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            <p className="text-[#22c55e] text-xs font-medium uppercase tracking-wider mb-8">
-              Testimonials
-            </p>
-
-            <blockquote className="text-2xl lg:text-4xl xl:text-5xl text-[#1a2f25] font-normal leading-[1.2] max-w-3xl">
-              "{testimonials[currentTestimonial].quote}"
-            </blockquote>
-            
-            <p className="mt-6 text-[#1a2f25]/60 text-base">
-              <span className="text-[#1a2f25] font-medium">{testimonials[currentTestimonial].name}</span>, {testimonials[currentTestimonial].role}
-            </p>
-
-            {/* Navigation */}
-            <div className="flex items-center gap-3 mt-10">
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                className="w-10 h-10 rounded-full border border-[#1a2f25]/20 flex items-center justify-center hover:border-[#1a2f25]/40 transition-colors"
-              >
-                <ChevronLeft className="w-5 h-5 text-[#1a2f25]" />
-              </button>
-              <button
-                onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-                className="w-10 h-10 rounded-full border border-[#1a2f25]/20 flex items-center justify-center hover:border-[#1a2f25]/40 transition-colors"
-              >
-                <ChevronRight className="w-5 h-5 text-[#1a2f25]" />
-              </button>
-              
-              {/* Dots */}
-              <div className="flex gap-2 ml-2">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentTestimonial(idx)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      idx === currentTestimonial ? 'bg-[#1a2f25]' : 'bg-[#1a2f25]/20'
-                    }`}
-                  />
-                ))}
-              </div>
+      {/* How It Works */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Zap size={14} className="mr-2" /> Getting Started
             </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Simple 3-Step Onboarding</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Start earning with our crypto investment platform in just three simple steps.
+            </p>
           </div>
-        </section>
-
-        {/* ==================== RESOURCES ==================== */}
-        <section className="py-16 lg:py-24">
-          <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-10">
-              <div>
-                <p className="text-[#22c55e] text-xs font-medium uppercase tracking-wider mb-2">
-                  Resources
-                </p>
-                <h2 className="text-2xl lg:text-3xl text-[#1a2f25] font-normal">
-                  Latest<br className="lg:hidden" /> articles
-                </h2>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {articles.map((article, idx) => (
-                <Link key={idx} href="/blog" className="group block">
-                  <div className="aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 mb-4">
-                    <Image
-                      src={article.image}
-                      alt={article.title}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+          <div className="grid md:grid-cols-3 gap-8">
+            {steps.map((step, i) => (
+              <div key={i} className="relative">
+                <div className="card p-6">
+                  <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center text-white font-bold mb-4">
+                    {step.number}
                   </div>
-                  <p className="text-[#22c55e] text-xs font-medium mb-2">{article.category}</p>
-                  <h3 className="text-[#1a2f25] text-base font-medium leading-snug mb-2 group-hover:text-[#22c55e] transition-colors">
-                    {article.title}
-                  </h3>
-                  <p className="text-[#1a2f25]/40 text-sm">
-                    {article.date} — {article.readTime}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* ==================== FOOTER ==================== */}
-      <footer className="bg-white border-t border-gray-100 pt-12 pb-8">
-        <div className="max-w-[1280px] mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 mb-12">
-            {/* Logo & Buttons */}
-            <div className="col-span-2 lg:col-span-1">
-              <Link href="/" className="text-[#1a2f25] font-semibold text-xl tracking-tight">
-                Quantroy
-              </Link>
-              <div className="flex flex-col gap-2 mt-6">
-                <Link
-                  href="/register"
-                  className="bg-[#1a2f25] text-white px-4 py-2 rounded-md text-sm font-medium text-center hover:bg-[#1a2f25]/90 transition-colors"
-                >
-                  Contact sales
-                </Link>
-                <Link
-                  href="/login"
-                  className="border border-[#1a2f25]/20 text-[#1a2f25] px-4 py-2 rounded-md text-sm font-medium text-center hover:border-[#1a2f25]/40 transition-colors"
-                >
-                  Sign in
-                </Link>
+                  <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-gray-400 mb-4">{step.desc}</p>
+                  <ul className="space-y-2">
+                    {step.items.map((item, j) => (
+                      <li key={j} className="flex items-center text-sm text-gray-300">
+                        <CheckCircle size={14} className="text-emerald-400 mr-2" /> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {i < 2 && (
+                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
+                    <ChevronRight size={24} className="text-emerald-700" />
+                  </div>
+                )}
               </div>
-            </div>
-
-            {/* Products */}
-            <div>
-              <h4 className="text-[#1a2f25] font-medium text-sm mb-4">Products</h4>
-              <ul className="space-y-3">
-                {['Investment Strategies', 'Portfolio Management', 'Secure Custody', 'AI Guidance'].map((item) => (
-                  <li key={item}>
-                    <Link href="/strategies" className="text-[#1a2f25]/60 text-sm hover:text-[#1a2f25] transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Pricing */}
-            <div>
-              <h4 className="text-[#1a2f25] font-medium text-sm mb-4">Pricing + Returns</h4>
-              <ul className="space-y-3">
-                {['Pricing', 'ROI Calculator', 'Performance'].map((item) => (
-                  <li key={item}>
-                    <Link href="/pricing" className="text-[#1a2f25]/60 text-sm hover:text-[#1a2f25] transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Resources */}
-            <div>
-              <h4 className="text-[#1a2f25] font-medium text-sm mb-4">Resources</h4>
-              <ul className="space-y-3">
-                {['Blog', 'Help Center', 'Education', 'Data Center'].map((item) => (
-                  <li key={item}>
-                    <Link href="/blog" className="text-[#1a2f25]/60 text-sm hover:text-[#1a2f25] transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Company */}
-            <div>
-              <h4 className="text-[#1a2f25] font-medium text-sm mb-4">Company</h4>
-              <ul className="space-y-3">
-                {['About Us', 'Careers', 'Engineering'].map((item) => (
-                  <li key={item}>
-                    <Link href="/about" className="text-[#1a2f25]/60 text-sm hover:text-[#1a2f25] transition-colors">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            ))}
           </div>
+          <div className="text-center mt-12">
+            <Link href="/register" className="btn-primary inline-flex items-center gap-2">
+              Start Your Journey Today <ChevronRight size={20} />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-          {/* Bottom */}
-          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 pt-8 border-t border-gray-100">
-            <div className="flex flex-wrap items-center gap-4 lg:gap-6">
-              <Link href="/terms" className="text-[#1a2f25]/40 text-sm hover:text-[#1a2f25]/60">Terms</Link>
-              <Link href="/privacy" className="text-[#1a2f25]/40 text-sm hover:text-[#1a2f25]/60">Privacy</Link>
-              <Link href="/disclosures" className="text-[#1a2f25]/40 text-sm hover:text-[#1a2f25]/60">Disclosures</Link>
-              <span className="text-[#1a2f25]/30 text-sm">© 2026 Quantroy Inc.</span>
+      {/* Security Section */}
+      <section className="py-20 px-4 bg-[#061510]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Lock size={14} className="mr-2" /> Enterprise Security
             </div>
-            <div className="flex items-center gap-4">
-              <Link href="#" className="text-[#1a2f25]/40 hover:text-[#1a2f25]/60">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </Link>
-              <Link href="#" className="text-[#1a2f25]/40 hover:text-[#1a2f25]/60">
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-              </Link>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Bank-Grade Security & Compliance</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Your security and trust are our top priorities with comprehensive protection measures.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { icon: Shield, title: 'Multi-Sig Security', desc: 'Multi-signature protection and cold storage' },
+              { icon: CheckCircle, title: 'KYC/AML Compliance', desc: 'Full identity verification and screening' },
+              { icon: Lock, title: 'Advanced Encryption', desc: 'AES-256 at rest, TLS 1.3 in transit' },
+              { icon: Clock, title: '24/7 Monitoring', desc: 'Continuous security monitoring' },
+            ].map((item, i) => (
+              <div key={i} className="card p-6 text-center">
+                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
+                  <item.icon size={24} className="text-white" />
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
+                <p className="text-gray-400 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="flex justify-center gap-8 mt-12 opacity-60">
+            <div className="text-center">
+              <div className="text-emerald-400 font-semibold">SOC 2</div>
+              <div className="text-gray-400 text-xs">Compliant</div>
+            </div>
+            <div className="text-center">
+              <div className="text-emerald-400 font-semibold">ISO 27001</div>
+              <div className="text-gray-400 text-xs">Certified</div>
+            </div>
+            <div className="text-center">
+              <div className="text-emerald-400 font-semibold">GDPR</div>
+              <div className="text-gray-400 text-xs">Compliant</div>
             </div>
           </div>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+            Your Journey Starts Here
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            Ready to Start Your Investment Journey?
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+            Join thousands of investors who trust Quantroy with their crypto investments. Start with as little as $500.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+              Start Investing Today <ChevronRight size={20} />
+            </Link>
+            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
+              View All Strategies
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { icon: Users, value: '10,000+', label: 'Active Investors' },
+              { icon: TrendingUp, value: '$50M+', label: 'Assets Managed' },
+              { icon: Shield, value: 'Bank-Grade', label: 'Security' },
+              { icon: Clock, value: '24/7', label: 'Support' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <stat.icon size={24} className="text-emerald-400 mx-auto mb-2" />
+                <div className="text-white font-bold text-xl">{stat.value}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }
