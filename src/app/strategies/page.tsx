@@ -5,6 +5,11 @@ import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
+  FadeUp, FadeIn, ScaleIn, StaggerContainer, StaggerItem, 
+  Float, SectionBlend, BlurIn 
+} from '@/components/ScrollAnimations';
+import { motion } from 'framer-motion';
+import { 
   TrendingUp, Shield, CheckCircle, ChevronRight,
   BarChart3, Clock, Users, Zap
 } from 'lucide-react';
@@ -99,7 +104,7 @@ const strategies = [
 
 export default function StrategiesPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Header />
       
       {/* Hero with 3D Assets */}
@@ -107,163 +112,211 @@ export default function StrategiesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
             {/* Left 3D Asset */}
-            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={4} y={12} className="hidden xl:block">
+              <FadeIn direction="left">
+                <div className="relative w-72 h-72 flex-shrink-0">
+                  <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
             
             <div className="text-center">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-                <BarChart3 size={16} className="mr-2" /> Investment Strategies
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Professional Investment<br />
-                <span className="text-emerald-400">Strategies</span>
-              </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Choose from our range of professionally managed strategies designed for different investment goals and risk appetites.
-              </p>
+              <FadeIn direction="up" delay={0.1}>
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                  <BarChart3 size={16} className="mr-2" /> Investment Strategies
+                </div>
+              </FadeIn>
+              <BlurIn delay={0.2}>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                  Professional Investment<br />
+                  <span className="text-emerald-400">Strategies</span>
+                </h1>
+              </BlurIn>
+              <FadeUp delay={0.3}>
+                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                  Choose from our range of professionally managed strategies designed for different investment goals and risk appetites.
+                </p>
+              </FadeUp>
             </div>
             
             {/* Right 3D Asset */}
-            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={3.5} y={15} className="hidden xl:block">
+              <FadeIn direction="right">
+                <div className="relative w-72 h-72 flex-shrink-0">
+                  <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
           </div>
         </div>
       </section>
 
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={80} />
+
       {/* Strategies */}
-      <section className="py-12 px-4">
+      <section className="py-12 px-4" style={{ background: 'rgb(8, 32, 26)' }}>
         <div className="max-w-7xl mx-auto space-y-8">
           {strategies.map((strategy, i) => (
-            <div 
-              key={strategy.id} 
-              className={`card p-8 ${strategy.popular ? 'border-emerald-500 glow' : ''}`}
-            >
-              {strategy.popular && (
-                <div className="inline-block px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold mb-4">
-                  Most Popular
-                </div>
-              )}
-              
-              <div className="grid lg:grid-cols-3 gap-8">
-                {/* Left - Info */}
-                <div className="lg:col-span-2">
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h2 className="text-2xl font-bold text-white">{strategy.name}</h2>
-                      <p className="text-gray-400">{strategy.subtitle}</p>
-                    </div>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      strategy.riskLevel === 'Moderate' ? 'bg-blue-900/30 text-blue-400' :
-                      strategy.riskLevel === 'Moderate-High' ? 'bg-amber-900/30 text-amber-400' :
-                      strategy.riskLevel === 'High' ? 'bg-red-900/30 text-red-400' :
-                      'bg-purple-900/30 text-purple-400'
-                    }`}>
-                      {strategy.riskLevel} Risk
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-300 mb-6">{strategy.description}</p>
-                  
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
-                    {strategy.features.map((feature, j) => (
-                      <div key={j} className="flex items-start gap-3">
-                        <CheckCircle size={18} className="text-emerald-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-gray-300 text-sm">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Stats */}
-                  <div className="flex gap-8">
-                    <div>
-                      <div className="flex items-center gap-2 text-emerald-400">
-                        <Users size={16} />
-                        <span className="font-semibold">{strategy.stats.investors}</span>
-                      </div>
-                      <p className="text-gray-400 text-xs">Active Investors</p>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 text-emerald-400">
-                        <TrendingUp size={16} />
-                        <span className="font-semibold">{strategy.stats.avgReturn}</span>
-                      </div>
-                      <p className="text-gray-400 text-xs">Avg Monthly Return</p>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 text-emerald-400">
-                        <Clock size={16} />
-                        <span className="font-semibold">{strategy.stats.yearsActive}</span>
-                      </div>
-                      <p className="text-gray-400 text-xs">Years Active</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right - Investment Card */}
-                <div className="bg-emerald-900/20 rounded-xl p-6 border border-emerald-900/30">
-                  <div className="mb-6">
-                    <p className="text-gray-400 text-sm">Minimum Investment</p>
-                    <p className="text-3xl font-bold text-white">{strategy.minInvestment}</p>
-                  </div>
-                  
-                  <div className="space-y-4 mb-6">
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Monthly Target</span>
-                      <span className="text-emerald-400 font-semibold">{strategy.monthlyTarget}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">6-Month Target</span>
-                      <span className="text-emerald-400 font-semibold">{strategy.sixMonthTarget}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-400">Payout Frequency</span>
-                      <span className="text-white font-semibold">Monthly</span>
-                    </div>
-                  </div>
-
-                  <Link 
-                    href="/register" 
-                    className="btn-primary w-full flex items-center justify-center gap-2"
+            <FadeUp key={strategy.id} delay={i * 0.1}>
+              <motion.div 
+                className={`card p-8 ${strategy.popular ? 'border-emerald-500 glow' : ''}`}
+                whileHover={{ scale: 1.01 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {strategy.popular && (
+                  <motion.div 
+                    className="inline-block px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold mb-4"
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ type: "spring", delay: 0.3 }}
                   >
-                    Start Investing <ChevronRight size={18} />
-                  </Link>
+                    Most Popular
+                  </motion.div>
+                )}
+                
+                <div className="grid lg:grid-cols-3 gap-8">
+                  {/* Left - Info */}
+                  <div className="lg:col-span-2">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        <h2 className="text-2xl font-bold text-white">{strategy.name}</h2>
+                        <p className="text-gray-400">{strategy.subtitle}</p>
+                      </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        strategy.riskLevel === 'Moderate' ? 'bg-blue-900/30 text-blue-400' :
+                        strategy.riskLevel === 'Moderate-High' ? 'bg-amber-900/30 text-amber-400' :
+                        strategy.riskLevel === 'High' ? 'bg-red-900/30 text-red-400' :
+                        'bg-purple-900/30 text-purple-400'
+                      }`}>
+                        {strategy.riskLevel} Risk
+                      </span>
+                    </div>
+                    
+                    <p className="text-gray-300 mb-6">{strategy.description}</p>
+                    
+                    <div className="grid md:grid-cols-2 gap-4 mb-6">
+                      {strategy.features.map((feature, j) => (
+                        <motion.div 
+                          key={j} 
+                          className="flex items-start gap-3"
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: j * 0.1 }}
+                        >
+                          <CheckCircle size={18} className="text-emerald-400 flex-shrink-0 mt-0.5" />
+                          <span className="text-gray-300 text-sm">{feature}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex gap-8">
+                      <div>
+                        <div className="flex items-center gap-2 text-emerald-400">
+                          <Users size={16} />
+                          <span className="font-semibold">{strategy.stats.investors}</span>
+                        </div>
+                        <p className="text-gray-400 text-xs">Active Investors</p>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 text-emerald-400">
+                          <TrendingUp size={16} />
+                          <span className="font-semibold">{strategy.stats.avgReturn}</span>
+                        </div>
+                        <p className="text-gray-400 text-xs">Avg Monthly Return</p>
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 text-emerald-400">
+                          <Clock size={16} />
+                          <span className="font-semibold">{strategy.stats.yearsActive}</span>
+                        </div>
+                        <p className="text-gray-400 text-xs">Years Active</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right - Investment Card */}
+                  <div className="bg-emerald-900/20 rounded-xl p-6 border border-emerald-900/30">
+                    <div className="mb-6">
+                      <p className="text-gray-400 text-sm">Minimum Investment</p>
+                      <p className="text-3xl font-bold text-white">{strategy.minInvestment}</p>
+                    </div>
+                    
+                    <div className="space-y-4 mb-6">
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Monthly Target</span>
+                        <span className="text-emerald-400 font-semibold">{strategy.monthlyTarget}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">6-Month Target</span>
+                        <span className="text-emerald-400 font-semibold">{strategy.sixMonthTarget}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-400">Payout Frequency</span>
+                        <span className="text-white font-semibold">Monthly</span>
+                      </div>
+                    </div>
+
+                    <Link 
+                      href="/register" 
+                      className="btn-primary w-full flex items-center justify-center gap-2"
+                    >
+                      Start Investing <ChevronRight size={18} />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </FadeUp>
           ))}
         </div>
       </section>
+
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(5, 25, 20)" height={100} />
 
       {/* CTA with 3D Assets */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-12">
             {/* Left 3D Asset */}
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={3.5} y={15} className="hidden xl:block">
+              <FadeIn direction="left">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
             
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-white mb-4">Not sure which strategy is right for you?</h2>
-              <p className="text-gray-400 mb-8">
-                Our AI assistant can help you find the perfect strategy based on your investment goals and risk tolerance.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-                  <Zap size={18} /> Talk to AI Assistant
-                </Link>
-                <Link href="/contact" className="btn-secondary flex items-center justify-center gap-2">
-                  Contact Our Team
-                </Link>
-              </div>
+              <BlurIn>
+                <h2 className="text-3xl font-bold text-white mb-4">Not sure which strategy is right for you?</h2>
+              </BlurIn>
+              <FadeUp delay={0.2}>
+                <p className="text-gray-400 mb-8">
+                  Our AI assistant can help you find the perfect strategy based on your investment goals and risk tolerance.
+                </p>
+              </FadeUp>
+              <FadeUp delay={0.3}>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+                    <Zap size={18} /> Talk to AI Assistant
+                  </Link>
+                  <Link href="/contact" className="btn-secondary flex items-center justify-center gap-2">
+                    Contact Our Team
+                  </Link>
+                </div>
+              </FadeUp>
             </div>
             
             {/* Right 3D Asset */}
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={4} y={12} className="hidden xl:block">
+              <FadeIn direction="right">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
           </div>
         </div>
       </section>

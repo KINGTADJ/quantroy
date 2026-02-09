@@ -3,6 +3,11 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
+import { 
+  FadeUp, FadeIn, StaggerContainer, StaggerItem, 
+  Float, SectionBlend, BlurIn 
+} from '@/components/ScrollAnimations';
+import { motion } from 'framer-motion';
 import { Shield, CheckCircle, FileText, Users, Globe, Scale } from 'lucide-react';
 
 const complianceAreas = [
@@ -37,109 +42,172 @@ const licenses = [
 
 export default function CompliancePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Header />
       
       {/* Hero */}
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={4} y={12} className="hidden xl:block">
+              <FadeIn direction="left">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
             
             <div className="text-center">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-                <Shield size={16} className="mr-2" /> Regulatory Compliance
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Compliance & <span className="text-emerald-400">Licensing</span>
-              </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Quantroy operates with full regulatory compliance, prioritizing transparency and legal adherence in all jurisdictions.
-              </p>
+              <FadeIn direction="up" delay={0.1}>
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                  <Shield size={16} className="mr-2" /> Regulatory Compliance
+                </div>
+              </FadeIn>
+              <BlurIn delay={0.2}>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                  Compliance & <span className="text-emerald-400">Licensing</span>
+                </h1>
+              </BlurIn>
+              <FadeUp delay={0.3}>
+                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                  Quantroy operates with full regulatory compliance, prioritizing transparency and legal adherence in all jurisdictions.
+                </p>
+              </FadeUp>
             </div>
             
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={3.5} y={15} className="hidden xl:block">
+              <FadeIn direction="right">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
           </div>
         </div>
       </section>
+
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={80} />
 
       {/* Compliance Areas */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4" style={{ background: 'rgb(8, 32, 26)' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <FadeUp className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Our Compliance Framework</h2>
             <p className="text-gray-400">Comprehensive measures to ensure regulatory adherence</p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-6">
+          </FadeUp>
+          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 gap-6">
             {complianceAreas.map((area, i) => (
-              <div key={i} className="card p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
-                    <area.icon size={24} className="text-white" />
+              <StaggerItem key={i}>
+                <motion.div 
+                  className="card p-6"
+                  whileHover={{ x: 8 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="flex items-start gap-4">
+                    <motion.div 
+                      className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0"
+                      whileHover={{ rotate: 10 }}
+                    >
+                      <area.icon size={24} className="text-white" />
+                    </motion.div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-2">{area.title}</h3>
+                      <p className="text-gray-400 text-sm">{area.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-white mb-2">{area.title}</h3>
-                    <p className="text-gray-400 text-sm">{area.desc}</p>
-                  </div>
-                </div>
-              </div>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(6, 21, 16)" height={100} />
+
       {/* Licenses */}
-      <section className="py-16 px-4 bg-[#061510]">
+      <section className="py-16 px-4" style={{ background: 'rgb(6, 21, 16)' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          <FadeUp className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-4">Regulatory Status</h2>
             <p className="text-gray-400">Our licensing and registration status by jurisdiction</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          </FadeUp>
+          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {licenses.map((license, i) => (
-              <div key={i} className="card p-6 text-center">
-                <CheckCircle size={32} className="text-emerald-400 mx-auto mb-3" />
-                <h3 className="text-lg font-semibold text-white mb-1">{license.jurisdiction}</h3>
-                <p className="text-emerald-400 text-sm mb-2">{license.status}</p>
-                <p className="text-gray-400 text-xs">{license.body}</p>
-              </div>
+              <StaggerItem key={i}>
+                <motion.div 
+                  className="card p-6 text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ type: "spring", delay: i * 0.1 }}
+                  >
+                    <CheckCircle size={32} className="text-emerald-400 mx-auto mb-3" />
+                  </motion.div>
+                  <h3 className="text-lg font-semibold text-white mb-1">{license.jurisdiction}</h3>
+                  <p className="text-emerald-400 text-sm mb-2">{license.status}</p>
+                  <p className="text-gray-400 text-xs">{license.body}</p>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
+
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(6, 21, 16)" toColor="rgb(5, 25, 20)" height={100} />
 
       {/* Commitment */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="card p-8">
-            <h2 className="text-2xl font-bold text-white mb-6">Our Commitment</h2>
-            <div className="space-y-4 text-gray-300">
-              <p>
-                At Quantroy, we believe that regulatory compliance is not just a legal requirement—it's a cornerstone 
-                of trust. We work closely with regulators and industry bodies to ensure our operations meet the highest standards.
-              </p>
-              <p>
-                We are committed to:
-              </p>
-              <ul className="list-disc list-inside space-y-2 ml-4">
-                <li>Maintaining transparent operations</li>
-                <li>Protecting customer funds and data</li>
-                <li>Preventing financial crime</li>
-                <li>Cooperating with regulatory authorities</li>
-                <li>Adapting to evolving regulatory requirements</li>
-              </ul>
-              <p>
-                For compliance-related inquiries, please contact our compliance team at{' '}
-                <a href="mailto:compliance@quantroy.com" className="text-emerald-400 hover:underline">
-                  compliance@quantroy.com
-                </a>
-              </p>
+          <FadeUp>
+            <div className="card p-8">
+              <h2 className="text-2xl font-bold text-white mb-6">Our Commitment</h2>
+              <div className="space-y-4 text-gray-300">
+                <p>
+                  At Quantroy, we believe that regulatory compliance is not just a legal requirement—it's a cornerstone 
+                  of trust. We work closely with regulators and industry bodies to ensure our operations meet the highest standards.
+                </p>
+                <p>We are committed to:</p>
+                <motion.ul 
+                  className="list-disc list-inside space-y-2 ml-4"
+                  initial="hidden"
+                  whileInView="visible"
+                  variants={{
+                    visible: { transition: { staggerChildren: 0.1 } },
+                  }}
+                >
+                  {[
+                    'Maintaining transparent operations',
+                    'Protecting customer funds and data',
+                    'Preventing financial crime',
+                    'Cooperating with regulatory authorities',
+                    'Adapting to evolving regulatory requirements',
+                  ].map((item, i) => (
+                    <motion.li
+                      key={i}
+                      variants={{
+                        hidden: { opacity: 0, x: -20 },
+                        visible: { opacity: 1, x: 0 },
+                      }}
+                    >
+                      {item}
+                    </motion.li>
+                  ))}
+                </motion.ul>
+                <p>
+                  For compliance-related inquiries, please contact our compliance team at{' '}
+                  <a href="mailto:compliance@quantroy.com" className="text-emerald-400 hover:underline">
+                    compliance@quantroy.com
+                  </a>
+                </p>
+              </div>
             </div>
-          </div>
+          </FadeUp>
         </div>
       </section>
 

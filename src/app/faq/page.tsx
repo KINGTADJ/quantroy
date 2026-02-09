@@ -3,8 +3,14 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
+import { 
+  FadeUp, FadeIn, StaggerContainer, StaggerItem, 
+  Float, SectionBlend, BlurIn 
+} from '@/components/ScrollAnimations';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const faqs = [
   {
@@ -85,88 +91,135 @@ const faqs = [
   },
 ];
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="card overflow-hidden">
-      <button
+    <motion.div 
+      className="card overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+      viewport={{ once: true }}
+    >
+      <motion.button
         className="w-full px-6 py-4 flex items-center justify-between text-left"
         onClick={() => setIsOpen(!isOpen)}
+        whileHover={{ backgroundColor: 'rgba(16, 185, 129, 0.05)' }}
       >
         <span className="text-white font-medium pr-4">{question}</span>
-        <ChevronDown
-          size={20}
-          className={`text-emerald-400 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`}
-        />
-      </button>
-      {isOpen && (
-        <div className="px-6 pb-4">
-          <p className="text-gray-400">{answer}</p>
-        </div>
-      )}
-    </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <ChevronDown size={20} className="text-emerald-400 flex-shrink-0" />
+        </motion.div>
+      </motion.button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="overflow-hidden"
+          >
+            <div className="px-6 pb-4">
+              <p className="text-gray-400">{answer}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
 export default function FAQPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-x-hidden">
       <Header />
       
       {/* Hero */}
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={4} y={12} className="hidden xl:block">
+              <FadeIn direction="left">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
             
             <div className="text-center">
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-                <HelpCircle size={16} className="mr-2" /> Help Center
-              </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Frequently Asked <span className="text-emerald-400">Questions</span>
-              </h1>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Find answers to common questions about Quantroy, investments, and more.
-              </p>
+              <FadeIn direction="up" delay={0.1}>
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                  <HelpCircle size={16} className="mr-2" /> Help Center
+                </div>
+              </FadeIn>
+              <BlurIn delay={0.2}>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                  Frequently Asked <span className="text-emerald-400">Questions</span>
+                </h1>
+              </BlurIn>
+              <FadeUp delay={0.3}>
+                <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                  Find answers to common questions about Quantroy, investments, and more.
+                </p>
+              </FadeUp>
             </div>
             
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
-            </div>
+            <Float duration={3.5} y={15} className="hidden xl:block">
+              <FadeIn direction="right">
+                <div className="relative w-64 h-64 flex-shrink-0">
+                  <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+                </div>
+              </FadeIn>
+            </Float>
           </div>
         </div>
       </section>
 
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={80} />
+
       {/* FAQ Sections */}
-      <section className="py-16 px-4">
+      <section className="py-16 px-4" style={{ background: 'rgb(8, 32, 26)' }}>
         <div className="max-w-4xl mx-auto space-y-12">
           {faqs.map((section, i) => (
-            <div key={i}>
-              <h2 className="text-2xl font-bold text-white mb-6">{section.category}</h2>
-              <div className="space-y-4">
-                {section.questions.map((faq, j) => (
-                  <FAQItem key={j} question={faq.q} answer={faq.a} />
-                ))}
+            <FadeUp key={i} delay={i * 0.1}>
+              <div>
+                <h2 className="text-2xl font-bold text-white mb-6">{section.category}</h2>
+                <div className="space-y-4">
+                  {section.questions.map((faq, j) => (
+                    <FAQItem key={j} question={faq.q} answer={faq.a} index={j} />
+                  ))}
+                </div>
               </div>
-            </div>
+            </FadeUp>
           ))}
         </div>
       </section>
 
+      {/* Section Blend */}
+      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(6, 21, 16)" height={100} />
+
       {/* Still Have Questions */}
-      <section className="py-16 px-4 bg-[#061510]">
+      <section className="py-16 px-4" style={{ background: 'rgb(6, 21, 16)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Still Have Questions?</h2>
-          <p className="text-gray-400 mb-8">
-            Can't find what you're looking for? Our support team is here to help.
-          </p>
-          <a href="/contact" className="btn-primary">
-            Contact Support
-          </a>
+          <BlurIn>
+            <h2 className="text-3xl font-bold text-white mb-4">Still Have Questions?</h2>
+          </BlurIn>
+          <FadeUp delay={0.2}>
+            <p className="text-gray-400 mb-8">
+              Can't find what you're looking for? Our support team is here to help.
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.3}>
+            <Link href="/contact" className="btn-primary">
+              Contact Support
+            </Link>
+          </FadeUp>
         </div>
       </section>
 
