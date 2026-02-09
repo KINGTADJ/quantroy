@@ -125,17 +125,14 @@ export default function Home() {
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
         
-        {/* 3D Static Assets - Hero */}
-        <div className="absolute top-32 left-[5%] w-64 h-64 hidden xl:block pointer-events-none opacity-90">
-          <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
-        <div className="absolute bottom-20 right-[8%] w-56 h-56 hidden xl:block pointer-events-none opacity-90">
-          <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Text */}
-            <div className="text-center lg:text-left">
+            {/* Left - Text with 3D Asset */}
+            <div className="text-center lg:text-left relative">
+              {/* 3D Credit Card - Integrated into hero text area */}
+              <div className="hidden lg:block absolute -left-20 top-1/2 -translate-y-1/2 w-48 h-48 opacity-90 -z-10">
+                <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              </div>
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
                 🚀 Professional Crypto Investment Platform
               </div>
@@ -156,8 +153,12 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Right - Image */}
+            {/* Right - Image with 3D Asset */}
             <div className="relative hidden lg:block">
+              {/* 3D Crypto Coins - Integrated near family image */}
+              <div className="absolute -right-16 bottom-20 w-44 h-44 opacity-90 z-10">
+                <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              </div>
               <div className="relative aspect-square max-w-lg mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-3xl" />
                 <Image
@@ -275,15 +276,17 @@ export default function Home() {
 
       {/* Investment Packages */}
       <section className="py-20 px-4 mesh-bg relative overflow-hidden">
-        {/* 3D Static Assets - Packages */}
-        <div className="absolute top-24 left-[6%] w-60 h-60 hidden xl:block pointer-events-none opacity-85">
-          <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
-        <div className="absolute bottom-24 right-[6%] w-52 h-52 hidden xl:block pointer-events-none opacity-85">
-          <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          {/* Section header with integrated 3D assets */}
+          <div className="text-center mb-12 relative">
+            {/* 3D Gold Bars - Left of title */}
+            <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 w-40 h-40 opacity-85">
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            {/* 3D Money Bundle - Right of title */}
+            <div className="hidden xl:block absolute right-0 top-1/2 -translate-y-1/2 w-36 h-36 opacity-85">
+              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
               <Award size={14} className="mr-2" /> Investment Plans
             </div>
@@ -416,12 +419,13 @@ export default function Home() {
 
       {/* Security Section */}
       <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
-        {/* 3D Static Asset - Security */}
-        <div className="absolute top-20 right-[6%] w-56 h-56 hidden xl:block pointer-events-none opacity-85">
-          <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
+          {/* Section header with integrated 3D asset */}
+          <div className="text-center mb-12 relative">
+            {/* 3D Secure Vault - Right of title */}
+            <div className="hidden xl:block absolute right-8 top-1/2 -translate-y-1/2 w-44 h-44 opacity-85">
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
               <Lock size={14} className="mr-2" /> Enterprise Security
             </div>
@@ -465,11 +469,11 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 cta-bg relative overflow-hidden">
-        {/* 3D Static Asset - CTA */}
-        <div className="absolute top-16 left-[8%] w-52 h-52 hidden xl:block pointer-events-none opacity-85">
-          <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
-        </div>
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-4xl mx-auto text-center relative">
+          {/* 3D Phone App - Left of CTA content */}
+          <div className="hidden xl:block absolute -left-32 top-1/2 -translate-y-1/2 w-44 h-44 opacity-85">
+            <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          </div>
           <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
             Your Journey Starts Here
           </div>
