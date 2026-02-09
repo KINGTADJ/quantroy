@@ -126,21 +126,14 @@ export default function Home() {
         <div className="hero-orb hero-orb-2" />
         
         <div className="max-w-7xl mx-auto relative z-10">
-          {/* 3-Column Hero: Asset | Text | Image+Asset */}
-          <div className="grid lg:grid-cols-[350px_1fr_1fr] gap-6 items-center">
-            {/* Left 3D Asset - Credit Card - HUGE */}
-            <div className="hidden lg:flex items-center justify-center">
-              <div className="relative w-80 h-80">
-                <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
-              </div>
-            </div>
-            
-            {/* Center - Text */}
+          {/* Clean 2-Column Hero */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Text */}
             <div className="text-center lg:text-left">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
                 🚀 Professional Crypto Investment Platform
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
                 Invest in Professional<br />
                 <span className="text-emerald-400">Crypto Strategies</span>
               </h1>
@@ -157,15 +150,9 @@ export default function Home() {
               </div>
             </div>
             
-            {/* Right - Image + Coins */}
-            <div className="hidden lg:block">
-              {/* 3D Coins above family image - HUGE */}
-              <div className="flex justify-end mb-4">
-                <div className="relative w-72 h-72">
-                  <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
-                </div>
-              </div>
-              <div className="relative aspect-square max-w-md mx-auto">
+            {/* Right - Image */}
+            <div className="relative hidden lg:block">
+              <div className="relative aspect-square max-w-lg mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-3xl" />
                 <Image
                   src="/images/hero-family.png"
