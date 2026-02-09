@@ -127,10 +127,10 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* 3-Column Hero: Asset | Text | Image+Asset */}
-          <div className="grid lg:grid-cols-[200px_1fr_1fr] gap-8 items-center">
-            {/* Left 3D Asset - Credit Card */}
+          <div className="grid lg:grid-cols-[350px_1fr_1fr] gap-6 items-center">
+            {/* Left 3D Asset - Credit Card - HUGE */}
             <div className="hidden lg:flex items-center justify-center">
-              <div className="relative w-56 h-56">
+              <div className="relative w-80 h-80">
                 <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
               </div>
             </div>
@@ -159,9 +159,9 @@ export default function Home() {
             
             {/* Right - Image + Coins */}
             <div className="hidden lg:block">
-              {/* 3D Coins above family image */}
+              {/* 3D Coins above family image - HUGE */}
               <div className="flex justify-end mb-4">
-                <div className="relative w-40 h-40">
+                <div className="relative w-72 h-72">
                   <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </div>
@@ -283,10 +283,10 @@ export default function Home() {
       {/* Investment Packages */}
       <section className="py-20 px-4 mesh-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Section header with 3D assets as inline elements */}
-          <div className="flex items-center justify-center gap-8 mb-12">
-            {/* Left 3D Asset - Gold Bars */}
-            <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
+          {/* Section header with 3D assets as inline elements - HUGE */}
+          <div className="flex items-center justify-center gap-12 mb-12">
+            {/* Left 3D Asset - Gold Bars - HUGE */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
               <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
@@ -301,8 +301,8 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Right 3D Asset - Money Bundle */}
-            <div className="hidden xl:block relative w-44 h-44 flex-shrink-0">
+            {/* Right 3D Asset - Money Bundle - HUGE */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
               <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
@@ -431,8 +431,8 @@ export default function Home() {
       {/* Security Section */}
       <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* Section header with 3D vault inline */}
-          <div className="flex items-center justify-center gap-8 mb-12">
+          {/* Section header with 3D vault inline - HUGE */}
+          <div className="flex items-center justify-center gap-12 mb-12">
             {/* Center - Title */}
             <div className="text-center">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -444,8 +444,8 @@ export default function Home() {
               </p>
             </div>
             
-            {/* Right 3D Asset - Secure Vault */}
-            <div className="hidden xl:block relative w-52 h-52 flex-shrink-0">
+            {/* Right 3D Asset - Secure Vault - HUGE */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
               <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
@@ -485,10 +485,10 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-20 px-4 cta-bg relative overflow-hidden">
         <div className="max-w-6xl mx-auto">
-          {/* CTA with Phone App inline */}
+          {/* CTA with Phone App inline - HUGE */}
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset - Phone App */}
-            <div className="hidden xl:block relative w-56 h-56 flex-shrink-0">
+            {/* Left 3D Asset - Phone App - HUGE */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
               <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
