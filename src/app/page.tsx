@@ -124,6 +124,14 @@ export default function Home() {
         {/* Animated orbs */}
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
+        
+        {/* 3D Floating Assets */}
+        <div className="absolute top-24 left-[2%] w-40 h-40 animate-float-slow hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/premium-card.png" alt="" fill className="object-contain" />
+        </div>
+        <div className="absolute bottom-10 right-[3%] w-36 h-36 animate-float-delayed hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/crypto-coins.png" alt="" fill className="object-contain" />
+        </div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text */}
@@ -267,6 +275,13 @@ export default function Home() {
 
       {/* Investment Packages */}
       <section className="py-20 px-4 mesh-bg relative overflow-hidden">
+        {/* 3D Floating Assets */}
+        <div className="absolute top-20 left-[2%] w-44 h-44 animate-float-delayed hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/gold-bars.png" alt="" fill className="object-contain" />
+        </div>
+        <div className="absolute bottom-16 right-[2%] w-36 h-36 animate-float-slow hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/money-bundle.png" alt="" fill className="object-contain" />
+        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -401,6 +416,10 @@ export default function Home() {
 
       {/* Security Section */}
       <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
+        {/* 3D Floating Asset */}
+        <div className="absolute top-16 right-[3%] w-40 h-40 animate-float-slow hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/secure-vault.png" alt="" fill className="object-contain" />
+        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -446,6 +465,10 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 px-4 cta-bg relative overflow-hidden">
+        {/* 3D Floating Asset */}
+        <div className="absolute top-20 left-[5%] w-36 h-36 animate-float-delayed hidden xl:block pointer-events-none">
+          <Image src="/images/3d-assets-v2/phone-app.png" alt="" fill className="object-contain" />
+        </div>
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
             Your Journey Starts Here
