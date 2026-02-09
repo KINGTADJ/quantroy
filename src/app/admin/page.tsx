@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import { formatCurrency, INVESTMENT_PLANS, getPlanById, calculateGrowth } from '@/lib/investment-plans';
 import { createClient } from '@/lib/supabase/client';
-import { useAuthStore } from '@/store/auth';
 
 type Tab = 'overview' | 'users' | 'investments' | 'kyc' | 'payouts';
 
@@ -61,13 +60,14 @@ interface Payout {
 
 export default function AdminPage() {
   const router = useRouter();
-  const { user, profile, isInitialized } = useAuthStore();
   const supabase = createClient();
   
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
   const [actionLoading, setActionLoading] = useState<string | null>(null);
+  const [isAdmin, setIsAdmin] = useState<boolean | null>(null); // null = loading, true = admin, false = not admin
+  const [currentUser, setCurrentUser] = useState<any>(null);
   
   // Real data from Supabase
   const [users, setUsers] = useState<User[]>([]);
@@ -75,21 +75,47 @@ export default function AdminPage() {
   const [kycDocuments, setKycDocuments] = useState<KYCDocument[]>([]);
   const [payouts, setPayouts] = useState<Payout[]>([]);
 
-  // Check admin access - wait for profile to be loaded
+  // Check admin access directly from database
   useEffect(() => {
-    // Only redirect if we're fully initialized AND profile has been fetched
-    // If user exists but profile is null, we're still loading the profile
-    if (isInitialized && !user) {
-      router.push('/login');
-    }
-  }, [isInitialized, user, router]);
-
-  // Fetch all data
-  useEffect(() => {
-    if (profile?.role === 'admin') {
-      fetchAllData();
-    }
-  }, [profile]);
+    const checkAdminAccess = async () => {
+      try {
+        // Get current user
+        const { data: { user } } = await supabase.auth.getUser();
+        
+        if (!user) {
+          router.push('/login');
+          return;
+        }
+        
+        setCurrentUser(user);
+        
+        // Check if user is admin in profiles table
+        const { data: profile, error } = await supabase
+          .from('profiles')
+          .select('role')
+          .eq('id', user.id)
+          .single();
+        
+        if (error || !profile) {
+          console.error('Error fetching profile:', error);
+          setIsAdmin(false);
+          return;
+        }
+        
+        if (profile.role === 'admin') {
+          setIsAdmin(true);
+          fetchAllData();
+        } else {
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        console.error('Admin check error:', error);
+        setIsAdmin(false);
+      }
+    };
+    
+    checkAdminAccess();
+  }, []);
 
   const fetchAllData = async () => {
     setLoading(true);
@@ -168,7 +194,7 @@ export default function AdminPage() {
       // Update KYC document
       await supabase
         .from('kyc_documents')
-        .update({ status: 'approved', reviewed_by: user?.id, reviewed_at: new Date().toISOString() })
+        .update({ status: 'approved', reviewed_by: currentUser?.id, reviewed_at: new Date().toISOString() })
         .eq('id', kycId);
 
       // Check if all documents are approved for this user
@@ -203,7 +229,7 @@ export default function AdminPage() {
         .from('kyc_documents')
         .update({ 
           status: 'rejected', 
-          reviewed_by: user?.id, 
+          reviewed_by: currentUser?.id, 
           reviewed_at: new Date().toISOString(),
           rejection_reason: 'Document rejected by admin'
         })
@@ -265,8 +291,8 @@ export default function AdminPage() {
     { id: 'payouts', label: 'Payouts', icon: CreditCard, badge: pendingPayouts },
   ];
 
-  // Loading state - wait for initialization AND profile if user exists
-  if (!isInitialized || loading || (user && !profile)) {
+  // Loading state - checking admin access
+  if (isAdmin === null || loading) {
     return (
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
         <div className="text-center">
@@ -277,20 +303,20 @@ export default function AdminPage() {
     );
   }
 
-  // Not logged in
-  if (!user) {
-    router.push('/login');
-    return null;
-  }
-
   // Not admin
-  if (profile?.role !== 'admin') {
+  if (!isAdmin) {
     return (
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
         <div className="text-center">
           <AlertTriangle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-white mb-2">Access Denied</h1>
           <p className="text-gray-400">You don't have permission to access this page.</p>
+          <button 
+            onClick={() => router.push('/dashboard')}
+            className="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 rounded-lg transition-colors"
+          >
+            Go to Dashboard
+          </button>
         </div>
       </div>
     );
