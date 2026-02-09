@@ -75,12 +75,14 @@ export default function AdminPage() {
   const [kycDocuments, setKycDocuments] = useState<KYCDocument[]>([]);
   const [payouts, setPayouts] = useState<Payout[]>([]);
 
-  // Check admin access
+  // Check admin access - wait for profile to be loaded
   useEffect(() => {
-    if (isInitialized && (!user || profile?.role !== 'admin')) {
+    // Only redirect if we're fully initialized AND profile has been fetched
+    // If user exists but profile is null, we're still loading the profile
+    if (isInitialized && !user) {
       router.push('/login');
     }
-  }, [isInitialized, user, profile, router]);
+  }, [isInitialized, user, router]);
 
   // Fetch all data
   useEffect(() => {
@@ -263,8 +265,8 @@ export default function AdminPage() {
     { id: 'payouts', label: 'Payouts', icon: CreditCard, badge: pendingPayouts },
   ];
 
-  // Loading state
-  if (!isInitialized || loading) {
+  // Loading state - wait for initialization AND profile if user exists
+  if (!isInitialized || loading || (user && !profile)) {
     return (
       <div className="min-h-screen bg-gray-950 flex items-center justify-center">
         <div className="text-center">
@@ -273,6 +275,12 @@ export default function AdminPage() {
         </div>
       </div>
     );
+  }
+
+  // Not logged in
+  if (!user) {
+    router.push('/login');
+    return null;
   }
 
   // Not admin
