@@ -125,29 +125,29 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden hero-bg">
-        {/* Animated orbs */}
-        <div className="hero-orb hero-orb-1" />
-        <div className="hero-orb hero-orb-2" />
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 relative overflow-hidden hero-bg">
+        {/* Animated orbs - hidden on mobile for performance */}
+        <div className="hero-orb hero-orb-1 hidden md:block" />
+        <div className="hero-orb hero-orb-2 hidden md:block" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Clean 2-Column Hero */}
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left - Text */}
             <div className="text-center lg:text-left">
               <FadeIn direction="up" delay={0.1}>
-                <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-xs sm:text-sm mb-4 sm:mb-6">
                   🚀 Professional Crypto Investment Platform
                 </div>
               </FadeIn>
               <BlurIn delay={0.2}>
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                   Invest in Professional<br />
                   <span className="text-emerald-400">Crypto Strategies</span>
                 </h1>
               </BlurIn>
               <FadeUp delay={0.3}>
-                <p className="text-xl text-gray-400 mb-8 max-w-xl">
+                <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0">
                   AI-powered crypto strategies with transparent tracking and monthly returns.
                 </p>
               </FadeUp>
@@ -196,12 +196,12 @@ export default function Home() {
           </div>
           
           {/* Stats */}
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto lg:mx-0 mt-12">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto lg:mx-0 mt-8 sm:mt-12">
             {stats.map((stat, i) => (
               <StaggerItem key={i}>
-                <div className="card p-4">
-                  <div className="text-emerald-400 font-bold text-lg">{stat.value}</div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                <div className="card p-3 sm:p-4">
+                  <div className="text-emerald-400 font-bold text-sm sm:text-lg">{stat.value}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">{stat.label}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -209,37 +209,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Blend */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(3, 18, 14)" height={100} />
+      {/* Section Blend - smaller on mobile */}
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(3, 18, 14)" height={60} />
 
-      {/* 3D Assets Showcase */}
-      <section className="py-16 px-4 relative" style={{ background: 'rgb(3, 18, 14)' }}>
+      {/* 3D Assets Showcase - Hidden on small mobile, smaller on tablet */}
+      <section className="py-8 sm:py-16 px-4 relative hidden sm:block" style={{ background: 'rgb(3, 18, 14)' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
-            <Float duration={3} y={12}>
+          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-16">
+            <Float duration={3} y={8}>
               <ScaleIn delay={0}>
-                <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
                   <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={3.5} y={15}>
+            <Float duration={3.5} y={10}>
               <ScaleIn delay={0.1}>
-                <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
                   <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={4} y={10}>
+            <Float duration={4} y={8}>
               <ScaleIn delay={0.2}>
-                <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
                   <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={3.2} y={14}>
+            <Float duration={3.2} y={10}>
               <ScaleIn delay={0.3}>
-                <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
                   <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
@@ -248,18 +248,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Section Blend */}
-      <SectionBlend fromColor="rgb(3, 18, 14)" toColor="rgb(5, 25, 20)" height={80} />
+      {/* Section Blend - smaller on mobile */}
+      <SectionBlend fromColor="rgb(3, 18, 14)" toColor="rgb(5, 25, 20)" height={50} />
 
       {/* Trust Logos */}
-      <section className="py-12 border-y border-emerald-900/30">
+      <section className="py-8 sm:py-12 border-y border-emerald-900/30">
         <FadeUp>
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h3 className="text-gray-400 text-sm mb-8">Trusted by Leading Organizations</h3>
-            <StaggerContainer staggerDelay={0.05} className="flex flex-wrap justify-center items-center gap-8">
+            <h3 className="text-gray-400 text-xs sm:text-sm mb-4 sm:mb-8">Trusted by Leading Organizations</h3>
+            <StaggerContainer staggerDelay={0.05} className="flex flex-wrap justify-center items-center gap-4 sm:gap-8">
               {['Coinbase', 'Binance', 'Kraken', 'Gemini', 'KuCoin', 'OKX'].map((name) => (
                 <StaggerItem key={name}>
-                  <div className="text-gray-400 font-semibold opacity-60 hover:opacity-100 transition-opacity">{name}</div>
+                  <div className="text-gray-400 font-semibold text-sm sm:text-base opacity-60 hover:opacity-100 transition-opacity">{name}</div>
                 </StaggerItem>
               ))}
             </StaggerContainer>
@@ -268,30 +268,30 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={100} />
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={60} />
 
       {/* Features Section */}
-      <section className="py-20 px-4 section-dots-bg relative overflow-hidden" style={{ background: 'rgb(8, 32, 26)' }}>
+      <section className="py-12 sm:py-20 px-4 section-dots-bg relative overflow-hidden" style={{ background: 'rgb(8, 32, 26)' }}>
         <div className="max-w-7xl mx-auto">
-          <FadeUp className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+          <FadeUp className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
               <Star size={14} className="mr-2" /> Market Leader
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Quantroy?</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Why Choose Quantroy?</h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
               Experience the future of investing with our cutting-edge technology and professional management.
             </p>
           </FadeUp>
-          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {features.map((feature, i) => (
               <StaggerItem key={i}>
-                <div className="card p-6 hover:border-emerald-700/50 transition group h-full">
-                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                    <feature.icon size={24} className="text-white" />
+                <div className="card p-4 sm:p-6 hover:border-emerald-700/50 transition group h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl gradient-primary flex items-center justify-center mb-3 sm:mb-4 group-hover:scale-110 transition">
+                    <feature.icon size={20} className="text-white sm:w-6 sm:h-6" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                  <p className="text-gray-400 mb-4">{feature.desc}</p>
-                  <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{feature.title}</h3>
+                  <p className="text-gray-400 text-sm mb-3 sm:mb-4">{feature.desc}</p>
+                  <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm">
                     {feature.badge}
                   </span>
                 </div>
@@ -302,27 +302,27 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(5, 25, 20)" height={120} />
+      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(5, 25, 20)" height={60} />
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
+      <section className="py-12 sm:py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <FadeUp className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+          <FadeUp className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
               <Users size={14} className="mr-2" /> Success Stories
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Investors Say</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">What Our Investors Say</h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
               Join thousands of satisfied investors who have transformed their financial future with Quantroy.
             </p>
           </FadeUp>
-          <StaggerContainer staggerDelay={0.15} className="grid md:grid-cols-3 gap-6">
+          <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
             {testimonials.map((testimonial, i) => (
               <StaggerItem key={i}>
-                <div className="card p-6 relative h-full">
-                  <Quote size={32} className="text-emerald-900/50 absolute top-4 right-4" />
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-500/30">
+                <div className="card p-4 sm:p-6 relative h-full">
+                  <Quote size={24} className="text-emerald-900/50 absolute top-3 right-3 sm:top-4 sm:right-4 sm:w-8 sm:h-8" />
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-emerald-500/30 flex-shrink-0">
                       <Image
                         src={testimonial.image}
                         alt={testimonial.name}
@@ -344,13 +344,13 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(10, 38, 30)" height={120} />
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(10, 38, 30)" height={60} />
 
       {/* Investment Packages */}
-      <section className="py-20 px-4 mesh-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
+      <section className="py-12 sm:py-20 px-4 mesh-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
         <div className="max-w-7xl mx-auto">
           {/* Section header with 3D assets as inline elements - HUGE */}
-          <div className="flex items-center justify-center gap-12 mb-12">
+          <div className="flex items-center justify-center gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Left 3D Asset - Gold Bars - HUGE */}
             <Float duration={4} y={12} className="hidden xl:block">
               <FadeIn direction="left">
@@ -361,12 +361,12 @@ export default function Home() {
             </Float>
             
             {/* Center - Title */}
-            <FadeUp className="text-center">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+            <FadeUp className="text-center px-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
                 <Award size={14} className="mr-2" /> Investment Plans
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Investment Packages</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Investment Packages</h2>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 Choose from our professionally managed investment strategies designed for different risk appetites and capital levels.
               </p>
             </FadeUp>
@@ -380,10 +380,57 @@ export default function Home() {
               </FadeIn>
             </Float>
           </div>
-          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Horizontal scroll on mobile for packages */}
+          <div className="sm:hidden overflow-x-auto pb-4 -mx-4 px-4 snap-x snap-mandatory">
+            <div className="flex gap-4" style={{ width: 'max-content' }}>
+              {packages.map((pkg, i) => (
+                <div key={i} className={`card p-4 relative flex-shrink-0 snap-center ${pkg.popular ? 'border-emerald-500 glow' : ''}`} style={{ width: '280px' }}>
+                  {pkg.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold">
+                      Most Popular
+                    </div>
+                  )}
+                  <div className="mb-3">
+                    <h3 className="text-lg font-bold text-white">{pkg.name}</h3>
+                    <p className="text-gray-400 text-xs">{pkg.subtitle}</p>
+                  </div>
+                  <div className="mb-4 text-xs">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400">Minimum</span>
+                      <span className="text-white font-semibold">{pkg.minInvestment}</span>
+                    </div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-gray-400">Monthly Target*</span>
+                      <span className="text-emerald-400 font-semibold">{pkg.monthlyTarget}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-400">6-Month Target*</span>
+                      <span className="text-emerald-400 font-semibold">{pkg.sixMonthTarget}</span>
+                    </div>
+                  </div>
+                  <ul className="space-y-1 mb-4">
+                    {pkg.features.map((f, j) => (
+                      <li key={j} className="flex items-center text-xs text-gray-300">
+                        <CheckCircle size={12} className="text-emerald-400 mr-1.5 flex-shrink-0" /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link href="/register" className={`block text-center py-2.5 rounded-lg font-semibold text-sm transition ${
+                    pkg.popular 
+                      ? 'gradient-primary text-white hover:opacity-90' 
+                      : 'border border-emerald-700 text-emerald-400 hover:bg-emerald-900/30'
+                  }`}>
+                    Get Started <ChevronRight size={14} className="inline" />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+          {/* Regular grid on tablet and up */}
+          <StaggerContainer staggerDelay={0.1} className="hidden sm:grid md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {packages.map((pkg, i) => (
               <StaggerItem key={i}>
-                <div className={`card p-6 relative h-full ${pkg.popular ? 'border-emerald-500 glow' : ''}`}>
+                <div className={`card p-4 sm:p-6 relative h-full ${pkg.popular ? 'border-emerald-500 glow' : ''}`}>
                   {pkg.popular && (
                     <motion.div 
                       className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold"
@@ -394,32 +441,32 @@ export default function Home() {
                       Most Popular
                     </motion.div>
                   )}
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
-                    <p className="text-gray-400 text-sm">{pkg.subtitle}</p>
+                  <div className="mb-3 sm:mb-4">
+                    <h3 className="text-lg sm:text-xl font-bold text-white">{pkg.name}</h3>
+                    <p className="text-gray-400 text-xs sm:text-sm">{pkg.subtitle}</p>
                   </div>
-                  <div className="mb-6">
-                    <div className="flex justify-between text-sm mb-2">
+                  <div className="mb-4 sm:mb-6 text-xs sm:text-sm">
+                    <div className="flex justify-between mb-1 sm:mb-2">
                       <span className="text-gray-400">Minimum Investment</span>
                       <span className="text-white font-semibold">{pkg.minInvestment}</span>
                     </div>
-                    <div className="flex justify-between text-sm mb-2">
+                    <div className="flex justify-between mb-1 sm:mb-2">
                       <span className="text-gray-400">Monthly Target*</span>
                       <span className="text-emerald-400 font-semibold">{pkg.monthlyTarget}</span>
                     </div>
-                    <div className="flex justify-between text-sm">
+                    <div className="flex justify-between">
                       <span className="text-gray-400">6-Month Target*</span>
                       <span className="text-emerald-400 font-semibold">{pkg.sixMonthTarget}</span>
                     </div>
                   </div>
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
                     {pkg.features.map((f, j) => (
-                      <li key={j} className="flex items-center text-sm text-gray-300">
-                        <CheckCircle size={16} className="text-emerald-400 mr-2" /> {f}
+                      <li key={j} className="flex items-center text-xs sm:text-sm text-gray-300">
+                        <CheckCircle size={14} className="text-emerald-400 mr-2 flex-shrink-0" /> {f}
                       </li>
                     ))}
                   </ul>
-                  <Link href="/register" className={`block text-center py-3 rounded-lg font-semibold transition ${
+                  <Link href="/register" className={`block text-center py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition ${
                     pkg.popular 
                       ? 'gradient-primary text-white hover:opacity-90' 
                       : 'border border-emerald-700 text-emerald-400 hover:bg-emerald-900/30'
@@ -434,38 +481,39 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(10, 38, 30)" toColor="rgb(5, 25, 20)" height={120} />
+      <SectionBlend fromColor="rgb(10, 38, 30)" toColor="rgb(5, 25, 20)" height={60} />
 
       {/* How It Works */}
-      <section className="py-20 px-4 section-wave-bg relative overflow-hidden">
+      <section className="py-12 sm:py-20 px-4 section-wave-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <FadeUp className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+          <FadeUp className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
               <Zap size={14} className="mr-2" /> Getting Started
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Simple 3-Step Onboarding</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Simple 3-Step Onboarding</h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
               Start earning with our crypto investment platform in just three simple steps.
             </p>
           </FadeUp>
-          <StaggerContainer staggerDelay={0.2} className="grid md:grid-cols-3 gap-8">
+          <StaggerContainer staggerDelay={0.2} className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
             {steps.map((step, i) => (
               <StaggerItem key={i}>
                 <div className="relative h-full">
-                  <div className="card p-6 h-full">
+                  <div className="card p-4 sm:p-6 h-full">
                     <motion.div 
-                      className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center text-white font-bold mb-4"
+                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-full gradient-primary flex items-center justify-center text-white font-bold mb-3 sm:mb-4 text-sm sm:text-base"
                       whileInView={{ scale: [0.5, 1.2, 1] }}
                       transition={{ duration: 0.5, delay: i * 0.2 }}
                     >
                       {step.number}
                     </motion.div>
-                    <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
-                    <p className="text-gray-400 mb-4">{step.desc}</p>
-                    <ul className="space-y-2">
+                    <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">{step.title}</h3>
+                    <p className="text-gray-400 text-sm mb-3 sm:mb-4">{step.desc}</p>
+                    <ul className="space-y-1.5 sm:space-y-2">
                       {step.items.map((item, j) => (
-                        <li key={j} className="flex items-center text-sm text-gray-300">
-                          <CheckCircle size={14} className="text-emerald-400 mr-2" /> {item}
+                        <li key={j} className="flex items-start text-xs sm:text-sm text-gray-300">
+                          <CheckCircle size={12} className="text-emerald-400 mr-2 mt-0.5 flex-shrink-0" /> 
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -484,7 +532,7 @@ export default function Home() {
               </StaggerItem>
             ))}
           </StaggerContainer>
-          <FadeUp delay={0.6} className="text-center mt-12">
+          <FadeUp delay={0.6} className="text-center mt-8 sm:mt-12">
             <Link href="/register" className="btn-primary inline-flex items-center gap-2">
               Start Your Journey Today <ChevronRight size={20} />
             </Link>
@@ -493,29 +541,29 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={100} />
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(8, 32, 26)" height={60} />
 
       {/* Team Section */}
-      <section className="py-20 px-4 section-dots-bg relative overflow-hidden" style={{ background: 'rgb(8, 32, 26)' }}>
+      <section className="py-12 sm:py-20 px-4 section-dots-bg relative overflow-hidden" style={{ background: 'rgb(8, 32, 26)' }}>
         <div className="max-w-7xl mx-auto">
-          <FadeUp className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+          <FadeUp className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
               <Users size={14} className="mr-2" /> Our Team
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Meet the Experts</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Meet the Experts</h2>
+            <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-4">
               Our leadership team brings decades of experience in finance, technology, and cryptocurrency markets.
             </p>
           </FadeUp>
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {team.map((member, i) => (
               <StaggerItem key={i}>
                 <motion.div 
-                  className="card p-4 text-center group"
+                  className="card p-3 sm:p-4 text-center group"
                   whileHover={{ y: -8 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-emerald-500/30 group-hover:border-emerald-500/60 transition">
+                  <div className="relative w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-2 sm:mb-4 rounded-full overflow-hidden border-2 border-emerald-500/30 group-hover:border-emerald-500/60 transition">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -523,8 +571,8 @@ export default function Home() {
                       className="object-cover"
                     />
                   </div>
-                  <h4 className="text-white font-semibold">{member.name}</h4>
-                  <p className="text-emerald-400 text-sm">{member.role}</p>
+                  <h4 className="text-white font-semibold text-sm sm:text-base">{member.name}</h4>
+                  <p className="text-emerald-400 text-xs sm:text-sm">{member.role}</p>
                 </motion.div>
               </StaggerItem>
             ))}
@@ -533,20 +581,20 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(5, 25, 20)" height={100} />
+      <SectionBlend fromColor="rgb(8, 32, 26)" toColor="rgb(5, 25, 20)" height={60} />
 
       {/* Security Section */}
-      <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
+      <section className="py-12 sm:py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           {/* Section header with 3D vault inline - HUGE */}
-          <div className="flex items-center justify-center gap-12 mb-12">
+          <div className="flex items-center justify-center gap-8 lg:gap-12 mb-8 sm:mb-12">
             {/* Center - Title */}
-            <FadeUp className="text-center">
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+            <FadeUp className="text-center px-4">
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
                 <Lock size={14} className="mr-2" /> Enterprise Security
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Bank-Grade Security & Compliance</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">Bank-Grade Security & Compliance</h2>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto">
                 Your security and trust are our top priorities with comprehensive protection measures.
               </p>
             </FadeUp>
@@ -560,7 +608,7 @@ export default function Home() {
               </FadeIn>
             </Float>
           </div>
-          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-4 gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {[
               { icon: Shield, title: 'Multi-Sig Security', desc: 'Multi-signature protection and cold storage' },
               { icon: CheckCircle, title: 'KYC/AML Compliance', desc: 'Full identity verification and screening' },
@@ -569,30 +617,30 @@ export default function Home() {
             ].map((item, i) => (
               <StaggerItem key={i}>
                 <motion.div 
-                  className="card p-6 text-center"
+                  className="card p-3 sm:p-6 text-center"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
-                    <item.icon size={24} className="text-white" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-2 sm:mb-4">
+                    <item.icon size={20} className="text-white" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-gray-400 text-sm">{item.desc}</p>
+                  <h3 className="text-sm sm:text-lg font-semibold text-white mb-1 sm:mb-2">{item.title}</h3>
+                  <p className="text-gray-400 text-xs sm:text-sm hidden sm:block">{item.desc}</p>
                 </motion.div>
               </StaggerItem>
             ))}
           </StaggerContainer>
-          <FadeUp delay={0.4} className="flex justify-center gap-8 mt-12 opacity-60">
+          <FadeUp delay={0.4} className="flex justify-center gap-4 sm:gap-8 mt-8 sm:mt-12 opacity-60">
             <div className="text-center">
-              <div className="text-emerald-400 font-semibold">SOC 2</div>
+              <div className="text-emerald-400 font-semibold text-sm sm:text-base">SOC 2</div>
               <div className="text-gray-400 text-xs">Compliant</div>
             </div>
             <div className="text-center">
-              <div className="text-emerald-400 font-semibold">ISO 27001</div>
+              <div className="text-emerald-400 font-semibold text-sm sm:text-base">ISO 27001</div>
               <div className="text-gray-400 text-xs">Certified</div>
             </div>
             <div className="text-center">
-              <div className="text-emerald-400 font-semibold">GDPR</div>
+              <div className="text-emerald-400 font-semibold text-sm sm:text-base">GDPR</div>
               <div className="text-gray-400 text-xs">Compliant</div>
             </div>
           </FadeUp>
@@ -600,13 +648,13 @@ export default function Home() {
       </section>
 
       {/* Section Blend */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(10, 38, 30)" height={120} />
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(10, 38, 30)" height={60} />
 
       {/* CTA Section */}
-      <section className="py-20 px-4 cta-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
+      <section className="py-12 sm:py-20 px-4 cta-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
         <div className="max-w-6xl mx-auto">
           {/* CTA with Phone App inline - HUGE */}
-          <div className="flex items-center justify-center gap-12">
+          <div className="flex items-center justify-center gap-8 lg:gap-12">
             {/* Left 3D Asset - Phone App - HUGE */}
             <Float duration={3.5} y={15} className="hidden xl:block">
               <FadeIn direction="left">
@@ -617,24 +665,24 @@ export default function Home() {
             </Float>
             
             {/* Center - CTA Content */}
-            <div className="text-center">
+            <div className="text-center px-4">
               <FadeUp>
-                <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+                <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
                   Your Journey Starts Here
                 </div>
               </FadeUp>
               <BlurIn delay={0.2}>
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
                   Ready to Start Your Investment Journey?
                 </h2>
               </BlurIn>
               <FadeUp delay={0.3}>
-                <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
+                <p className="text-gray-400 text-sm sm:text-base mb-6 sm:mb-8 max-w-2xl mx-auto">
                   Join thousands of investors who trust Quantroy with their crypto investments. Start with as little as $500.
                 </p>
               </FadeUp>
               <FadeUp delay={0.4}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12">
                   <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
                     Start Investing Today <ChevronRight size={20} />
                   </Link>
@@ -645,7 +693,7 @@ export default function Home() {
               </FadeUp>
             </div>
           </div>
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {[
               { icon: Users, value: '10,000+', label: 'Active Investors' },
               { icon: TrendingUp, value: '$50M+', label: 'Assets Managed' },
@@ -657,9 +705,9 @@ export default function Home() {
                   className="text-center"
                   whileHover={{ scale: 1.1 }}
                 >
-                  <stat.icon size={24} className="text-emerald-400 mx-auto mb-2" />
-                  <div className="text-white font-bold text-xl">{stat.value}</div>
-                  <div className="text-gray-400 text-sm">{stat.label}</div>
+                  <stat.icon size={20} className="text-emerald-400 mx-auto mb-1 sm:mb-2" />
+                  <div className="text-white font-bold text-base sm:text-xl">{stat.value}</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">{stat.label}</div>
                 </motion.div>
               </StaggerItem>
             ))}
