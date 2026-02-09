@@ -24,7 +24,7 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const { user, initialized, signOut } = useAuthStore();
+  const { user, isInitialized, signOut } = useAuthStore();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
@@ -104,7 +104,7 @@ export default function Header() {
 
           {/* Right Side - Auth */}
           <div className="hidden lg:flex items-center gap-4">
-            {initialized && user ? (
+            {isInitialized && user ? (
               <>
                 <Link 
                   href="/dashboard" 
@@ -181,7 +181,7 @@ export default function Header() {
             </nav>
             
             <div className="mt-6 pt-6 border-t border-white/10 space-y-3">
-              {initialized && user ? (
+              {isInitialized && user ? (
                 <>
                   <Link
                     href="/dashboard"
