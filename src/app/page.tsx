@@ -124,14 +124,6 @@ export default function Home() {
         {/* Animated orbs */}
         <div className="hero-orb hero-orb-1" />
         <div className="hero-orb hero-orb-2" />
-        
-        {/* Floating 3D Assets */}
-        <div className="absolute top-20 left-[5%] w-32 h-32 opacity-60 animate-float-slow hidden lg:block">
-          <Image src="/images/3d-assets/credit-card.png" alt="" fill className="object-contain" />
-        </div>
-        <div className="absolute bottom-20 right-[8%] w-28 h-28 opacity-50 animate-float-delayed hidden lg:block">
-          <Image src="/images/3d-assets/gold-coins.png" alt="" fill className="object-contain" />
-        </div>
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text */}
@@ -209,10 +201,6 @@ export default function Home() {
 
       {/* Features Section */}
       <section className="py-20 px-4 section-dots-bg relative overflow-hidden">
-        {/* Floating 3D Asset */}
-        <div className="absolute top-10 right-[5%] w-24 h-24 opacity-40 animate-float-slow hidden lg:block">
-          <Image src="/images/3d-assets/chart-bars.png" alt="" fill className="object-contain" />
-        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -279,13 +267,6 @@ export default function Home() {
 
       {/* Investment Packages */}
       <section className="py-20 px-4 mesh-bg relative overflow-hidden">
-        {/* Floating 3D Assets */}
-        <div className="absolute top-16 left-[3%] w-28 h-28 opacity-40 animate-float-delayed hidden lg:block">
-          <Image src="/images/3d-assets/money-stack.png" alt="" fill className="object-contain" />
-        </div>
-        <div className="absolute bottom-20 right-[5%] w-24 h-24 opacity-30 animate-float-slow hidden lg:block">
-          <Image src="/images/3d-assets/wallet.png" alt="" fill className="object-contain" />
-        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -420,10 +401,6 @@ export default function Home() {
 
       {/* Security Section */}
       <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
-        {/* Floating 3D Asset */}
-        <div className="absolute top-20 right-[8%] w-32 h-32 opacity-40 animate-float-slow hidden lg:block">
-          <Image src="/images/3d-assets/safe-vault.png" alt="" fill className="object-contain" />
-        </div>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
