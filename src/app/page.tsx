@@ -99,63 +99,64 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden">
       <Header />
       
-      {/* Hero Section - Dark Green - Coronation Style */}
-      <section className="bg-[#1a2f25] min-h-[90vh] flex items-center relative overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-4 items-center">
-            {/* Left Content */}
-            <div className="max-w-xl py-12 lg:py-20">
-              <h1 className="text-[42px] md:text-[52px] lg:text-[62px] font-bold text-white leading-[1.1] mb-8 font-[family-name:var(--font-playfair)]">
-                Secure your{' '}
-                <span className="text-[#c4f542] relative">
-                  future
-                  <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
-                    <path d="M2 8C50 2 150 2 198 8" stroke="#c4f542" strokeWidth="4" strokeLinecap="round"/>
-                  </svg>
-                </span>
-                <br />
-                with smart investments
-              </h1>
-              <p className="text-lg text-white/70 mb-10 leading-relaxed max-w-md">
-                We proudly present professional crypto investment strategies that 
-                represent the future of wealth creation, carefully crafted for 
-                investors who value transparency and consistent returns.
-              </p>
-              <div className="mb-16">
-                <Link 
-                  href="/register" 
-                  className="inline-flex items-center gap-2 border-2 border-[#c4f542] text-[#c4f542] px-8 py-4 rounded-full font-semibold hover:bg-[#c4f542] hover:text-[#1a2f25] transition-all"
-                >
-                  <ArrowRight size={18} /> Learn More
-                </Link>
-              </div>
-              
-              {/* Trust Logos */}
-              <div>
-                <p className="text-white/40 text-sm mb-4">As Seen On:</p>
-                <div className="flex flex-wrap items-center gap-6">
-                  {['Zillow', 'HousingWire', 'Forbes', 'Yahoo!'].map((name) => (
-                    <span key={name} className="text-white/50 font-bold text-base tracking-wide">{name}</span>
-                  ))}
-                </div>
-              </div>
+      {/* Hero Section - Coronation Style EXACT */}
+      <section className="bg-[#1a2f25] min-h-screen relative">
+        {/* Content Container */}
+        <div className="flex min-h-screen">
+          {/* Left Side - Text Content */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 xl:px-24 py-32">
+            <h1 className="text-[44px] md:text-[54px] lg:text-[64px] text-white leading-[1.05] mb-8 font-[family-name:var(--font-playfair)]">
+              <span className="block">Secure your <span className="text-[#c4f542]">future</span></span>
+              <span className="block">with smart investments</span>
+            </h1>
+            
+            <p className="text-[17px] text-white/60 mb-12 leading-[1.7] max-w-[480px]">
+              We proudly present an exhibition of works by artists who represent the zeitgeist 
+              of contemporary African artworks, carefully excerpted from the generously loaned 
+              private collection of Mr. Aigboje Aig-Imoukhuede.
+            </p>
+            
+            <div className="mb-16">
+              <Link 
+                href="/register" 
+                className="inline-flex items-center gap-3 bg-[#c4f542] text-[#1a2f25] pl-5 pr-7 py-4 rounded-full font-semibold text-[15px] hover:bg-[#d4ff5c] transition-all"
+              >
+                <ArrowRight size={18} /> Learn More
+              </Link>
             </div>
             
-            {/* Right Image - Offset positioning like Coronation */}
-            <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[45%] lg:h-[85%]">
-              <div className="relative h-full min-h-[400px] lg:min-h-[600px] rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/images/hero-family.png"
-                  alt="Happy African family investing for their future"
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-                {/* Yellow Ribbon - Angled across image */}
-                <div className="absolute bottom-12 -left-8 -right-8 bg-[#f9d423] py-4 px-8 transform -rotate-3 shadow-lg">
-                  <p className="text-[#1a2f25] font-black text-center text-sm tracking-[0.2em] uppercase">
-                    ⭐ Best Investment Platform 2026 ⭐
-                  </p>
+            {/* Trust Logos */}
+            <div>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-5">As Seen On:</p>
+              <div className="flex flex-wrap items-center gap-8">
+                <span className="text-white/60 font-bold text-lg">✪ Zillow</span>
+                <span className="text-white/60 font-black text-sm tracking-wide">HOUSINGWIRE</span>
+                <span className="text-white/60 font-bold text-xl italic">Forbes</span>
+                <span className="text-white/60 font-bold text-lg">yahoo!</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Side - Image */}
+          <div className="hidden lg:block w-1/2 relative">
+            <div className="absolute inset-y-16 right-8 left-0">
+              <div className="relative h-full rounded-[20px] overflow-visible">
+                <div className="relative h-full rounded-[20px] overflow-hidden">
+                  <Image
+                    src="/images/hero-family.png"
+                    alt="Happy African family investing for their future"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+                {/* Yellow Ribbon - Curved style */}
+                <div className="absolute bottom-16 -left-6 right-[-30px] overflow-hidden">
+                  <div className="bg-[#f9d423] py-3 transform -rotate-[4deg] shadow-lg">
+                    <p className="text-[#1a2f25] font-black text-center text-[13px] tracking-[0.15em] uppercase whitespace-nowrap">
+                      BEST INVESTMENT PLATFORM 2026 &nbsp;&nbsp;★&nbsp;&nbsp; BEST INVESTMENT PLATFORM
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
