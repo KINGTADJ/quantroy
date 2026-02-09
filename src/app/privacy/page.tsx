@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
 export default function PrivacyPage() {
   return (
@@ -9,8 +10,19 @@ export default function PrivacyPage() {
       <Header />
       
       <section className="pt-32 pb-16 px-4">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+        <div className="max-w-6xl mx-auto">
+          {/* Header with 3D Assets */}
+          <div className="flex items-center justify-center gap-12 mb-12">
+            <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            <h1 className="text-4xl font-bold text-white">Privacy Policy</h1>
+            <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+          </div>
+          
+          <div className="max-w-4xl mx-auto">
           <div className="card p-8 space-y-6 text-gray-300">
             <p className="text-gray-400">Last updated: February 2024</p>
 
@@ -76,6 +88,7 @@ export default function PrivacyPage() {
                 For privacy-related inquiries, contact us at privacy@quantroy.com.
               </p>
             </section>
+          </div>
           </div>
         </div>
       </section>
