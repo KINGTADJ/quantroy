@@ -189,6 +189,26 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 3D Assets Showcase */}
+      <section className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-wrap justify-center items-center gap-8 lg:gap-16">
+            <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            <div className="relative w-40 h-40 lg:w-56 lg:h-56">
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Trust Logos */}
       <section className="py-12 border-y border-emerald-900/30">
         <div className="max-w-7xl mx-auto px-4 text-center">
