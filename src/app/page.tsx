@@ -120,8 +120,10 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/20 to-transparent pointer-events-none" />
+      <section className="pt-32 pb-20 px-4 relative overflow-hidden hero-bg">
+        {/* Animated orbs */}
+        <div className="hero-orb hero-orb-1" />
+        <div className="hero-orb hero-orb-2" />
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text */}
@@ -198,7 +200,7 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 section-dots-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -227,7 +229,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 bg-[#061510]">
+      <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -264,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* Investment Packages */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 mesh-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -322,7 +324,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4 bg-[#061510]">
+      <section className="py-20 px-4 section-wave-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -367,7 +369,7 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 section-dots-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -398,7 +400,7 @@ export default function Home() {
       </section>
 
       {/* Security Section */}
-      <section className="py-20 px-4 bg-[#061510]">
+      <section className="py-20 px-4 section-grid-bg relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -443,7 +445,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 cta-bg relative overflow-hidden">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
             Your Journey Starts Here
