@@ -152,9 +152,9 @@ export default function HomePage() {
               </h1>
 
               <p className="text-[17px] text-white/60 leading-[1.7] mb-10 max-w-[440px]">
-                We proudly present an exhibition of works by artists who represent the zeitgeist
-                of contemporary African artworks, carefully excerpted from the generously loaned
-                private collection of Mr. Aigboje Aig-Imoukhuede.
+                Join thousands of investors building wealth through our AI-powered crypto 
+                investment platform. Start with as little as $500 and let our proven 
+                strategies work for you.
               </p>
 
               <Link
@@ -393,29 +393,59 @@ export default function HomePage() {
 
             {/* Phone Mockup */}
             <div className="flex justify-center lg:justify-end">
-              <div className="w-[280px] bg-[#111] rounded-[40px] p-3 shadow-2xl">
-                <div className="bg-white rounded-[32px] overflow-hidden">
-                  <div className="bg-[#1a2f25] p-4">
-                    <span className="text-[#c4f542] text-xs font-medium">Finances</span>
-                  </div>
-                  <div className="bg-[#c04d2d] p-6">
-                    <p className="text-white font-semibold mb-1">Introducing Quantroy</p>
-                    <p className="text-white/70 text-sm">Helping you make sense of your money</p>
-                  </div>
-                  <div className="bg-[#c4f542] p-6">
-                    <p className="text-[#1a2f25] font-semibold mb-1">Your Dashboard</p>
-                    <p className="text-[#1a2f25]/70 text-sm">Track investments, view returns</p>
-                  </div>
-                  <div className="p-4 space-y-3">
-                    {[1, 2].map((i) => (
-                      <div key={i} className="flex items-center gap-3 p-3 bg-gray-100 rounded-xl">
-                        <div className="w-8 h-8 rounded-full bg-[#1a2f25]" />
-                        <div className="flex-1">
-                          <div className="h-2.5 bg-gray-300 rounded w-3/4 mb-1.5" />
-                          <div className="h-2 bg-gray-200 rounded w-1/2" />
-                        </div>
+              <div className="w-[300px] bg-[#0a0a0a] rounded-[48px] p-4 shadow-2xl border-[6px] border-[#1f1f1f]">
+                {/* Notch */}
+                <div className="absolute top-6 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-[#0a0a0a] rounded-full z-10" />
+                <div className="bg-[#1a2f25] rounded-[36px] overflow-hidden">
+                  {/* Status Bar */}
+                  <div className="flex justify-between items-center px-6 py-3">
+                    <span className="text-white text-xs font-medium">9:41</span>
+                    <div className="flex items-center gap-1">
+                      <div className="w-4 h-2 border border-white/60 rounded-sm flex items-center justify-end pr-[1px]">
+                        <div className="w-2.5 h-1.5 bg-[#c4f542] rounded-sm" />
                       </div>
-                    ))}
+                    </div>
+                  </div>
+                  
+                  {/* App Header */}
+                  <div className="px-6 py-4 border-b border-white/10">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#c4f542] flex items-center justify-center">
+                        <span className="text-[#1a2f25] font-bold">Q</span>
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-sm">Quantroy</p>
+                        <p className="text-white/50 text-xs">Your Dashboard</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Portfolio Value */}
+                  <div className="px-6 py-6">
+                    <p className="text-white/50 text-xs mb-1">Total Portfolio Value</p>
+                    <p className="text-[#c4f542] text-3xl font-bold mb-1">$24,582.40</p>
+                    <p className="text-green-400 text-sm">+12.4% this month</p>
+                  </div>
+                  
+                  {/* Mini Chart */}
+                  <div className="px-6 pb-4">
+                    <div className="h-24 bg-white/5 rounded-xl flex items-end justify-between px-3 pb-3">
+                      {[40, 55, 45, 70, 60, 80, 75, 90].map((h, i) => (
+                        <div key={i} className="w-5 bg-gradient-to-t from-[#c4f542] to-[#c4f542]/60 rounded-t" style={{ height: `${h}%` }} />
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-2 gap-3 px-6 pb-6">
+                    <div className="bg-white/5 rounded-xl p-3">
+                      <p className="text-white/40 text-[10px] mb-1">Today's Gain</p>
+                      <p className="text-green-400 font-semibold">+$342.50</p>
+                    </div>
+                    <div className="bg-white/5 rounded-xl p-3">
+                      <p className="text-white/40 text-[10px] mb-1">Active Trades</p>
+                      <p className="text-white font-semibold">7</p>
+                    </div>
                   </div>
                 </div>
               </div>
