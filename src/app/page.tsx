@@ -125,7 +125,7 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-20 sm:pt-28 md:pt-32 pb-8 sm:pb-16 md:pb-20 px-4 relative overflow-hidden hero-bg">
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-8 sm:pb-16 md:pb-20 px-4 relative overflow-hidden hero-bg">
         {/* Animated orbs - smaller on mobile */}
         <div className="hero-orb hero-orb-1 opacity-30 sm:opacity-50 md:opacity-100" />
         <div className="hero-orb hero-orb-2 opacity-30 sm:opacity-50 md:opacity-100" />
