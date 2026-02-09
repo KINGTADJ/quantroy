@@ -189,12 +189,11 @@ export default function HomePage() {
                   </p>
                   
                   {/* Image */}
-                  <div className="relative aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 mb-4">
-                    <Image
+                  <div className="aspect-[4/3] rounded-lg overflow-hidden bg-gray-100 mb-4">
+                    <img
                       src={product.image}
                       alt={product.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   
