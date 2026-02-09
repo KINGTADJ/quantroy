@@ -54,22 +54,22 @@ const teamMembers = [
   {
     name: 'David Okonkwo',
     role: 'Chief Executive Officer',
-    image: '/images/team-ceo.jpg',
+    image: '/images/team-ceo.png',
   },
   {
     name: 'Amara Nwachukwu',
     role: 'Chief Investment Officer',
-    image: '/images/team-cio.jpg',
+    image: '/images/team-cio.png',
   },
   {
     name: 'Michael Adeyemi',
     role: 'Head of Technology',
-    image: '/images/team-cto.jpg',
+    image: '/images/team-cto.png',
   },
   {
     name: 'Grace Mensah',
     role: 'Head of Compliance',
-    image: '/images/team-compliance.jpg',
+    image: '/images/team-compliance.png',
   },
 ];
 
@@ -78,19 +78,19 @@ const testimonials = [
     name: 'James Okoro',
     role: 'Entrepreneur',
     text: 'Quantroy has transformed how I invest. The returns have been consistent and the platform is incredibly easy to use.',
-    image: '/images/testimonial-1.jpg',
+    image: '/images/testimonial-1.png',
   },
   {
     name: 'Chioma Eze',
     role: 'Business Owner',
     text: 'I was skeptical at first, but Quantroy proved me wrong. My portfolio has grown significantly in just 6 months.',
-    image: '/images/testimonial-2.jpg',
+    image: '/images/testimonial-2.png',
   },
   {
     name: 'Emmanuel Asante',
     role: 'Financial Analyst',
     text: 'As someone in finance, I appreciate the transparency and professionalism. This is how crypto investing should be.',
-    image: '/images/testimonial-3.jpg',
+    image: '/images/testimonial-3.png',
   },
 ];
 
