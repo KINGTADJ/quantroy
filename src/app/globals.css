@@ -360,9 +360,21 @@ body {
     min-height: 48px;
   }
   
-  /* Reduce animation intensity on mobile for performance */
+  /* Smaller orbs on mobile for performance */
   .hero-orb {
-    display: none;
+    width: 150px !important;
+    height: 150px !important;
+    filter: blur(40px);
+  }
+  
+  .hero-orb-1 {
+    top: -30px !important;
+    right: -30px !important;
+  }
+  
+  .hero-orb-2 {
+    bottom: -20px !important;
+    left: -20px !important;
   }
   
   /* Better tap targets */

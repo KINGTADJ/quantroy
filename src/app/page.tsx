@@ -126,9 +126,9 @@ export default function Home() {
       
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 relative overflow-hidden hero-bg">
-        {/* Animated orbs - hidden on mobile for performance */}
-        <div className="hero-orb hero-orb-1 hidden md:block" />
-        <div className="hero-orb hero-orb-2 hidden md:block" />
+        {/* Animated orbs - smaller on mobile */}
+        <div className="hero-orb hero-orb-1 opacity-50 md:opacity-100" />
+        <div className="hero-orb hero-orb-2 opacity-50 md:opacity-100" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Clean 2-Column Hero */}
@@ -163,31 +163,31 @@ export default function Home() {
               </FadeUp>
             </div>
             
-            {/* Right - Image */}
-            <FadeIn direction="right" delay={0.3} className="relative hidden lg:block">
-              <div className="relative aspect-square max-w-lg mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-3xl" />
+            {/* Right - Image - NOW VISIBLE ON MOBILE TOO */}
+            <FadeIn direction="right" delay={0.3} className="relative">
+              <div className="relative aspect-square max-w-xs sm:max-w-md lg:max-w-lg mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-2xl sm:rounded-3xl" />
                 <Image
                   src="/images/hero-family.png"
                   alt="Happy family investing"
                   fill
-                  className="object-cover rounded-3xl"
+                  className="object-cover rounded-2xl sm:rounded-3xl"
                   priority
                 />
-                {/* Floating card */}
+                {/* Floating card - smaller on mobile */}
                 <motion.div 
-                  className="absolute -bottom-4 -left-4 bg-[#0a1f1a]/90 backdrop-blur-xl border border-emerald-800/50 rounded-xl p-4 shadow-xl"
+                  className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-[#0a1f1a]/90 backdrop-blur-xl border border-emerald-800/50 rounded-lg sm:rounded-xl p-2 sm:p-4 shadow-xl"
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-emerald-400" />
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                      <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
                     </div>
                     <div>
-                      <p className="text-white font-semibold">+23.5%</p>
-                      <p className="text-gray-400 text-sm">This Month</p>
+                      <p className="text-white font-semibold text-sm sm:text-base">+23.5%</p>
+                      <p className="text-gray-400 text-xs sm:text-sm">This Month</p>
                     </div>
                   </div>
                 </motion.div>
@@ -210,36 +210,37 @@ export default function Home() {
       </section>
 
       {/* Section Blend - smaller on mobile */}
-      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(3, 18, 14)" height={60} />
+      <SectionBlend fromColor="rgb(5, 25, 20)" toColor="rgb(3, 18, 14)" height={40} />
 
-      {/* 3D Assets Showcase - Hidden on small mobile, smaller on tablet */}
-      <section className="py-8 sm:py-16 px-4 relative hidden sm:block" style={{ background: 'rgb(3, 18, 14)' }}>
+      {/* 3D Assets Showcase - NOW VISIBLE ON MOBILE */}
+      <section className="py-6 sm:py-12 lg:py-16 px-4 relative" style={{ background: 'rgb(3, 18, 14)' }}>
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-16">
-            <Float duration={3} y={8}>
+          {/* On mobile: 2x2 grid, on larger: flex row */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center items-center gap-4 sm:gap-8 lg:gap-16">
+            <Float duration={3} y={6}>
               <ScaleIn delay={0}>
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
+                <div className="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-56 lg:h-56 mx-auto">
                   <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={3.5} y={10}>
+            <Float duration={3.5} y={8}>
               <ScaleIn delay={0.1}>
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
+                <div className="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-56 lg:h-56 mx-auto">
                   <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={4} y={8}>
+            <Float duration={4} y={6}>
               <ScaleIn delay={0.2}>
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
+                <div className="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-56 lg:h-56 mx-auto">
                   <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
             </Float>
-            <Float duration={3.2} y={10}>
+            <Float duration={3.2} y={8}>
               <ScaleIn delay={0.3}>
-                <div className="relative w-24 h-24 sm:w-40 sm:h-40 lg:w-56 lg:h-56">
+                <div className="relative w-28 h-28 sm:w-40 sm:h-40 lg:w-56 lg:h-56 mx-auto">
                   <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </ScaleIn>
