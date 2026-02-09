@@ -45,23 +45,23 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex">
+    <main className="min-h-screen flex bg-[#1a2f25]">
       {/* Left side - Form */}
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 mb-8">
-            <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-white font-bold text-xl">Q</span>
+          <Link href="/" className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-xl bg-[#c4f542] flex items-center justify-center">
+              <span className="text-[#1a2f25] font-bold text-2xl">Q</span>
             </div>
             <span className="text-2xl font-bold text-white">Quantroy</span>
           </Link>
 
-          <h1 className="text-3xl font-bold text-white mb-2">Welcome back</h1>
-          <p className="text-gray-400 mb-8">Sign in to access your investment dashboard</p>
+          <h1 className="text-3xl font-bold text-white mb-2 font-[family-name:var(--font-playfair)]">Welcome back</h1>
+          <p className="text-white/60 mb-8">Sign in to access your investment dashboard</p>
 
           {error && (
-            <div className="mb-6 p-4 rounded-lg bg-red-900/20 border border-red-900/30 flex items-center gap-3">
+            <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center gap-3">
               <AlertCircle className="text-red-400" size={20} />
               <p className="text-red-400 text-sm">{error}</p>
             </div>
@@ -70,12 +70,12 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email */}
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Email Address</label>
+              <label className="block text-sm text-white/80 mb-2 font-medium">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
                 <input
                   type="email"
-                  className="input pl-12"
+                  className="input-dark pl-12"
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -86,12 +86,12 @@ export default function LoginPage() {
 
             {/* Password */}
             <div>
-              <label className="block text-sm text-gray-300 mb-2">Password</label>
+              <label className="block text-sm text-white/80 mb-2 font-medium">Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
                 <input
                   type={showPassword ? 'text' : 'password'}
-                  className="input pl-12 pr-12"
+                  className="input-dark pl-12 pr-12"
                   placeholder="••••••••"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
@@ -99,7 +99,7 @@ export default function LoginPage() {
                 />
                 <button
                   type="button"
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -110,10 +110,10 @@ export default function LoginPage() {
             {/* Remember & Forgot */}
             <div className="flex items-center justify-between">
               <label className="flex items-center">
-                <input type="checkbox" className="w-4 h-4 rounded border-emerald-700 bg-transparent text-emerald-500 focus:ring-emerald-500" />
-                <span className="ml-2 text-sm text-gray-400">Remember me</span>
+                <input type="checkbox" className="w-4 h-4 rounded border-white/20 bg-transparent text-[#c4f542] focus:ring-[#c4f542]" />
+                <span className="ml-2 text-sm text-white/60">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-sm text-emerald-400 hover:underline">
+              <Link href="/forgot-password" className="text-sm text-[#c4f542] hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -125,7 +125,7 @@ export default function LoginPage() {
               className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-[#1a2f25] border-t-transparent rounded-full animate-spin" />
               ) : (
                 <>Sign In <ArrowRight size={20} /></>
               )}
@@ -134,15 +134,15 @@ export default function LoginPage() {
 
           {/* Divider */}
           <div className="flex items-center my-6">
-            <div className="flex-1 border-t border-gray-700"></div>
-            <span className="px-4 text-sm text-gray-400">or continue with</span>
-            <div className="flex-1 border-t border-gray-700"></div>
+            <div className="flex-1 border-t border-white/10"></div>
+            <span className="px-4 text-sm text-white/40">or continue with</span>
+            <div className="flex-1 border-t border-white/10"></div>
           </div>
 
           {/* Google Sign In */}
           <button
             onClick={handleGoogleSignIn}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-gray-100 text-gray-900 rounded-lg font-medium transition-colors"
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white hover:bg-gray-100 text-[#1a2f25] rounded-full font-semibold transition-colors"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -154,9 +154,9 @@ export default function LoginPage() {
           </button>
 
           {/* Register link */}
-          <p className="text-center text-gray-400 mt-8">
+          <p className="text-center text-white/60 mt-8">
             Don't have an account?{' '}
-            <Link href="/register" className="text-emerald-400 hover:underline">
+            <Link href="/register" className="text-[#c4f542] hover:underline font-medium">
               Create one
             </Link>
           </p>
@@ -164,27 +164,30 @@ export default function LoginPage() {
       </div>
 
       {/* Right side - Visual */}
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-emerald-900/30 to-emerald-950/50 p-12">
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-[#234d3a] to-[#1a2f25] p-12">
         <div className="max-w-lg text-center">
-          <div className="w-24 h-24 rounded-2xl gradient-primary flex items-center justify-center mx-auto mb-8 glow">
-            <span className="text-white font-bold text-4xl">Q</span>
+          <div className="w-28 h-28 rounded-2xl bg-[#c4f542] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[#c4f542]/30">
+            <span className="text-[#1a2f25] font-bold text-5xl">Q</span>
           </div>
-          <h2 className="text-3xl font-bold text-white mb-4">Start Growing Your Wealth</h2>
-          <p className="text-gray-400">
-            Access AI-powered crypto investment strategies with transparent tracking and monthly returns.
+          <h2 className="text-3xl font-bold text-white mb-4 font-[family-name:var(--font-playfair)]">
+            Start Growing Your Wealth
+          </h2>
+          <p className="text-white/60 leading-relaxed">
+            Access AI-powered crypto investment strategies with transparent tracking and monthly returns. 
+            Join thousands of investors building their financial future.
           </p>
           <div className="mt-12 grid grid-cols-3 gap-4">
-            <div className="card p-4">
-              <div className="text-emerald-400 font-bold text-lg">$50M+</div>
-              <div className="text-gray-400 text-xs">Assets Managed</div>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="text-[#c4f542] font-bold text-2xl">$50M+</div>
+              <div className="text-white/40 text-xs mt-1">Assets Managed</div>
             </div>
-            <div className="card p-4">
-              <div className="text-emerald-400 font-bold text-lg">10K+</div>
-              <div className="text-gray-400 text-xs">Investors</div>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="text-[#c4f542] font-bold text-2xl">10K+</div>
+              <div className="text-white/40 text-xs mt-1">Investors</div>
             </div>
-            <div className="card p-4">
-              <div className="text-emerald-400 font-bold text-lg">24/7</div>
-              <div className="text-gray-400 text-xs">Support</div>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4">
+              <div className="text-[#c4f542] font-bold text-2xl">24/7</div>
+              <div className="text-white/40 text-xs mt-1">Support</div>
             </div>
           </div>
         </div>

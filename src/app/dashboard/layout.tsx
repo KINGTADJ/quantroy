@@ -49,21 +49,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
   if (!isInitialized || !user) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0A0D14]">
-        <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen flex items-center justify-center bg-[#1a2f25]">
+        <div className="w-8 h-8 border-2 border-[#c4f542] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#0a1612] flex">
+    <div className="min-h-screen bg-[#1a2f25] flex">
       {/* Sidebar */}
-      <aside className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-[#061510] border-r border-emerald-900/30 transition-all duration-300 flex flex-col`}>
+      <aside className={`${isSidebarOpen ? 'w-64' : 'w-20'} bg-[#152a22] border-r border-white/5 transition-all duration-300 flex flex-col`}>
         {/* Logo */}
-        <div className="p-4 border-b border-emerald-900/30">
+        <div className="p-4 border-b border-white/5">
           <Link href="/dashboard" className="flex items-center space-x-2">
-            <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-              <span className="text-white font-bold text-xl">Q</span>
+            <div className="w-10 h-10 rounded-xl bg-[#c4f542] flex items-center justify-center">
+              <span className="text-[#1a2f25] font-bold text-xl">Q</span>
             </div>
             {isSidebarOpen && <span className="text-xl font-bold text-white">Quantroy</span>}
           </Link>
@@ -71,21 +71,21 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Navigation */}
         <nav className="flex-1 p-4">
-          <ul className="space-y-2">
+          <ul className="space-y-1">
             {sidebarLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition ${
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition ${
                       isActive 
-                        ? 'bg-emerald-900/30 text-emerald-400' 
-                        : 'text-gray-400 hover:text-white hover:bg-emerald-900/20'
+                        ? 'bg-[#c4f542]/10 text-[#c4f542]' 
+                        : 'text-white/60 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     <link.icon size={20} />
-                    {isSidebarOpen && <span>{link.label}</span>}
+                    {isSidebarOpen && <span className="font-medium">{link.label}</span>}
                   </Link>
                 </li>
               );
@@ -94,10 +94,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
 
         {/* Logout */}
-        <div className="p-4 border-t border-emerald-900/30">
+        <div className="p-4 border-t border-white/5">
           <button
             onClick={handleLogout}
-            className="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-900/20 transition"
+            className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-white/60 hover:text-red-400 hover:bg-red-500/10 transition"
           >
             <LogOut size={20} />
             {isSidebarOpen && <span>Logout</span>}
@@ -108,7 +108,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Header */}
-        <header className="h-16 bg-[#061510] border-b border-emerald-900/30 flex items-center justify-between px-6">
+        <header className="h-16 bg-[#152a22] border-b border-white/5 flex items-center justify-between px-6">
           <div>
             <h1 className="text-white font-semibold">Dashboard</h1>
           </div>
@@ -117,26 +117,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             {profile?.kyc_status === 'not_started' && (
               <Link 
                 href="/dashboard/kyc"
-                className="px-3 py-1 rounded-full bg-amber-900/30 text-amber-400 text-xs hover:bg-amber-900/50 transition"
+                className="px-3 py-1.5 rounded-full bg-amber-500/10 text-amber-400 text-xs font-medium hover:bg-amber-500/20 transition"
               >
                 Complete KYC
               </Link>
             )}
             {profile?.kyc_status === 'pending' && (
-              <span className="px-3 py-1 rounded-full bg-blue-900/30 text-blue-400 text-xs">
+              <span className="px-3 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-xs font-medium">
                 KYC Pending
               </span>
             )}
             {profile?.kyc_status === 'approved' && (
-              <span className="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs">
+              <span className="px-3 py-1.5 rounded-full bg-[#c4f542]/10 text-[#c4f542] text-xs font-medium">
                 Verified ✓
               </span>
             )}
 
             {/* Notifications */}
-            <button className="relative p-2 text-gray-400 hover:text-white transition">
+            <button className="relative p-2 text-white/60 hover:text-white transition">
               <Bell size={20} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-emerald-500 rounded-full" />
+              <span className="absolute top-1 right-1 w-2 h-2 bg-[#c4f542] rounded-full" />
             </button>
             
             {/* User Menu */}
@@ -144,26 +144,26 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               className="relative"
               onClick={() => setShowUserMenu(!showUserMenu)}
             >
-              <div className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-emerald-900/20 cursor-pointer hover:bg-emerald-900/30 transition">
-                <div className="w-8 h-8 rounded-full bg-emerald-700 flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold">{initials}</span>
+              <div className="flex items-center space-x-3 px-3 py-2 rounded-xl bg-white/5 cursor-pointer hover:bg-white/10 transition">
+                <div className="w-8 h-8 rounded-full bg-[#c4f542] flex items-center justify-center">
+                  <span className="text-[#1a2f25] text-sm font-semibold">{initials}</span>
                 </div>
-                <span className="text-white text-sm">{displayName}</span>
-                <ChevronDown size={16} className="text-gray-400" />
+                <span className="text-white text-sm font-medium">{displayName}</span>
+                <ChevronDown size={16} className="text-white/40" />
               </div>
 
               {/* Dropdown Menu */}
               {showUserMenu && (
-                <div className="absolute right-0 top-full mt-2 w-48 bg-[#061510] border border-emerald-900/30 rounded-lg shadow-xl z-50">
+                <div className="absolute right-0 top-full mt-2 w-48 bg-[#152a22] border border-white/10 rounded-xl shadow-xl z-50 overflow-hidden">
                   <Link 
                     href="/dashboard/settings" 
-                    className="block px-4 py-3 text-gray-400 hover:text-white hover:bg-emerald-900/20 transition"
+                    className="block px-4 py-3 text-white/60 hover:text-white hover:bg-white/5 transition"
                   >
                     Settings
                   </Link>
                   <button 
                     onClick={handleLogout}
-                    className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-900/20 transition"
+                    className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-500/10 transition"
                   >
                     Logout
                   </button>

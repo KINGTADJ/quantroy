@@ -1,222 +1,183 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
   TrendingUp, Shield, Wallet, Bot, Users, Gift,
-  ChevronRight, Star, CheckCircle, Lock, Clock,
-  BarChart3, Zap, Award, Globe
+  ArrowRight, Star, CheckCircle, Lock, Clock,
+  BarChart3, Zap, Award, Globe, ChevronRight,
+  Smartphone, PieChart, LineChart, DollarSign
 } from 'lucide-react';
 
-const stats = [
-  { value: '$500-$50M', label: 'Investment Range' },
-  { value: 'Monthly', label: 'Payout Frequency' },
-  { value: '4 Assets', label: 'Supported Cryptos' },
-  { value: 'AI-Powered', label: 'Gemini Integration' },
-];
-
-const features = [
-  { icon: TrendingUp, title: 'Professional Management', desc: 'Expert quantitative analysts with proven track records', badge: '10+ Years' },
-  { icon: Wallet, title: 'Monthly Payouts', desc: 'Regular returns directly to your crypto wallet', badge: 'Monthly' },
-  { icon: Shield, title: 'Bank-Grade Security', desc: 'Multi-signature wallets and cold storage protection', badge: '100% Secure' },
-  { icon: Bot, title: 'AI-Powered Guidance', desc: 'Gemini AI provides 24/7 personalized recommendations', badge: '24/7 AI' },
-  { icon: BarChart3, title: 'Transparent Tracking', desc: 'Real-time portfolio performance with blockchain verification', badge: 'Real-time' },
-  { icon: Gift, title: 'Affiliate Rewards', desc: 'Earn up to 6% commission with our referral system', badge: 'Up to 6%' },
-];
-
-const packages = [
-  {
-    name: 'Starter',
-    subtitle: 'First-time crypto investors',
-    minInvestment: '$500',
-    monthlyTarget: '~$830',
-    sixMonthTarget: '$5,000',
-    features: ['Monthly payouts', 'AI guidance', '24/7 support'],
-    popular: false,
+const services = [
+  { 
+    icon: TrendingUp, 
+    title: 'Investment Strategies', 
+    desc: 'Professional quantitative strategies tailored to your risk appetite and investment goals.',
+    link: '/strategies'
   },
-  {
-    name: 'Pro',
-    subtitle: 'Serious investors',
-    minInvestment: '$5,000',
-    monthlyTarget: '~$8,300',
-    sixMonthTarget: '$50,000',
-    features: ['Priority support', 'Advanced analytics', 'Dedicated advisor'],
-    popular: true,
+  { 
+    icon: PieChart, 
+    title: 'Portfolio Management', 
+    desc: 'Diversified crypto portfolios managed by AI-powered algorithms for optimal returns.',
+    link: '/strategies'
   },
-  {
-    name: 'Elite',
-    subtitle: 'High-net-worth individuals',
-    minInvestment: '$50,000',
-    monthlyTarget: '~$83,000',
-    sixMonthTarget: '$500,000',
-    features: ['VIP support', 'Custom strategies', 'Direct access'],
-    popular: false,
+  { 
+    icon: Shield, 
+    title: 'Secure Custody', 
+    desc: 'Bank-grade security with multi-signature wallets and cold storage protection.',
+    link: '/about'
   },
-  {
-    name: 'VIP',
-    subtitle: 'Institutional investors',
-    minInvestment: '$500,000+',
-    monthlyTarget: '~$830,000',
-    sixMonthTarget: '$5,000,000+',
-    features: ['White-glove service', 'Bespoke solutions', 'Risk management'],
-    popular: false,
+  { 
+    icon: Bot, 
+    title: 'AI Guidance', 
+    desc: 'Get personalized investment recommendations powered by advanced AI technology.',
+    link: '/dashboard/ai'
+  },
+  { 
+    icon: LineChart, 
+    title: 'Real-time Tracking', 
+    desc: 'Monitor your investments with transparent, real-time performance analytics.',
+    link: '/dashboard'
+  },
+  { 
+    icon: Gift, 
+    title: 'Referral Program', 
+    desc: 'Earn up to 6% commission by referring friends and family to our platform.',
+    link: '/affiliates'
   },
 ];
 
-const steps = [
+const teamMembers = [
   {
-    number: '1',
-    title: 'Account Creation',
-    desc: 'Quick and secure account setup with enterprise-grade protection',
-    items: ['Email verification required', '2FA setup (email + authenticator)', 'Strong password requirements'],
+    name: 'David Okonkwo',
+    role: 'Chief Executive Officer',
+    image: '/images/team-ceo.jpg',
   },
   {
-    number: '2',
-    title: 'Identity Verification',
-    desc: 'Fast KYC process with automated compliance review',
-    items: ['Government-issued ID upload', 'Proof of address document', 'Compliance review (24-48 hours)'],
+    name: 'Amara Nwachukwu',
+    role: 'Chief Investment Officer',
+    image: '/images/team-cio.jpg',
   },
   {
-    number: '3',
-    title: 'Fund & Invest',
-    desc: 'Choose your strategy and start earning monthly returns',
-    items: ['Select investment strategy', 'Choose funding cryptocurrency', 'Start earning monthly payouts'],
+    name: 'Michael Adeyemi',
+    role: 'Head of Technology',
+    image: '/images/team-cto.jpg',
+  },
+  {
+    name: 'Grace Mensah',
+    role: 'Head of Compliance',
+    image: '/images/team-compliance.jpg',
+  },
+];
+
+const testimonials = [
+  {
+    name: 'James Okoro',
+    role: 'Entrepreneur',
+    text: 'Quantroy has transformed how I invest. The returns have been consistent and the platform is incredibly easy to use.',
+    image: '/images/testimonial-1.jpg',
+  },
+  {
+    name: 'Chioma Eze',
+    role: 'Business Owner',
+    text: 'I was skeptical at first, but Quantroy proved me wrong. My portfolio has grown significantly in just 6 months.',
+    image: '/images/testimonial-2.jpg',
+  },
+  {
+    name: 'Emmanuel Asante',
+    role: 'Financial Analyst',
+    text: 'As someone in finance, I appreciate the transparency and professionalism. This is how crypto investing should be.',
+    image: '/images/testimonial-3.jpg',
   },
 ];
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen overflow-hidden">
       <Header />
       
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/20 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-            🚀 Professional Crypto Investment Platform
+      {/* Hero Section - Dark Green */}
+      <section className="bg-dark-green pt-28 pb-20 px-6 relative">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="animate-fadeInUp">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-[family-name:var(--font-playfair)]">
+                Secure your{' '}
+                <span className="text-[#c4f542]">future</span>
+                <br />
+                with smart investments
+              </h1>
+              <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
+                Join thousands of investors who trust Quantroy with their crypto investments. 
+                AI-powered strategies with transparent tracking and consistent monthly returns.
+              </p>
+              <div className="flex flex-wrap gap-4 mb-12">
+                <Link href="/register" className="btn-primary">
+                  Learn More <ArrowRight size={18} />
+                </Link>
+              </div>
+              
+              {/* Trust Logos */}
+              <div className="pt-8 border-t border-white/10">
+                <p className="text-gray-400 text-sm mb-4">As Seen On:</p>
+                <div className="flex flex-wrap items-center gap-8 opacity-60">
+                  {['Forbes', 'Bloomberg', 'CoinDesk', 'Yahoo!'].map((name) => (
+                    <span key={name} className="text-white font-semibold text-lg">{name}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Image */}
+            <div className="relative animate-slideInRight hidden lg:block">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <div className="aspect-[4/5] bg-gradient-to-br from-[#234d3a] to-[#1a2f25] flex items-center justify-center">
+                  {/* Placeholder for hero image - will be replaced with AI-generated image */}
+                  <div className="text-center p-8">
+                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-[#c4f542]/20 flex items-center justify-center">
+                      <Users size={64} className="text-[#c4f542]" />
+                    </div>
+                    <p className="text-white/60 text-sm">Hero Image</p>
+                    <p className="text-white/40 text-xs mt-1">Happy African Family</p>
+                  </div>
+                </div>
+                {/* Yellow Ribbon */}
+                <div className="absolute bottom-8 -left-4 -right-4 bg-[#f9d423] py-3 px-6 transform -rotate-2">
+                  <p className="text-[#1a2f25] font-bold text-center text-sm tracking-wider uppercase">
+                    ⭐ Best Investment Platform 2026 ⭐
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Invest in Professional<br />
-            <span className="text-emerald-400">Crypto Strategies</span>
-          </h1>
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            AI-powered crypto strategies with transparent tracking and monthly returns.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-              Get Started <ChevronRight size={20} />
-            </Link>
-            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
-              View Strategies
-            </Link>
+        </div>
+      </section>
+
+      {/* Services Section - Cream Background */}
+      <section className="bg-cream py-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[#1a2f25]/60 text-sm uppercase tracking-wider mb-3">Products and services</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2f25] font-[family-name:var(--font-playfair)]">
+              Providing transformational solutions for<br />
+              your investment challenges
+            </h2>
           </div>
           
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {stats.map((stat, i) => (
-              <div key={i} className="card p-4">
-                <div className="text-emerald-400 font-bold text-lg">{stat.value}</div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Trust Logos */}
-      <section className="py-12 border-y border-emerald-900/30">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <h3 className="text-gray-400 text-sm mb-8">Trusted by Leading Organizations</h3>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            {['Coinbase', 'Binance', 'Kraken', 'Gemini', 'KuCoin', 'OKX'].map((name) => (
-              <div key={name} className="text-gray-400 font-semibold">{name}</div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Star size={14} className="mr-2" /> Market Leader
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Why Choose Quantroy?</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Experience the future of investing with our cutting-edge technology and professional management.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, i) => (
-              <div key={i} className="card p-6 hover:border-emerald-700/50 transition group">
-                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 group-hover:scale-110 transition">
-                  <feature.icon size={24} className="text-white" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, i) => (
+              <div key={i} className="service-card group cursor-pointer" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div className="icon group-hover:scale-110 transition-transform">
+                  <service.icon size={24} />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2">{feature.title}</h3>
-                <p className="text-gray-400 mb-4">{feature.desc}</p>
-                <span className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm">
-                  {feature.badge}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Investment Packages */}
-      <section className="py-20 px-4 bg-[#061510]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Award size={14} className="mr-2" /> Investment Plans
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Investment Packages</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Choose from our professionally managed investment strategies designed for different risk appetites and capital levels.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {packages.map((pkg, i) => (
-              <div key={i} className={`card p-6 relative ${pkg.popular ? 'border-emerald-500 glow' : ''}`}>
-                {pkg.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-emerald-500 text-white text-xs font-semibold">
-                    Most Popular
-                  </div>
-                )}
-                <div className="mb-4">
-                  <h3 className="text-xl font-bold text-white">{pkg.name}</h3>
-                  <p className="text-gray-400 text-sm">{pkg.subtitle}</p>
-                </div>
-                <div className="mb-6">
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="text-gray-400">Minimum Investment</span>
-                    <span className="text-white font-semibold">{pkg.minInvestment}</span>
-                  </div>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="text-gray-400">Monthly Target*</span>
-                    <span className="text-emerald-400 font-semibold">{pkg.monthlyTarget}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">6-Month Target*</span>
-                    <span className="text-emerald-400 font-semibold">{pkg.sixMonthTarget}</span>
-                  </div>
-                </div>
-                <ul className="space-y-2 mb-6">
-                  {pkg.features.map((f, j) => (
-                    <li key={j} className="flex items-center text-sm text-gray-300">
-                      <CheckCircle size={16} className="text-emerald-400 mr-2" /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/register" className={`block text-center py-3 rounded-lg font-semibold transition ${
-                  pkg.popular 
-                    ? 'gradient-primary text-white hover:opacity-90' 
-                    : 'border border-emerald-700 text-emerald-400 hover:bg-emerald-900/30'
-                }`}>
-                  Get Started <ChevronRight size={16} className="inline" />
+                <h3 className="text-xl font-semibold text-[#1a2f25] mb-3">{service.title}</h3>
+                <p className="text-gray-600 mb-4 leading-relaxed">{service.desc}</p>
+                <Link href={service.link} className="inline-flex items-center text-[#1a2f25] font-medium hover:text-[#234d3a] transition-colors">
+                  Learn more <ArrowRight size={16} className="ml-2" />
                 </Link>
               </div>
             ))}
@@ -224,129 +185,199 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Zap size={14} className="mr-2" /> Getting Started
+      {/* Individual Investors Section - Terracotta */}
+      <section className="bg-terracotta py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-[family-name:var(--font-playfair)]">
+                Products & services<br />
+                for the individual
+              </h2>
+              <p className="text-white/80 mb-8 leading-relaxed max-w-lg">
+                Our products and services provide self-sufficiency, financial independence, 
+                creation and preservation of wealth for the future. Start your investment 
+                journey with as little as $500.
+              </p>
+              <Link href="/strategies" className="btn-yellow">
+                Learn More <ArrowRight size={18} />
+              </Link>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Simple 3-Step Onboarding</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Start earning with our crypto investment platform in just three simple steps.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {steps.map((step, i) => (
-              <div key={i} className="relative">
-                <div className="card p-6">
-                  <div className="w-10 h-10 rounded-full gradient-primary flex items-center justify-center text-white font-bold mb-4">
-                    {step.number}
+            
+            {/* Image Placeholder */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <div className="aspect-[4/3] bg-gradient-to-br from-[#d05a3a] to-[#a03d1d] flex items-center justify-center">
+                <div className="text-center p-8">
+                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center">
+                    <Users size={48} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{step.title}</h3>
-                  <p className="text-gray-400 mb-4">{step.desc}</p>
-                  <ul className="space-y-2">
-                    {step.items.map((item, j) => (
-                      <li key={j} className="flex items-center text-sm text-gray-300">
-                        <CheckCircle size={14} className="text-emerald-400 mr-2" /> {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="text-white/60 text-sm">Lifestyle Image</p>
+                  <p className="text-white/40 text-xs mt-1">Family reviewing finances together</p>
                 </div>
-                {i < 2 && (
-                  <div className="hidden md:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ChevronRight size={24} className="text-emerald-700" />
-                  </div>
-                )}
               </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link href="/register" className="btn-primary inline-flex items-center gap-2">
-              Start Your Journey Today <ChevronRight size={20} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Security Section */}
-      <section className="py-20 px-4 bg-[#061510]">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-              <Lock size={14} className="mr-2" /> Enterprise Security
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Bank-Grade Security & Compliance</h2>
-            <p className="text-gray-400 max-w-2xl mx-auto">
-              Your security and trust are our top priorities with comprehensive protection measures.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { icon: Shield, title: 'Multi-Sig Security', desc: 'Multi-signature protection and cold storage' },
-              { icon: CheckCircle, title: 'KYC/AML Compliance', desc: 'Full identity verification and screening' },
-              { icon: Lock, title: 'Advanced Encryption', desc: 'AES-256 at rest, TLS 1.3 in transit' },
-              { icon: Clock, title: '24/7 Monitoring', desc: 'Continuous security monitoring' },
-            ].map((item, i) => (
-              <div key={i} className="card p-6 text-center">
-                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mx-auto mb-4">
-                  <item.icon size={24} className="text-white" />
-                </div>
-                <h3 className="text-lg font-semibold text-white mb-2">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center gap-8 mt-12 opacity-60">
-            <div className="text-center">
-              <div className="text-emerald-400 font-semibold">SOC 2</div>
-              <div className="text-gray-400 text-xs">Compliant</div>
-            </div>
-            <div className="text-center">
-              <div className="text-emerald-400 font-semibold">ISO 27001</div>
-              <div className="text-gray-400 text-xs">Certified</div>
-            </div>
-            <div className="text-center">
-              <div className="text-emerald-400 font-semibold">GDPR</div>
-              <div className="text-gray-400 text-xs">Compliant</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
-            Your Journey Starts Here
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Start Your Investment Journey?
-          </h2>
-          <p className="text-gray-400 mb-8 max-w-2xl mx-auto">
-            Join thousands of investors who trust Quantroy with their crypto investments. Start with as little as $500.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-              Start Investing Today <ChevronRight size={20} />
-            </Link>
-            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
-              View All Strategies
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      {/* Stats Section - Dark Green */}
+      <section className="bg-dark-green py-16 px-6">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { icon: Users, value: '10,000+', label: 'Active Investors' },
-              { icon: TrendingUp, value: '$50M+', label: 'Assets Managed' },
-              { icon: Shield, value: 'Bank-Grade', label: 'Security' },
-              { icon: Clock, value: '24/7', label: 'Support' },
+              { value: '$50M+', label: 'Assets Under Management' },
+              { value: '10,000+', label: 'Active Investors' },
+              { value: '99.9%', label: 'Platform Uptime' },
+              { value: '24/7', label: 'Customer Support' },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <stat.icon size={24} className="text-emerald-400 mx-auto mb-2" />
-                <div className="text-white font-bold text-xl">{stat.value}</div>
-                <div className="text-gray-400 text-sm">{stat.label}</div>
+                <div className="text-3xl md:text-4xl font-bold text-[#c4f542] mb-2 font-[family-name:var(--font-playfair)]">
+                  {stat.value}
+                </div>
+                <div className="text-white/60 text-sm">{stat.label}</div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Team Section - Cream Light */}
+      <section className="bg-cream-light py-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[#1a2f25]/60 text-sm uppercase tracking-wider mb-3">Our Leadership</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2f25] font-[family-name:var(--font-playfair)]">
+              Meet our expert team
+            </h2>
+            <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+              Our leadership team brings decades of experience in finance, technology, and crypto markets.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member, i) => (
+              <div key={i} className="text-center group">
+                <div className="relative mb-6 rounded-2xl overflow-hidden aspect-[3/4] bg-gradient-to-br from-[#234d3a] to-[#1a2f25]">
+                  {/* Placeholder for team member image */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-20 h-20 rounded-full bg-[#c4f542]/20 flex items-center justify-center">
+                      <Users size={40} className="text-[#c4f542]" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1a2f25] to-transparent h-1/3" />
+                </div>
+                <h3 className="text-lg font-semibold text-[#1a2f25] mb-1">{member.name}</h3>
+                <p className="text-gray-600 text-sm">{member.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section - Cream */}
+      <section className="bg-cream py-20 px-6">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <p className="text-[#1a2f25]/60 text-sm uppercase tracking-wider mb-3">Testimonials</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1a2f25] font-[family-name:var(--font-playfair)]">
+              What our investors say
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, i) => (
+              <div key={i} className="card-light p-8">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={18} className="fill-[#f9d423] text-[#f9d423]" />
+                  ))}
+                </div>
+                <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#234d3a] to-[#1a2f25] flex items-center justify-center">
+                    <Users size={20} className="text-[#c4f542]" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#1a2f25]">{testimonial.name}</p>
+                    <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* App Section - Dark Green with Phone Mockup */}
+      <section className="bg-dark-green py-20 px-6">
+        <div className="container mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <p className="text-[#c4f542] text-sm uppercase tracking-wider mb-3">Mobile App</p>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 font-[family-name:var(--font-playfair)]">
+                Are you looking to improve<br />
+                your personal finances and<br />
+                grow your money?
+              </h2>
+              <p className="text-gray-300 mb-8 leading-relaxed max-w-lg">
+                Quantroy Conversations is your go-to platform that helps you learn in a light, fun, 
+                and easy way. Track your investments, get AI recommendations, and grow your wealth.
+              </p>
+              <Link href="/register" className="btn-primary">
+                Click Here to Start <ArrowRight size={18} />
+              </Link>
+            </div>
+            
+            {/* Phone Mockup */}
+            <div className="flex justify-center">
+              <div className="phone-mockup">
+                <div className="phone-screen">
+                  <div className="bg-[#1a2f25] p-4">
+                    <p className="text-[#c4f542] text-xs font-medium">Finances</p>
+                  </div>
+                  <div className="bg-[#c04d2d] p-6">
+                    <p className="text-white text-lg font-semibold mb-2">Introducing Quantroy</p>
+                    <p className="text-white/80 text-sm">Helping you make sense of your money</p>
+                  </div>
+                  <div className="bg-[#c4f542] p-6">
+                    <p className="text-[#1a2f25] text-lg font-semibold mb-2">Your Dashboard</p>
+                    <p className="text-[#1a2f25]/70 text-sm">Track investments, view returns</p>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    {[1, 2].map((i) => (
+                      <div key={i} className="flex items-center gap-3 p-3 bg-gray-100 rounded-lg">
+                        <div className="w-8 h-8 rounded-full bg-[#1a2f25]" />
+                        <div className="flex-1">
+                          <div className="h-3 bg-gray-300 rounded w-3/4 mb-1" />
+                          <div className="h-2 bg-gray-200 rounded w-1/2" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Cream Light */}
+      <section className="bg-cream-light py-20 px-6">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a2f25] mb-6 font-[family-name:var(--font-playfair)]">
+            Ready to start your investment journey?
+          </h2>
+          <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
+            Join thousands of investors who trust Quantroy with their financial future. 
+            Start with as little as $500 and watch your wealth grow.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link href="/register" className="bg-[#1a2f25] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#234d3a] transition-colors inline-flex items-center gap-2">
+              Start Investing Today <ArrowRight size={18} />
+            </Link>
+            <Link href="/strategies" className="border-2 border-[#1a2f25] text-[#1a2f25] px-8 py-4 rounded-full font-semibold hover:bg-[#1a2f25] hover:text-white transition-colors inline-flex items-center gap-2">
+              View Strategies
+            </Link>
           </div>
         </div>
       </section>
