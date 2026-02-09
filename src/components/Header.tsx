@@ -17,16 +17,16 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 px-4 pt-4">
+    <div className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 pt-2 sm:pt-4">
       <header 
-        className={`max-w-6xl mx-auto rounded-2xl border transition-all duration-300 ${
+        className={`max-w-6xl mx-auto rounded-xl sm:rounded-2xl border transition-all duration-300 ${
           scrolled 
-            ? 'bg-[#0a1f1a]/90 backdrop-blur-xl border-emerald-800/50 shadow-lg shadow-black/20' 
-            : 'bg-[#0a1f1a]/70 backdrop-blur-md border-emerald-900/30'
+            ? 'bg-[#0a1f1a]/95 backdrop-blur-xl border-emerald-800/50 shadow-lg shadow-black/20' 
+            : 'bg-[#0a1f1a]/80 backdrop-blur-md border-emerald-900/30'
         }`}
       >
-        <div className="px-4 sm:px-6">
-          <div className="flex items-center justify-between h-14">
+        <div className="px-3 sm:px-6">
+          <div className="flex items-center justify-between h-12 sm:h-14">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center">

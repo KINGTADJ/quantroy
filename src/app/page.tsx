@@ -125,38 +125,38 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 relative overflow-hidden hero-bg">
+      <section className="pt-20 sm:pt-28 md:pt-32 pb-8 sm:pb-16 md:pb-20 px-4 relative overflow-hidden hero-bg">
         {/* Animated orbs - smaller on mobile */}
-        <div className="hero-orb hero-orb-1 opacity-50 md:opacity-100" />
-        <div className="hero-orb hero-orb-2 opacity-50 md:opacity-100" />
+        <div className="hero-orb hero-orb-1 opacity-30 sm:opacity-50 md:opacity-100" />
+        <div className="hero-orb hero-orb-2 opacity-30 sm:opacity-50 md:opacity-100" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Clean 2-Column Hero */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             {/* Left - Text */}
             <div className="text-center lg:text-left">
               <FadeIn direction="up" delay={0.1}>
-                <div className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-xs sm:text-sm mb-4 sm:mb-6">
-                  🚀 Professional Crypto Investment Platform
+                <div className="inline-flex items-center px-3 py-1.5 sm:py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-6">
+                  🚀 Professional Crypto Platform
                 </div>
               </FadeIn>
               <BlurIn delay={0.2}>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-6 leading-tight">
                   Invest in Professional<br />
                   <span className="text-emerald-400">Crypto Strategies</span>
                 </h1>
               </BlurIn>
               <FadeUp delay={0.3}>
-                <p className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl mx-auto lg:mx-0">
+                <p className="text-sm sm:text-base md:text-xl text-gray-400 mb-5 sm:mb-8 max-w-xl mx-auto lg:mx-0">
                   AI-powered crypto strategies with transparent tracking and monthly returns.
                 </p>
               </FadeUp>
               <FadeUp delay={0.4}>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
-                  <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-                    Get Started <ChevronRight size={20} />
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start mb-4 sm:mb-8">
+                  <Link href="/register" className="btn-primary flex items-center justify-center gap-2 text-sm sm:text-base py-3 sm:py-3">
+                    Get Started <ChevronRight size={18} />
                   </Link>
-                  <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
+                  <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2 text-sm sm:text-base py-3 sm:py-3">
                     View Strategies
                   </Link>
                 </div>
