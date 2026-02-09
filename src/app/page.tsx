@@ -125,18 +125,18 @@ export default function Home() {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-28 sm:pt-32 md:pt-36 pb-8 sm:pb-16 md:pb-20 px-4 relative overflow-hidden hero-bg">
+      <section className="pt-20 sm:pt-32 md:pt-36 pb-8 sm:pb-16 md:pb-20 px-4 relative overflow-hidden hero-bg">
         {/* Animated orbs - smaller on mobile */}
         <div className="hero-orb hero-orb-1 opacity-30 sm:opacity-50 md:opacity-100" />
         <div className="hero-orb hero-orb-2 opacity-30 sm:opacity-50 md:opacity-100" />
         
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Clean 2-Column Hero */}
-          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center mt-16 sm:mt-0">
             {/* Left - Text */}
             <div className="text-center lg:text-left">
               <FadeIn direction="up" delay={0.1}>
-                <div className="inline-flex items-center px-3 py-1.5 sm:py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-6">
+                <div className="hidden sm:inline-flex items-center px-3 py-1.5 sm:py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-6">
                   🚀 Professional Crypto Platform
                 </div>
               </FadeIn>
