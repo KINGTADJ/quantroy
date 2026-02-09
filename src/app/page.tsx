@@ -1,12 +1,13 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
   TrendingUp, Shield, Wallet, Bot, Users, Gift,
   ChevronRight, Star, CheckCircle, Lock, Clock,
-  BarChart3, Zap, Award, Globe
+  BarChart3, Zap, Award, Globe, Quote
 } from 'lucide-react';
 
 const stats = [
@@ -85,6 +86,34 @@ const steps = [
   },
 ];
 
+const testimonials = [
+  {
+    name: 'James Okoro',
+    role: 'Business Owner',
+    image: '/images/testimonial-1.png',
+    quote: 'Quantroy transformed my approach to crypto investing. The monthly returns have been consistent and the platform is incredibly easy to use.',
+  },
+  {
+    name: 'Sarah Chen',
+    role: 'Tech Executive',
+    image: '/images/testimonial-2.png',
+    quote: 'As someone skeptical about crypto, Quantroy\'s professional management and transparent tracking gave me the confidence to invest.',
+  },
+  {
+    name: 'Michael Adebayo',
+    role: 'Entrepreneur',
+    image: '/images/testimonial-3.png',
+    quote: 'The AI-powered guidance helped me make smarter investment decisions. I\'ve seen my portfolio grow steadily month after month.',
+  },
+];
+
+const team = [
+  { name: 'David Chen', role: 'CEO & Co-Founder', image: '/images/team-ceo.png' },
+  { name: 'Sarah Williams', role: 'Chief Investment Officer', image: '/images/team-cio.png' },
+  { name: 'Michael Torres', role: 'Chief Technology Officer', image: '/images/team-cto.png' },
+  { name: 'Emily Zhang', role: 'Head of Compliance', image: '/images/team-compliance.png' },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -93,28 +122,59 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-emerald-900/20 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-            🚀 Professional Crypto Investment Platform
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Invest in Professional<br />
-            <span className="text-emerald-400">Crypto Strategies</span>
-          </h1>
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
-            AI-powered crypto strategies with transparent tracking and monthly returns.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-              Get Started <ChevronRight size={20} />
-            </Link>
-            <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
-              View Strategies
-            </Link>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Text */}
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                🚀 Professional Crypto Investment Platform
+              </div>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
+                Invest in Professional<br />
+                <span className="text-emerald-400">Crypto Strategies</span>
+              </h1>
+              <p className="text-xl text-gray-400 mb-8 max-w-xl">
+                AI-powered crypto strategies with transparent tracking and monthly returns.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+                  Get Started <ChevronRight size={20} />
+                </Link>
+                <Link href="/strategies" className="btn-secondary flex items-center justify-center gap-2">
+                  View Strategies
+                </Link>
+              </div>
+            </div>
+            
+            {/* Right - Image */}
+            <div className="relative hidden lg:block">
+              <div className="relative aspect-square max-w-lg mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-emerald-900/20 rounded-3xl" />
+                <Image
+                  src="/images/hero-family.png"
+                  alt="Happy family investing"
+                  fill
+                  className="object-cover rounded-3xl"
+                  priority
+                />
+                {/* Floating card */}
+                <div className="absolute -bottom-4 -left-4 bg-[#0a1f1a]/90 backdrop-blur-xl border border-emerald-800/50 rounded-xl p-4 shadow-xl">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">+23.5%</p>
+                      <p className="text-gray-400 text-sm">This Month</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto lg:mx-0 mt-12">
             {stats.map((stat, i) => (
               <div key={i} className="card p-4">
                 <div className="text-emerald-400 font-bold text-lg">{stat.value}</div>
@@ -166,8 +226,45 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Investment Packages */}
+      {/* Testimonials Section */}
       <section className="py-20 px-4 bg-[#061510]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Users size={14} className="mr-2" /> Success Stories
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">What Our Investors Say</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Join thousands of satisfied investors who have transformed their financial future with Quantroy.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, i) => (
+              <div key={i} className="card p-6 relative">
+                <Quote size={32} className="text-emerald-900/50 absolute top-4 right-4" />
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-500/30">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-semibold">{testimonial.name}</h4>
+                    <p className="text-emerald-400 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-300 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Investment Packages */}
+      <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -225,7 +322,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-[#061510]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
@@ -265,6 +362,37 @@ export default function Home() {
             <Link href="/register" className="btn-primary inline-flex items-center gap-2">
               Start Your Journey Today <ChevronRight size={20} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm mb-4">
+              <Users size={14} className="mr-2" /> Our Team
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Meet the Experts</h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Our leadership team brings decades of experience in finance, technology, and cryptocurrency markets.
+            </p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            {team.map((member, i) => (
+              <div key={i} className="card p-4 text-center group">
+                <div className="relative w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-emerald-500/30 group-hover:border-emerald-500/60 transition">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <h4 className="text-white font-semibold">{member.name}</h4>
+                <p className="text-emerald-400 text-sm">{member.role}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
