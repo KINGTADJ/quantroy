@@ -39,9 +39,9 @@ export default function AboutPage() {
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset - Globe */}
+            {/* Left 3D Asset */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/page-assets/about-globe.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -54,9 +54,9 @@ export default function AboutPage() {
               </p>
             </div>
             
-            {/* Right 3D Asset - Trophy */}
+            {/* Right 3D Asset */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/page-assets/about-trophy.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>
@@ -108,9 +108,9 @@ export default function AboutPage() {
       <section className="py-16 px-4 bg-[#061510]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12 mb-12">
-            {/* Left 3D Asset - Handshake */}
+            {/* Left 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/about-handshake.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -118,9 +118,9 @@ export default function AboutPage() {
               <p className="text-gray-400">The principles that guide everything we do</p>
             </div>
             
-            {/* Right 3D Asset - Shield */}
+            {/* Right 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/auth-shield.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -165,9 +165,9 @@ export default function AboutPage() {
       <section className="py-16 px-4 bg-[#061510]">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset - Key */}
+            {/* Left 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/auth-key.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -180,9 +180,9 @@ export default function AboutPage() {
               </Link>
             </div>
             
-            {/* Right 3D Asset - Lock */}
+            {/* Right 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/auth-lock.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>

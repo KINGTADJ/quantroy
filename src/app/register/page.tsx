@@ -283,13 +283,13 @@ export default function RegisterPage() {
 
       {/* Right side - Visual with 3D Assets */}
       <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-emerald-900/30 to-emerald-950/50 p-12 relative overflow-hidden">
-        {/* 3D Asset - Top Right - Shield */}
+        {/* 3D Asset - Top Right */}
         <div className="absolute top-8 right-8 w-48 h-48">
-          <Image src="/images/page-assets/auth-shield.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
         </div>
-        {/* 3D Asset - Bottom Left - Key */}
+        {/* 3D Asset - Bottom Left */}
         <div className="absolute bottom-8 left-8 w-48 h-48">
-          <Image src="/images/page-assets/auth-key.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
         </div>
         
         <div className="max-w-lg text-center relative z-10">

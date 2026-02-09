@@ -166,9 +166,9 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Welcome Banner with 3D Assets */}
       <div className="card p-6 bg-gradient-to-r from-emerald-900/50 to-emerald-800/30 relative overflow-hidden">
-        {/* 3D Asset - Right Side - Chart */}
+        {/* 3D Asset - Right Side */}
         <div className="absolute right-32 top-1/2 -translate-y-1/2 w-32 h-32 hidden xl:block">
-          <Image src="/images/page-assets/strategies-chart.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
         </div>
         <div className="flex items-center justify-between relative z-10">
           <div>

@@ -106,9 +106,9 @@ export default function StrategiesPage() {
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset - Chart */}
+            {/* Left 3D Asset */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/page-assets/strategies-chart.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -124,9 +124,9 @@ export default function StrategiesPage() {
               </p>
             </div>
             
-            {/* Right 3D Asset - Bull */}
+            {/* Right 3D Asset */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/page-assets/strategies-bull.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>
@@ -240,9 +240,9 @@ export default function StrategiesPage() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset - Target */}
+            {/* Left 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/strategies-target.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -260,9 +260,9 @@ export default function StrategiesPage() {
               </div>
             </div>
             
-            {/* Right 3D Asset - Shield */}
+            {/* Right 3D Asset */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/page-assets/auth-shield.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>

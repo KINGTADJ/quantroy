@@ -14,11 +14,11 @@ export default function PrivacyPage() {
           {/* Header with 3D Assets */}
           <div className="flex items-center justify-center gap-12 mb-12">
             <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
-              <Image src="/images/page-assets/legal-document.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             <h1 className="text-4xl font-bold text-white">Privacy Policy</h1>
             <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
-              <Image src="/images/page-assets/auth-shield.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
           
