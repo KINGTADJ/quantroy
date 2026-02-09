@@ -1,153 +1,115 @@
 'use client';
 
 import Link from 'next/link';
-import { Twitter, Linkedin, Instagram, Facebook, Send, ArrowUpRight } from 'lucide-react';
-
-const footerLinks = {
-  mainService: [
-    { name: 'Investment Strategies', href: '/strategies' },
-    { name: 'Portfolio Management', href: '/strategies' },
-    { name: 'Wealth Management', href: '/strategies' },
-    { name: 'Securities Trading', href: '/strategies' },
-  ],
-  selfServices: [
-    { name: 'Log in', href: '/login' },
-    { name: 'Register', href: '/register' },
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Support', href: '/about' },
-  ],
-  company: [
-    { name: 'About Us', href: '/about' },
-    { name: 'Careers', href: '/about' },
-    { name: 'Affiliates', href: '/affiliates' },
-    { name: 'Contact', href: '/about' },
-  ],
-};
-
-const socialLinks = [
-  { icon: Twitter, href: 'https://twitter.com/quantroy', label: 'Twitter' },
-  { icon: Facebook, href: 'https://facebook.com/quantroy', label: 'Facebook' },
-  { icon: Linkedin, href: 'https://linkedin.com/company/quantroy', label: 'LinkedIn' },
-];
-
-const waveWords = ['invest', 'grow', 'your', 'money', 'secure', 'future', 'wealth', 'freedom'];
+import { Shield, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a2f25] text-white">
-      {/* Animated Wave Text Banner */}
-      <div className="overflow-hidden py-8 border-b border-white/10">
-        <div className="wave-text">
-          {[...waveWords, ...waveWords].map((word, i) => (
-            <span key={i} className="inline-flex items-center">
-              {word}
-              <span className="mx-8 text-[#c4f542]">•</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Footer Content */}
-      <div className="container mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 rounded-xl bg-[#c4f542] flex items-center justify-center">
-                <span className="text-[#1a2f25] font-bold text-2xl">Q</span>
+    <footer className="bg-[#061510] border-t border-emerald-900/30">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
+                <span className="text-white font-bold text-lg">Q</span>
               </div>
-              <span className="text-white font-semibold text-2xl">Quantroy</span>
-            </Link>
-            <p className="text-white/60 mb-6 max-w-sm leading-relaxed">
-              We are a leading crypto investment platform that helps build enduring legacies 
-              that lead to sustainable wealth creation globally.
+              <span className="text-xl font-bold text-white">Quantroy</span>
+            </div>
+            <p className="text-gray-400 text-sm">
+              Professional crypto investment platform with AI-powered guidance and monthly payouts.
             </p>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-white/40 text-sm">Follow us:</span>
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-[#c4f542] transition-all"
-                  aria-label={social.label}
-                >
-                  <social.icon size={18} className="text-white/80" />
-                </a>
-              ))}
+            <div className="flex items-center space-x-2 text-emerald-400 text-sm">
+              <Shield size={16} />
+              <span>Licensed & Regulated</span>
             </div>
           </div>
 
-          {/* Main Service */}
+          {/* Platform Links */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Main Service</h4>
-            <ul className="space-y-3">
-              {footerLinks.mainService.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-white/60 hover:text-[#c4f542] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-white font-semibold mb-4">Platform</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/strategies" className="text-gray-400 hover:text-white transition text-sm">
+                  Investment Strategies
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className="text-gray-400 hover:text-white transition text-sm">
+                  Dashboard
+                </Link>
+              </li>
+              <li>
+                <Link href="/affiliates" className="text-gray-400 hover:text-white transition text-sm">
+                  Affiliate Program
+                </Link>
+              </li>
+              <li>
+                <Link href="/ai" className="text-gray-400 hover:text-white transition text-sm">
+                  AI Assistant
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Self Services */}
+          {/* Support Links */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Self Services</h4>
-            <ul className="space-y-3">
-              {footerLinks.selfServices.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-white/60 hover:text-[#c4f542] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-white font-semibold mb-4">Support</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/faq" className="text-gray-400 hover:text-white transition text-sm">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-gray-400 hover:text-white transition text-sm">
+                  Contact Support
+                </Link>
+              </li>
+              <li>
+                <Link href="/security" className="text-gray-400 hover:text-white transition text-sm">
+                  Security
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Company */}
+          {/* Legal Links */}
           <div>
-            <h4 className="text-white font-semibold mb-6">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    href={link.href}
-                    className="text-white/60 hover:text-[#c4f542] transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="text-white font-semibold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/terms" className="text-gray-400 hover:text-white transition text-sm">
+                  Terms of Service
+                </Link>
+              </li>
+              <li>
+                <Link href="/privacy" className="text-gray-400 hover:text-white transition text-sm">
+                  Privacy Policy
+                </Link>
+              </li>
+              <li>
+                <Link href="/risk" className="text-gray-400 hover:text-white transition text-sm">
+                  Risk Disclosure
+                </Link>
+              </li>
+              <li>
+                <Link href="/compliance" className="text-gray-400 hover:text-white transition text-sm">
+                  Compliance
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-white/10">
-        <div className="container mx-auto px-6 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/40 text-sm">
-              © {new Date().getFullYear()} Quantroy. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <Link href="/terms" className="text-white/40 hover:text-white/60 text-sm">
-                Terms and conditions
-              </Link>
-              <Link href="/privacy" className="text-white/40 hover:text-white/60 text-sm">
-                Privacy policy
-              </Link>
-            </div>
-          </div>
+        {/* Bottom */}
+        <div className="mt-12 pt-8 border-t border-emerald-900/30 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm">
+            © 2024 Quantroy. All rights reserved.
+          </p>
+          <p className="text-gray-500 text-xs mt-2 md:mt-0">
+            Quantroy is a crypto investment platform. All investments carry risk and past performance is not indicative of future results.
+          </p>
         </div>
       </div>
     </footer>
