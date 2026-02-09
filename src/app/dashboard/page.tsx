@@ -1,60 +1,173 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { 
   TrendingUp, TrendingDown, Wallet, DollarSign, 
   ArrowUpRight, ArrowDownRight, Clock, CheckCircle,
-  AlertCircle, ChevronRight
+  AlertCircle, ChevronRight, Loader2
 } from 'lucide-react';
 import Link from 'next/link';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
-// Demo data
-const portfolioStats = {
-  totalValue: '$12,450.00',
-  totalProfit: '+$2,450.00',
-  profitPercent: '+24.5%',
-  monthlyEarnings: '$830.00',
-  pendingPayouts: '$415.00',
-  activeInvestments: 2,
-};
+interface Profile {
+  id: string;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+}
 
-const investments = [
-  {
-    id: 1,
-    strategy: 'Pro Strategy',
-    amount: '$5,000',
-    currentValue: '$6,250',
-    profit: '+$1,250',
-    profitPercent: '+25%',
-    status: 'active',
-    startDate: '2024-01-15',
-  },
-  {
-    id: 2,
-    strategy: 'Starter Strategy',
-    amount: '$2,000',
-    currentValue: '$2,400',
-    profit: '+$400',
-    profitPercent: '+20%',
-    status: 'active',
-    startDate: '2024-02-01',
-  },
-];
+interface Investment {
+  id: string;
+  strategy: string;
+  amount: number;
+  currency: string;
+  status: string;
+  current_value: number | null;
+  created_at: string;
+  plan_id: string | null;
+  daily_roi: number | null;
+  duration_days: number | null;
+}
 
-const recentActivity = [
-  { type: 'payout', amount: '+$415.00', date: '2024-02-01', status: 'completed' },
-  { type: 'investment', amount: '$2,000.00', date: '2024-02-01', status: 'completed' },
-  { type: 'payout', amount: '+$312.50', date: '2024-01-01', status: 'completed' },
-  { type: 'investment', amount: '$5,000.00', date: '2024-01-15', status: 'completed' },
-];
+interface Payout {
+  id: string;
+  amount: number;
+  currency: string;
+  status: string;
+  created_at: string;
+}
 
 export default function DashboardPage() {
+  const [loading, setLoading] = useState(true);
+  const [profile, setProfile] = useState<Profile | null>(null);
+  const [investments, setInvestments] = useState<Investment[]>([]);
+  const [payouts, setPayouts] = useState<Payout[]>([]);
+  const [stats, setStats] = useState({
+    totalValue: 0,
+    totalInvested: 0,
+    totalProfit: 0,
+    pendingPayouts: 0,
+  });
+
+  const supabase = createClientComponentClient();
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Get current user
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        // Fetch profile
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+        
+        if (profileData) setProfile(profileData);
+
+        // Fetch investments
+        const { data: investmentsData } = await supabase
+          .from('investments')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
+        
+        if (investmentsData) {
+          setInvestments(investmentsData);
+          
+          // Calculate stats
+          const totalInvested = investmentsData.reduce((sum, inv) => sum + (inv.amount || 0), 0);
+          const totalValue = investmentsData.reduce((sum, inv) => sum + (inv.current_value || inv.amount || 0), 0);
+          const totalProfit = totalValue - totalInvested;
+          
+          setStats(prev => ({
+            ...prev,
+            totalInvested,
+            totalValue,
+            totalProfit,
+          }));
+        }
+
+        // Fetch payouts
+        const { data: payoutsData } = await supabase
+          .from('payouts')
+          .select('*')
+          .eq('user_id', user.id)
+          .order('created_at', { ascending: false });
+        
+        if (payoutsData) {
+          setPayouts(payoutsData);
+          
+          // Calculate pending payouts
+          const pendingPayouts = payoutsData
+            .filter(p => p.status === 'pending' || p.status === 'processing')
+            .reduce((sum, p) => sum + (p.amount || 0), 0);
+          
+          setStats(prev => ({
+            ...prev,
+            pendingPayouts,
+          }));
+        }
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [supabase]);
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 2,
+    }).format(amount);
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  };
+
+  const getStrategyName = (strategy: string) => {
+    const names: Record<string, string> = {
+      starter: 'Starter Strategy',
+      growth: 'Growth Strategy',
+      premium: 'Premium Strategy',
+      elite: 'Elite Strategy',
+      vip: 'VIP Strategy',
+    };
+    return names[strategy] || strategy;
+  };
+
+  const profitPercent = stats.totalInvested > 0 
+    ? ((stats.totalProfit / stats.totalInvested) * 100).toFixed(1) 
+    : '0';
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <Loader2 className="w-8 h-8 animate-spin text-emerald-400" />
+      </div>
+    );
+  }
+
+  const userName = profile?.first_name || profile?.email?.split('@')[0] || 'Investor';
+
   return (
     <div className="space-y-6">
       {/* Welcome Banner */}
       <div className="card p-6 bg-gradient-to-r from-emerald-900/50 to-emerald-800/30">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-2xl font-bold text-white mb-2">Welcome back, Demo User! 👋</h2>
+            <h2 className="text-2xl font-bold text-white mb-2">Welcome back, {userName}! 👋</h2>
             <p className="text-gray-400">Here's what's happening with your investments today.</p>
           </div>
           <Link href="/dashboard/invest" className="btn-primary flex items-center gap-2">
@@ -72,10 +185,10 @@ export default function DashboardPage() {
               <Wallet size={20} className="text-emerald-400" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-white">{portfolioStats.totalValue}</div>
+          <div className="text-2xl font-bold text-white">{formatCurrency(stats.totalValue)}</div>
           <div className="flex items-center mt-2 text-emerald-400 text-sm">
             <TrendingUp size={16} className="mr-1" />
-            {portfolioStats.profitPercent} all time
+            +{profitPercent}% all time
           </div>
         </div>
 
@@ -86,7 +199,9 @@ export default function DashboardPage() {
               <TrendingUp size={20} className="text-emerald-400" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-emerald-400">{portfolioStats.totalProfit}</div>
+          <div className={`text-2xl font-bold ${stats.totalProfit >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+            {stats.totalProfit >= 0 ? '+' : ''}{formatCurrency(stats.totalProfit)}
+          </div>
           <div className="flex items-center mt-2 text-gray-400 text-sm">
             <ArrowUpRight size={16} className="mr-1 text-emerald-400" />
             Lifetime earnings
@@ -95,15 +210,15 @@ export default function DashboardPage() {
 
         <div className="card p-6">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-gray-400 text-sm">Monthly Earnings</span>
+            <span className="text-gray-400 text-sm">Total Invested</span>
             <div className="w-10 h-10 rounded-lg bg-emerald-900/30 flex items-center justify-center">
               <DollarSign size={20} className="text-emerald-400" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-white">{portfolioStats.monthlyEarnings}</div>
+          <div className="text-2xl font-bold text-white">{formatCurrency(stats.totalInvested)}</div>
           <div className="flex items-center mt-2 text-gray-400 text-sm">
             <Clock size={16} className="mr-1" />
-            Last payout
+            Active investments: {investments.filter(i => i.status === 'active').length}
           </div>
         </div>
 
@@ -114,10 +229,10 @@ export default function DashboardPage() {
               <Clock size={20} className="text-amber-400" />
             </div>
           </div>
-          <div className="text-2xl font-bold text-amber-400">{portfolioStats.pendingPayouts}</div>
+          <div className="text-2xl font-bold text-amber-400">{formatCurrency(stats.pendingPayouts)}</div>
           <div className="flex items-center mt-2 text-gray-400 text-sm">
             <AlertCircle size={16} className="mr-1" />
-            Processing...
+            {payouts.filter(p => p.status === 'pending' || p.status === 'processing').length} pending
           </div>
         </div>
       </div>
@@ -132,35 +247,52 @@ export default function DashboardPage() {
               View All <ChevronRight size={16} />
             </Link>
           </div>
-          <div className="space-y-4">
-            {investments.map((inv) => (
-              <div key={inv.id} className="p-4 rounded-lg bg-emerald-900/10 border border-emerald-900/30">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <h4 className="text-white font-medium">{inv.strategy}</h4>
-                    <p className="text-gray-400 text-sm">Started {inv.startDate}</p>
+          
+          {investments.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-400 mb-4">No investments yet. Start your first investment today!</p>
+              <Link href="/dashboard/invest" className="btn-primary inline-flex items-center gap-2">
+                Make Investment <ArrowUpRight size={18} />
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {investments.filter(inv => inv.status === 'active').slice(0, 3).map((inv) => {
+                const profit = (inv.current_value || inv.amount) - inv.amount;
+                const profitPct = ((profit / inv.amount) * 100).toFixed(1);
+                
+                return (
+                  <div key={inv.id} className="p-4 rounded-lg bg-emerald-900/10 border border-emerald-900/30">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <h4 className="text-white font-medium">{getStrategyName(inv.strategy)}</h4>
+                        <p className="text-gray-400 text-sm">Started {formatDate(inv.created_at)}</p>
+                      </div>
+                      <span className="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs capitalize">
+                        {inv.status}
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div>
+                        <p className="text-gray-400 text-xs">Invested</p>
+                        <p className="text-white font-medium">{formatCurrency(inv.amount)}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-400 text-xs">Current Value</p>
+                        <p className="text-white font-medium">{formatCurrency(inv.current_value || inv.amount)}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-400 text-xs">Profit</p>
+                        <p className={`font-medium ${profit >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                          {profit >= 0 ? '+' : ''}{formatCurrency(profit)} ({profit >= 0 ? '+' : ''}{profitPct}%)
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs">
-                    Active
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <p className="text-gray-400 text-xs">Invested</p>
-                    <p className="text-white font-medium">{inv.amount}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-xs">Current Value</p>
-                    <p className="text-white font-medium">{inv.currentValue}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400 text-xs">Profit</p>
-                    <p className="text-emerald-400 font-medium">{inv.profit} ({inv.profitPercent})</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Recent Activity */}
@@ -168,36 +300,58 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-lg font-semibold text-white">Recent Activity</h3>
           </div>
-          <div className="space-y-4">
-            {recentActivity.map((activity, i) => (
-              <div key={i} className="flex items-center justify-between py-3 border-b border-emerald-900/30 last:border-0">
-                <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    activity.type === 'payout' ? 'bg-emerald-900/30' : 'bg-blue-900/30'
-                  }`}>
-                    {activity.type === 'payout' ? (
-                      <ArrowDownRight size={16} className="text-emerald-400" />
-                    ) : (
-                      <ArrowUpRight size={16} className="text-blue-400" />
-                    )}
+          
+          {investments.length === 0 && payouts.length === 0 ? (
+            <p className="text-gray-400 text-center py-4">No activity yet</p>
+          ) : (
+            <div className="space-y-4">
+              {/* Combine and sort investments and payouts */}
+              {[
+                ...investments.map(inv => ({
+                  type: 'investment' as const,
+                  amount: inv.amount,
+                  date: inv.created_at,
+                  status: inv.status,
+                })),
+                ...payouts.map(p => ({
+                  type: 'payout' as const,
+                  amount: p.amount,
+                  date: p.created_at,
+                  status: p.status,
+                })),
+              ]
+                .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .slice(0, 5)
+                .map((activity, i) => (
+                  <div key={i} className="flex items-center justify-between py-3 border-b border-emerald-900/30 last:border-0">
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                        activity.type === 'payout' ? 'bg-emerald-900/30' : 'bg-blue-900/30'
+                      }`}>
+                        {activity.type === 'payout' ? (
+                          <ArrowDownRight size={16} className="text-emerald-400" />
+                        ) : (
+                          <ArrowUpRight size={16} className="text-blue-400" />
+                        )}
+                      </div>
+                      <div>
+                        <p className="text-white text-sm capitalize">{activity.type}</p>
+                        <p className="text-gray-400 text-xs">{formatDate(activity.date)}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className={`font-medium ${activity.type === 'payout' ? 'text-emerald-400' : 'text-white'}`}>
+                        {activity.type === 'payout' ? '+' : ''}{formatCurrency(activity.amount)}
+                      </p>
+                      <p className="text-xs text-gray-400 flex items-center justify-end">
+                        <CheckCircle size={12} className="text-emerald-400 mr-1" />
+                        {activity.status}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-white text-sm capitalize">{activity.type}</p>
-                    <p className="text-gray-400 text-xs">{activity.date}</p>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <p className={`font-medium ${activity.type === 'payout' ? 'text-emerald-400' : 'text-white'}`}>
-                    {activity.amount}
-                  </p>
-                  <p className="text-xs text-gray-400 flex items-center justify-end">
-                    <CheckCircle size={12} className="text-emerald-400 mr-1" />
-                    {activity.status}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+                ))}
+            </div>
+          )}
         </div>
       </div>
 
