@@ -7,7 +7,7 @@ import {
   AlertCircle, ChevronRight, Loader2
 } from 'lucide-react';
 import Link from 'next/link';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createClient } from '@/lib/supabase/client';
 
 interface Profile {
   id: string;
@@ -49,7 +49,7 @@ export default function DashboardPage() {
     pendingPayouts: 0,
   });
 
-  const supabase = createClientComponentClient();
+  const supabase = createClient();
 
   useEffect(() => {
     async function fetchData() {

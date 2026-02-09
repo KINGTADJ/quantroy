@@ -33,10 +33,11 @@ CREATE TABLE wallets (
 );
 
 -- Investments table
+-- NOTE: Strategy options are: starter, growth, premium, elite, vip
 CREATE TABLE investments (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   user_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-  strategy TEXT NOT NULL CHECK (strategy IN ('starter', 'pro', 'elite', 'vip')),
+  strategy TEXT NOT NULL CHECK (strategy IN ('starter', 'growth', 'premium', 'elite', 'vip')),
   amount DECIMAL(20, 2) NOT NULL,
   currency TEXT NOT NULL CHECK (currency IN ('btc', 'eth', 'usdt', 'usdc')),
   status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'completed', 'cancelled')),
