@@ -135,15 +135,14 @@ export default function Home() {
             {/* Right Image */}
             <div className="relative animate-slideInRight hidden lg:block">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <div className="aspect-[4/5] bg-gradient-to-br from-[#234d3a] to-[#1a2f25] flex items-center justify-center">
-                  {/* Placeholder for hero image - will be replaced with AI-generated image */}
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-[#c4f542]/20 flex items-center justify-center">
-                      <Users size={64} className="text-[#c4f542]" />
-                    </div>
-                    <p className="text-white/60 text-sm">Hero Image</p>
-                    <p className="text-white/40 text-xs mt-1">Happy African Family</p>
-                  </div>
+                <div className="aspect-[4/5] relative">
+                  <Image
+                    src="/images/hero-family.png"
+                    alt="Happy African family investing for their future"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
                 </div>
                 {/* Yellow Ribbon */}
                 <div className="absolute bottom-8 -left-4 -right-4 bg-[#f9d423] py-3 px-6 transform -rotate-2">
@@ -204,16 +203,15 @@ export default function Home() {
               </Link>
             </div>
             
-            {/* Image Placeholder */}
+            {/* Lifestyle Image */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-[4/3] bg-gradient-to-br from-[#d05a3a] to-[#a03d1d] flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-white/20 flex items-center justify-center">
-                    <Users size={48} className="text-white" />
-                  </div>
-                  <p className="text-white/60 text-sm">Lifestyle Image</p>
-                  <p className="text-white/40 text-xs mt-1">Family reviewing finances together</p>
-                </div>
+              <div className="aspect-[4/3] relative">
+                <Image
+                  src="/images/lifestyle-finance.png"
+                  alt="Couple reviewing their investments together"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -257,13 +255,13 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member, i) => (
               <div key={i} className="text-center group">
-                <div className="relative mb-6 rounded-2xl overflow-hidden aspect-[3/4] bg-gradient-to-br from-[#234d3a] to-[#1a2f25]">
-                  {/* Placeholder for team member image */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 rounded-full bg-[#c4f542]/20 flex items-center justify-center">
-                      <Users size={40} className="text-[#c4f542]" />
-                    </div>
-                  </div>
+                <div className="relative mb-6 rounded-2xl overflow-hidden aspect-[3/4]">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#1a2f25] to-transparent h-1/3" />
                 </div>
                 <h3 className="text-lg font-semibold text-[#1a2f25] mb-1">{member.name}</h3>
@@ -294,8 +292,13 @@ export default function Home() {
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed italic">"{testimonial.text}"</p>
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#234d3a] to-[#1a2f25] flex items-center justify-center">
-                    <Users size={20} className="text-[#c4f542]" />
+                  <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                    <Image
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
                   <div>
                     <p className="font-semibold text-[#1a2f25]">{testimonial.name}</p>
