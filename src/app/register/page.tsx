@@ -5,13 +5,11 @@ import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle, Gift } from 'lucide-react';
 import { useAuthStore } from '@/store/auth';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 
 export default function RegisterPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { signUp, isLoading, user } = useAuthStore();
-  const supabase = createClientComponentClient();
+  const { signUp, signInWithGoogle, isLoading, user } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -67,15 +65,7 @@ export default function RegisterPage() {
 
   const handleGoogleSignUp = async () => {
     setError(null);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/auth/callback`,
-        queryParams: formData.referralCode ? {
-          referred_by: formData.referralCode
-        } : undefined
-      }
-    });
+    const { error } = await signInWithGoogle();
     if (error) {
       setError(error.message);
     }
