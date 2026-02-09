@@ -294,3 +294,39 @@ body {
   pointer-events: none;
   mix-blend-mode: overlay;
 }
+
+/* ============================================
+   3D ASSET FLOATING ANIMATIONS
+   ============================================ */
+
+@keyframes float-slow {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-20px) rotate(3deg); 
+  }
+}
+
+@keyframes float-delayed {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg); 
+  }
+  50% { 
+    transform: translateY(-15px) rotate(-3deg); 
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 8s ease-in-out infinite;
+  animation-delay: -2s;
+}
+
+/* 3D asset glow effect */
+.asset-glow {
+  filter: drop-shadow(0 0 20px rgba(16, 185, 129, 0.3));
+}
