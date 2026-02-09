@@ -166,13 +166,13 @@ export default function LoginPage() {
 
       {/* Right side - Visual with 3D Assets */}
       <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-[#234d3a] to-[#1a2f25] p-12 relative overflow-hidden">
-        {/* 3D Asset - Top Left */}
+        {/* 3D Asset - Top Left - Lock */}
         <div className="absolute top-8 left-8 w-48 h-48">
-          <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          <Image src="/images/page-assets/auth-lock.png" alt="" fill className="object-contain drop-shadow-2xl" />
         </div>
-        {/* 3D Asset - Bottom Right */}
+        {/* 3D Asset - Bottom Right - Key */}
         <div className="absolute bottom-8 right-8 w-48 h-48">
-          <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+          <Image src="/images/page-assets/auth-key.png" alt="" fill className="object-contain drop-shadow-2xl" />
         </div>
         
         <div className="max-w-lg text-center relative z-10">

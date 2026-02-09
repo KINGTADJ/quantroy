@@ -38,9 +38,9 @@ export default function AffiliatesPage() {
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            {/* Left 3D Asset */}
+            {/* Left 3D Asset - Gift */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/affiliates-gift.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -59,9 +59,9 @@ export default function AffiliatesPage() {
               </Link>
             </div>
             
-            {/* Right 3D Asset */}
+            {/* Right 3D Asset - Megaphone */}
             <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
-              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/affiliates-megaphone.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>
@@ -71,9 +71,9 @@ export default function AffiliatesPage() {
       <section className="py-16 px-4 bg-[#061510]">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12 mb-12">
-            {/* Left 3D Asset */}
+            {/* Left 3D Asset - Trophy */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/about-trophy.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
             <div className="text-center">
@@ -81,9 +81,9 @@ export default function AffiliatesPage() {
               <p className="text-gray-400">Earn on 3 levels of referrals</p>
             </div>
             
-            {/* Right 3D Asset */}
+            {/* Right 3D Asset - Key */}
             <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
-              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/auth-key.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">

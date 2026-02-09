@@ -14,11 +14,11 @@ export default function TermsPage() {
           {/* Header with 3D Assets */}
           <div className="flex items-center justify-center gap-12 mb-12">
             <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
-              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/legal-scales.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             <h1 className="text-4xl font-bold text-white">Terms of Service</h1>
             <div className="hidden xl:block relative w-48 h-48 flex-shrink-0">
-              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+              <Image src="/images/page-assets/legal-document.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>
           

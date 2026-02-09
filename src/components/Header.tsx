@@ -43,11 +43,8 @@ export default function Header() {
               <Link href="/strategies" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
                 Products & solutions
               </Link>
-              <Link href="/blog" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
-                Insights
-              </Link>
-              <Link href="/careers" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
-                Careers
+              <Link href="/affiliates" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
+                Affiliates
               </Link>
               <Link href="/contact" className="px-4 py-2 text-sm text-gray-300 hover:text-white transition rounded-lg hover:bg-white/5">
                 Contact us
@@ -91,11 +88,8 @@ export default function Header() {
                 <Link href="/strategies" className="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                   Products & solutions
                 </Link>
-                <Link href="/blog" className="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
-                  Insights
-                </Link>
-                <Link href="/careers" className="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
-                  Careers
+                <Link href="/affiliates" className="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
+                  Affiliates
                 </Link>
                 <Link href="/contact" className="px-3 py-2 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition">
                   Contact us
