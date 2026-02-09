@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 import { 
   Shield, Users, TrendingUp, Globe,
   Award, Target, Heart, Zap
@@ -34,16 +35,30 @@ export default function AboutPage() {
     <main className="min-h-screen">
       <Header />
       
-      {/* Hero */}
+      {/* Hero with 3D Assets */}
       <section className="pt-32 pb-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            About <span className="text-emerald-400">Quantroy</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            We're on a mission to democratize professional crypto investment strategies, 
-            making institutional-grade returns accessible to everyone.
-          </p>
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                About <span className="text-emerald-400">Quantroy</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                We're on a mission to democratize professional crypto investment strategies, 
+                making institutional-grade returns accessible to everyone.
+              </p>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -89,12 +104,24 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values */}
+      {/* Values with 3D Assets */}
       <section className="py-16 px-4 bg-[#061510]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
-            <p className="text-gray-400">The principles that guide everything we do</p>
+          <div className="flex items-center justify-center gap-12 mb-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Our Values</h2>
+              <p className="text-gray-400">The principles that guide everything we do</p>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, i) => (
@@ -134,16 +161,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA with 3D Assets */}
       <section className="py-16 px-4 bg-[#061510]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Ready to Join Us?</h2>
-          <p className="text-gray-400 mb-8">
-            Start your investment journey with Quantroy today.
-          </p>
-          <Link href="/register" className="btn-primary">
-            Get Started
-          </Link>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Ready to Join Us?</h2>
+              <p className="text-gray-400 mb-8">
+                Start your investment journey with Quantroy today.
+              </p>
+              <Link href="/register" className="btn-primary">
+                Get Started
+              </Link>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+          </div>
         </div>
       </section>
 

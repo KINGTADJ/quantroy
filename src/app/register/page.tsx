@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight, AlertCircle, CheckCircle, Gift } from 'lucide-react';
@@ -280,9 +281,18 @@ export default function RegisterPage() {
         </div>
       </div>
 
-      {/* Right side - Visual */}
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-emerald-900/30 to-emerald-950/50 p-12">
-        <div className="max-w-lg text-center">
+      {/* Right side - Visual with 3D Assets */}
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-emerald-900/30 to-emerald-950/50 p-12 relative overflow-hidden">
+        {/* 3D Asset - Top Right */}
+        <div className="absolute top-8 right-8 w-48 h-48">
+          <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+        </div>
+        {/* 3D Asset - Bottom Left */}
+        <div className="absolute bottom-8 left-8 w-48 h-48">
+          <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+        </div>
+        
+        <div className="max-w-lg text-center relative z-10">
           <div className="w-24 h-24 rounded-2xl gradient-primary flex items-center justify-center mx-auto mb-8 glow">
             <span className="text-white font-bold text-4xl">Q</span>
           </div>

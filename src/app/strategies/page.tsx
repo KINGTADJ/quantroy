@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { 
@@ -101,19 +102,33 @@ export default function StrategiesPage() {
     <main className="min-h-screen">
       <Header />
       
-      {/* Hero */}
+      {/* Hero with 3D Assets */}
       <section className="pt-32 pb-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-            <BarChart3 size={16} className="mr-2" /> Investment Strategies
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                <BarChart3 size={16} className="mr-2" /> Investment Strategies
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Professional Investment<br />
+                <span className="text-emerald-400">Strategies</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                Choose from our range of professionally managed strategies designed for different investment goals and risk appetites.
+              </p>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Professional Investment<br />
-            <span className="text-emerald-400">Strategies</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Choose from our range of professionally managed strategies designed for different investment goals and risk appetites.
-          </p>
         </div>
       </section>
 
@@ -221,20 +236,34 @@ export default function StrategiesPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA with 3D Assets */}
       <section className="py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Not sure which strategy is right for you?</h2>
-          <p className="text-gray-400 mb-8">
-            Our AI assistant can help you find the perfect strategy based on your investment goals and risk tolerance.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
-              <Zap size={18} /> Talk to AI Assistant
-            </Link>
-            <Link href="/contact" className="btn-secondary flex items-center justify-center gap-2">
-              Contact Our Team
-            </Link>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Not sure which strategy is right for you?</h2>
+              <p className="text-gray-400 mb-8">
+                Our AI assistant can help you find the perfect strategy based on your investment goals and risk tolerance.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link href="/register" className="btn-primary flex items-center justify-center gap-2">
+                  <Zap size={18} /> Talk to AI Assistant
+                </Link>
+                <Link href="/contact" className="btn-secondary flex items-center justify-center gap-2">
+                  Contact Our Team
+                </Link>
+              </div>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
           </div>
         </div>
       </section>

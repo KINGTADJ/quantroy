@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Eye, EyeOff, Mail, Lock, ArrowRight, AlertCircle } from 'lucide-react';
@@ -163,9 +164,18 @@ export default function LoginPage() {
         </div>
       </div>
 
-      {/* Right side - Visual */}
-      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-[#234d3a] to-[#1a2f25] p-12">
-        <div className="max-w-lg text-center">
+      {/* Right side - Visual with 3D Assets */}
+      <div className="hidden lg:flex flex-1 items-center justify-center bg-gradient-to-br from-[#234d3a] to-[#1a2f25] p-12 relative overflow-hidden">
+        {/* 3D Asset - Top Left */}
+        <div className="absolute top-8 left-8 w-48 h-48">
+          <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+        </div>
+        {/* 3D Asset - Bottom Right */}
+        <div className="absolute bottom-8 right-8 w-48 h-48">
+          <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+        </div>
+        
+        <div className="max-w-lg text-center relative z-10">
           <div className="w-28 h-28 rounded-2xl bg-[#c4f542] flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-[#c4f542]/30">
             <span className="text-[#1a2f25] font-bold text-5xl">Q</span>
           </div>

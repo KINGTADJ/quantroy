@@ -2,6 +2,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 import { 
   Gift, Users, DollarSign, TrendingUp,
   CheckCircle, ChevronRight, Zap
@@ -33,31 +34,57 @@ export default function AffiliatesPage() {
     <main className="min-h-screen">
       <Header />
       
-      {/* Hero */}
+      {/* Hero with 3D Assets */}
       <section className="pt-32 pb-16 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
-            <Gift size={16} className="mr-2" /> Affiliate Program
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-center gap-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-700/30 text-emerald-400 text-sm mb-6">
+                <Gift size={16} className="mr-2" /> Affiliate Program
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Earn Up to <span className="text-emerald-400">6% Commission</span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
+                Refer friends to Quantroy and earn lifetime commissions on their investments. 
+                It's free to join and there's no limit to how much you can earn.
+              </p>
+              <Link href="/register" className="btn-primary inline-flex items-center gap-2">
+                Join the Program <ChevronRight size={20} />
+              </Link>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-72 h-72 flex-shrink-0">
+              <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Earn Up to <span className="text-emerald-400">6% Commission</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-8">
-            Refer friends to Quantroy and earn lifetime commissions on their investments. 
-            It's free to join and there's no limit to how much you can earn.
-          </p>
-          <Link href="/register" className="btn-primary inline-flex items-center gap-2">
-            Join the Program <ChevronRight size={20} />
-          </Link>
         </div>
       </section>
 
-      {/* Commission Tiers */}
+      {/* Commission Tiers with 3D Assets */}
       <section className="py-16 px-4 bg-[#061510]">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">Commission Structure</h2>
-            <p className="text-gray-400">Earn on 3 levels of referrals</p>
+          <div className="flex items-center justify-center gap-12 mb-12">
+            {/* Left 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
+            
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-white mb-4">Commission Structure</h2>
+              <p className="text-gray-400">Earn on 3 levels of referrals</p>
+            </div>
+            
+            {/* Right 3D Asset */}
+            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+              <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {tiers.map((tier) => (

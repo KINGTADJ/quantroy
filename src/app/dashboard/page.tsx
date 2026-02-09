@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { 
   TrendingUp, TrendingDown, Wallet, DollarSign, 
   ArrowUpRight, ArrowDownRight, Clock, CheckCircle,
@@ -163,9 +164,13 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
-      <div className="card p-6 bg-gradient-to-r from-emerald-900/50 to-emerald-800/30">
-        <div className="flex items-center justify-between">
+      {/* Welcome Banner with 3D Assets */}
+      <div className="card p-6 bg-gradient-to-r from-emerald-900/50 to-emerald-800/30 relative overflow-hidden">
+        {/* 3D Asset - Right Side */}
+        <div className="absolute right-32 top-1/2 -translate-y-1/2 w-32 h-32 hidden xl:block">
+          <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
+        </div>
+        <div className="flex items-center justify-between relative z-10">
           <div>
             <h2 className="text-2xl font-bold text-white mb-2">Welcome back, {userName}! 👋</h2>
             <p className="text-gray-400">Here's what's happening with your investments today.</p>
