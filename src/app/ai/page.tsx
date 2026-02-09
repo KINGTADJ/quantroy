@@ -52,7 +52,7 @@ export default function AIPage() {
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+            <div className="hidden xl:block relative w-20 h-20 sm:w-36 sm:h-36 xl:w-64 xl:h-64 flex-shrink-0">
               <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
             
@@ -71,7 +71,7 @@ export default function AIPage() {
               </Link>
             </div>
             
-            <div className="hidden xl:block relative w-64 h-64 flex-shrink-0">
+            <div className="hidden xl:block relative w-20 h-20 sm:w-36 sm:h-36 xl:w-64 xl:h-64 flex-shrink-0">
               <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
             </div>
           </div>

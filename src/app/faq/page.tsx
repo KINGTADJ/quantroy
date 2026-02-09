@@ -143,9 +143,9 @@ export default function FAQPage() {
       <section className="pt-32 pb-16 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-center gap-12">
-            <Float duration={4} y={12} className="hidden xl:block">
+            <Float duration={4} y={12} className="">
               <FadeIn direction="left">
-                <div className="relative w-64 h-64 flex-shrink-0">
+                <div className="relative w-20 h-20 sm:w-36 sm:h-36 xl:w-64 xl:h-64 flex-shrink-0">
                   <Image src="/images/3d-transparent/crypto-coins.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>
@@ -169,9 +169,9 @@ export default function FAQPage() {
               </FadeUp>
             </div>
             
-            <Float duration={3.5} y={15} className="hidden xl:block">
+            <Float duration={3.5} y={15} className="">
               <FadeIn direction="right">
-                <div className="relative w-64 h-64 flex-shrink-0">
+                <div className="relative w-20 h-20 sm:w-36 sm:h-36 xl:w-64 xl:h-64 flex-shrink-0">
                   <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>

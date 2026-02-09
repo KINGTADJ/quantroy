@@ -350,19 +350,19 @@ export default function Home() {
       {/* Investment Packages */}
       <section className="py-12 sm:py-20 px-4 mesh-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
         <div className="max-w-7xl mx-auto">
-          {/* Section header with 3D assets as inline elements - HUGE */}
-          <div className="flex items-center justify-center gap-8 lg:gap-12 mb-8 sm:mb-12">
-            {/* Left 3D Asset - Gold Bars - HUGE */}
-            <Float duration={4} y={12} className="hidden xl:block">
+          {/* Section header with 3D assets */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-12">
+            {/* Left 3D Asset - Gold Bars */}
+            <Float duration={4} y={8} className="order-2 sm:order-1">
               <FadeIn direction="left">
-                <div className="relative w-72 h-72 flex-shrink-0">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 xl:w-72 xl:h-72 flex-shrink-0">
                   <Image src="/images/3d-transparent/gold-bars.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>
             </Float>
             
             {/* Center - Title */}
-            <FadeUp className="text-center px-4">
+            <FadeUp className="text-center px-4 order-1 sm:order-2">
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
                 <Award size={14} className="mr-2" /> Investment Plans
               </div>
@@ -372,10 +372,10 @@ export default function Home() {
               </p>
             </FadeUp>
             
-            {/* Right 3D Asset - Money Bundle - HUGE */}
-            <Float duration={3.5} y={15} className="hidden xl:block">
+            {/* Right 3D Asset - Money Bundle */}
+            <Float duration={3.5} y={10} className="order-3">
               <FadeIn direction="right">
-                <div className="relative w-64 h-64 flex-shrink-0">
+                <div className="relative w-24 h-24 sm:w-40 sm:h-40 xl:w-64 xl:h-64 flex-shrink-0">
                   <Image src="/images/3d-transparent/money-bundle.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>
@@ -600,10 +600,10 @@ export default function Home() {
               </p>
             </FadeUp>
             
-            {/* Right 3D Asset - Secure Vault - HUGE */}
-            <Float duration={4} y={12} className="hidden xl:block">
+            {/* Right 3D Asset - Secure Vault */}
+            <Float duration={4} y={8}>
               <FadeIn direction="right">
-                <div className="relative w-72 h-72 flex-shrink-0">
+                <div className="relative w-20 h-20 sm:w-32 sm:h-32 xl:w-72 xl:h-72 flex-shrink-0">
                   <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>
@@ -654,19 +654,19 @@ export default function Home() {
       {/* CTA Section */}
       <section className="py-12 sm:py-20 px-4 cta-bg relative overflow-hidden" style={{ background: 'rgb(10, 38, 30)' }}>
         <div className="max-w-6xl mx-auto">
-          {/* CTA with Phone App inline - HUGE */}
-          <div className="flex items-center justify-center gap-8 lg:gap-12">
-            {/* Left 3D Asset - Phone App - HUGE */}
-            <Float duration={3.5} y={15} className="hidden xl:block">
+          {/* CTA with Phone App inline */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-8 lg:gap-12">
+            {/* Left 3D Asset - Phone App */}
+            <Float duration={3.5} y={10} className="order-2 sm:order-1">
               <FadeIn direction="left">
-                <div className="relative w-72 h-72 flex-shrink-0">
+                <div className="relative w-28 h-28 sm:w-40 sm:h-40 xl:w-72 xl:h-72 flex-shrink-0">
                   <Image src="/images/3d-transparent/phone-app.png" alt="" fill className="object-contain drop-shadow-2xl" />
                 </div>
               </FadeIn>
             </Float>
             
             {/* Center - CTA Content */}
-            <div className="text-center px-4">
+            <div className="text-center px-4 order-1 sm:order-2">
               <FadeUp>
                 <div className="inline-block px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-xs sm:text-sm mb-3 sm:mb-4">
                   Your Journey Starts Here

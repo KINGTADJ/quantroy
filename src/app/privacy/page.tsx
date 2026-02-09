@@ -30,7 +30,7 @@ export default function PrivacyPage() {
         <div className="max-w-6xl mx-auto">
           {/* Header with 3D Assets */}
           <div className="flex items-center justify-center gap-12 mb-12">
-            <Float duration={4} y={12} className="hidden xl:block">
+            <Float duration={4} y={12} className="">
               <FadeIn direction="left">
                 <div className="relative w-48 h-48 flex-shrink-0">
                   <Image src="/images/3d-transparent/secure-vault.png" alt="" fill className="object-contain drop-shadow-2xl" />
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
                 <h1 className="text-4xl font-bold text-white">Privacy Policy</h1>
               </BlurIn>
             </div>
-            <Float duration={3.5} y={15} className="hidden xl:block">
+            <Float duration={3.5} y={15} className="">
               <FadeIn direction="right">
                 <div className="relative w-48 h-48 flex-shrink-0">
                   <Image src="/images/3d-transparent/premium-card.png" alt="" fill className="object-contain drop-shadow-2xl" />
